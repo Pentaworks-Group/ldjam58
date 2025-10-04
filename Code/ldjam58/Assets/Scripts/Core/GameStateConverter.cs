@@ -3,9 +3,6 @@ using Assets.Scripts.Core.Model;
 using System;
 using System.Collections.Generic;
 
-using Assets.Scripts.Core.Model;
-
-using GameFrame.Core.Definitions;
 
 namespace Assets.Scripts.Core
 {
@@ -27,7 +24,7 @@ namespace Assets.Scripts.Core
                 CreatedOn = DateTime.Now,
                 CurrentScene = Constants.Scenes.GameName,
                 Mode = mode,
-                Levels= ConvertLevels()
+                Levels = ConvertLevels()
             };
 
             gameState.World = GenerateWorld();
