@@ -24,7 +24,7 @@ namespace Assets.Scripts.Core
             }
         }
 
-        public Pinguin Pinguin { get; set; }
+        public Pinguin Penguin { get; set; }
         public List<Level> Levels { get; set; }
         public Level CurrentLevel { get; set; }
         public List<Food> Foods { get; set; }
