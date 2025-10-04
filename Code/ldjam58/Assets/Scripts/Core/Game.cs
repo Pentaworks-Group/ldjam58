@@ -10,10 +10,10 @@ namespace Assets.Scripts.Core
 {
     public class Game : GameFrame.Core.Game<GameState, PlayerOptions>
     {
-        private readonly DefinitionCache<GameMode> gameModeCache = new DefinitionCache<GameMode>();
+        private readonly DefinitionCache<Definitons.GameMode> gameModeCache = new DefinitionCache<Definitons.GameMode>();
         protected override GameState InitializeGameState()
         {
-            var gameMode = default(GameMode);
+            var gameMode = default(GameFrame.Core.Definitions.GameMode);
 
             var gameStateConverter = new GameStateConverter(gameMode);
 
