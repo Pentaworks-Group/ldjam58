@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-using GameFrame.Core.Definitions;
+﻿using System.Collections.Generic;
 
 namespace Assets.Scripts.Core.Definitons
 {
-    public class GameMode : BaseDefinition
+    public class GameMode : GameFrame.Core.Definitions.GameMode
     {
-        public String Name { get; set; }
-        public PinguinDefinition Pinguin { get; set; }
+        public PinguinDefinition PinguinDefinition { get; set; }
         public List<LevelDefinition> Levels { get; set; }
     }
 }

@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Assets.Scripts.Core.Definitons;
+using GameFrame.Core.Math;
+using System;
 
 namespace Assets.Scripts.Core.Model
 {
     public class Obstacle
     {
-        public String Name { get; set; }
-        public String Sprite { get; set; }
+        public ObstacleDefinition Definition { get; set; }
+        public Vector2 Position { get; set; }
+        public float Rotation { get; set; }
+        public Vector2 Size { get; set; }
     }
 }

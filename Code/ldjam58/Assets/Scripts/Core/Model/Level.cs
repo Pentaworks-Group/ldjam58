@@ -7,6 +7,7 @@ namespace Assets.Scripts.Core.Model
     public class Level
     {
         public String Name { get; set; }
+        public String Description { get; set; }
         public Single? Seed { get; set; }
         public Int32? Width { get; set; }
         public Int32? Height { get; set; }

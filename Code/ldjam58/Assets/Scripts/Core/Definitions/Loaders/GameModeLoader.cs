@@ -36,12 +36,12 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                         CheckLevels(loadedGameMode.Levels, newGameMode.Levels);
                     }
 
-                    if (loadedGameMode.Pinguin != default)
+                    if (loadedGameMode.PinguinDefinition != default)
                     {
-                        newGameMode.Pinguin = new PinguinDefinition()
+                        newGameMode.PinguinDefinition = new PinguinDefinition()
                         {
-                            Name = loadedGameMode.Pinguin.Name,
-                            Sprite = loadedGameMode.Pinguin.Sprite,
+                            Name = loadedGameMode.PinguinDefinition.Name,
+                            Sprite = loadedGameMode.PinguinDefinition.Sprite,
                         };
                     }
 
@@ -59,14 +59,44 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                     Width = loadedItem.Width,
                     Height = loadedItem.Height,
                     PinguinStartPosition = loadedItem.PinguinStartPosition,
-                    Foods = new List<FoodDefinition>(),
-                    Obstacles = new List<ObstacleDefinition>()
+                    FoodRandomOrder = loadedItem.FoodRandomOrder,
+                    FoodRandomPosition = loadedItem.FoodRandomPosition,
+                    Foods = new List<FoodPosDefinition>(),
+                    ObstacleRandomOrder = loadedItem.ObstacleRandomOrder,
+                    ObstacleRandomPosition = loadedItem.ObstacleRandomPosition,
+                    Obstacles = new List<ObstaclePosDefinition>()
                 };
 
-                CheckItems(loadedItem.Foods, targetItem.Foods, this.fooodCache);
-                CheckItems(loadedItem.Obstacles, targetItem.Obstacles, this.obstacleCache);
+                CheckFoods(loadedItem.Foods, targetItem.Foods);
+                CheckObstacles(loadedItem.Obstacles, targetItem.Obstacles);
 
                 targetItems.Add(targetItem);
+            }
+        }
+
+        private void CheckFoods(List<FoodPosDefinition> loadedFoodPos, List<FoodPosDefinition> targetFoodPos)
+        {
+            foreach (var food in loadedFoodPos)
+            {
+                var targetFood = new FoodPosDefinition()
+                {
+                    Position = food.Position,
+                    FoodDefinition = CheckItem(food.FoodDefinition, this.fooodCache)
+                };
+                targetFoodPos.Add(targetFood);
+            }
+        }
+
+        private void CheckObstacles(List<ObstaclePosDefinition> loadedFoodPos, List<ObstaclePosDefinition> targetFoodPos)
+        {
+            foreach (var food in loadedFoodPos)
+            {
+                var targetFood = new ObstaclePosDefinition()
+                {
+                    Position = food.Position,
+                    ObstacleDefinition = CheckItem(food.ObstacleDefinition, this.obstacleCache)
+                };
+                targetFoodPos.Add(targetFood);
             }
         }
     }
