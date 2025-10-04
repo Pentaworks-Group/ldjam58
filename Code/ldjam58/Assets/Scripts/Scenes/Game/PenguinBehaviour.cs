@@ -14,10 +14,6 @@ namespace Assets.Scripts.Scenes.Game
         {
             this.penguin = penguin;
             this.penguinRigidbody = GetComponent<Rigidbody>();
-
-            var moveAction = InputSystem.actions.FindAction("Move");
-
-            moveAction.performed += OnMove;
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -27,6 +23,30 @@ namespace Assets.Scripts.Scenes.Game
             var translation = 50f * Time.deltaTime * new Vector3(moveVector.x, 0, moveVector.y);
 
             penguinRigidbody.AddForce(translation, ForceMode.Impulse);
+        }
+
+        private void HookActions()
+        {
+            var moveAction = InputSystem.actions.FindAction("Move");
+
+            moveAction.performed += OnMove;
+        }
+
+        private void UnhookActions()
+        {
+            var moveAction = InputSystem.actions.FindAction("Move");
+
+            moveAction.performed -= OnMove;
+        }
+
+        private void OnEnable()
+        {
+            HookActions();
+        }
+
+        private void OnDisable()
+        {
+            UnhookActions();
         }
     }
 }
