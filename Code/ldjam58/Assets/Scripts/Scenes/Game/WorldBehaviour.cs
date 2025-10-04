@@ -30,20 +30,20 @@ namespace Assets.Scripts.Scenes.Game
 
         private void RenderWorld()
         {
-            if (gameState.World != default)
+            if (gameState.CurrentLevel != default)
             {
-                var tileMap = GenerateChunkMap(gameState.World);
+                var tileMap = GenerateChunkMap(gameState.CurrentLevel);
 
-                var terrainGenerator = new TerrainGenerator(terrainMaterial, gameState.World);
+                var terrainGenerator = new TerrainGenerator(terrainMaterial, gameState.CurrentLevel);
 
-                for (int x = 0; x < gameState.World.Size.X; x++)
+                for (int x = 0; x < gameState.CurrentLevel.Size.X; x++)
                 {
-                    for (int z = 0; z < gameState.World.Size.Y; z++)
+                    for (int z = 0; z < gameState.CurrentLevel.Size.Y; z++)
                     {
                         var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
 
                         mapChunk.transform.parent = chunkContainer.transform;
-                        mapChunk.transform.localPosition = new Vector3(x * gameState.World.Resolution, 0f, z * gameState.World.Resolution);
+                        mapChunk.transform.localPosition = new Vector3(x * gameState.CurrentLevel.Resolution, 0f, z * gameState.CurrentLevel.Resolution);
 
                         _ = tileMap.TryGetValue(x, z, out var worldChunk);
 
@@ -61,7 +61,7 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
-        private Map<Int32, WorldChunk> GenerateChunkMap(World world)
+        private Map<Int32, WorldChunk> GenerateChunkMap(Level world)
         {
             var map = new Map<Int32, WorldChunk>();
 

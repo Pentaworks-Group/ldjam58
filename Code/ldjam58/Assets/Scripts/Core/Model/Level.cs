@@ -17,10 +17,12 @@ namespace Assets.Scripts.Core.Model
         /// Tiles per Chunk axis
         /// </summary>
         public Int32 Resolution { get; set; }
-
-        public List<WorldChunk> Chunks { get; set; } = new List<WorldChunk>();
         public Vector2? PinguinStartPosition { get; set; }
         public List<Food> Foods { get; set; }
         public List<Obstacle> Obstacles { get; set; }
+
+
+
+        public List<WorldChunk> Chunks { get; set; } = new List<WorldChunk>();
     }
 }

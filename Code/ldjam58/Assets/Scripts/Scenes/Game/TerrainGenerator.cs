@@ -6,10 +6,10 @@ namespace Assets.Scripts.Scenes.Game
 {
     public class TerrainGenerator
     {
-        private readonly World world;
+        private readonly Level world;
         private readonly Material terrainMaterial;
 
-        public TerrainGenerator(Material terrainMaterial, World world)
+        public TerrainGenerator(Material terrainMaterial, Level world)
         {
             this.world = world;
             this.terrainMaterial = terrainMaterial;

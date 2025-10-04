@@ -25,25 +25,7 @@ namespace Assets.Scripts.Core
         }
 
         public Penguin Penguin { get; set; }
-        public List<Level> Levels { get; set; }
         public Level CurrentLevel { get; set; }
-        public List<Food> Foods { get; set; }
-        public List<Obstacle> Obstacles { get; set; }
 
-        private World world;
-        public World World
-        {
-            get
-            {
-                return world;
-            }
-            set
-            {
-                if (world != value)
-                {
-                    world = value;
-                }
-            }
-        }
     }
 }
