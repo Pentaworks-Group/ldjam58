@@ -1,3 +1,4 @@
+using GameFrame.Core.Definitions;
 
 using UnityEngine;
 
@@ -7,9 +8,13 @@ namespace Assets.Scripts.Core
     {
         protected override GameState InitializeGameState()
         {
-            return new GameState()
-            {
-            };
+            var gameMode = default(GameMode);
+
+            var gameStateConverter = new GameStateConverter(gameMode);
+
+            var gameState = gameStateConverter.Convert();
+
+            return gameState;
         }
 
         protected override PlayerOptions InitializePlayerOptions()
