@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using GameFrame.Core.Collections;
+﻿using GameFrame.Core.Collections;
 using GameFrame.Core.Math;
+using System;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Core.Model
 {
