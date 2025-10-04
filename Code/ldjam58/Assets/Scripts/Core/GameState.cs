@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.Core.Model;
 
 using GameFrame.Core.Definitions;
 
@@ -22,6 +18,22 @@ namespace Assets.Scripts.Core
                 if (mode != value)
                 {
                     mode = value;
+                }
+            }
+        }
+
+        private World world;
+        public World World
+        {
+            get
+            {
+                return world;
+            }
+            set
+            {
+                if (world != value)
+                {
+                    world = value;
                 }
             }
         }
