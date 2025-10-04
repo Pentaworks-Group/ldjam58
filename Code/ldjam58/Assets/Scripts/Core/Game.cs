@@ -2,13 +2,14 @@ using GameFrame.Core.Definitions;
 
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Definitons.Loaders;
+using Assets.Scripts.Core.Persistence;
 using GameFrame.Core.Definitions.Loaders;
 using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Core
 {
-    public class Game : GameFrame.Core.Game<GameState, PlayerOptions>
+    public class Game : GameFrame.Core.SaveableGame<GameState, PlayerOptions, SavedGamePreview>
     {
         private readonly DefinitionCache<Definitons.GameMode> gameModeCache = new DefinitionCache<Definitons.GameMode>();
         protected override GameState InitializeGameState()

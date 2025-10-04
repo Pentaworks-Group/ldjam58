@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-using Assets.Scripts.Core.Model;
-
+﻿using Assets.Scripts.Core.Model;
 using GameFrame.Core.Definitions;
+using System;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Core
 {
@@ -26,6 +25,8 @@ namespace Assets.Scripts.Core
 
         public Penguin Penguin { get; set; }
         public Level CurrentLevel { get; set; }
+
+        public Double TimeElapsed { get; set; } = 0.0;
 
     }
 }

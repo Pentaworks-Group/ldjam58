@@ -1,11 +1,9 @@
+using Assets.Scripts.Constants;
 using System;
 using System.Collections.Generic;
-
-using Assets.Scripts.Constants;
-
 using TMPro;
-
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Prefabs.Menus
@@ -44,13 +42,34 @@ namespace Assets.Scripts.Prefabs.Menus
             menuToggle.SetActive(false);
         }
 
-        void Update()
+        private void OnEnable()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                HandleEsc();
-            }
+            HookActions();
         }
+
+        private void OnDisable()
+        {
+            UnhookActions();
+        }
+
+        public void HookActions()
+        {
+            var moveAction = InputSystem.actions.FindAction("Esc");
+            moveAction.performed += HandleEsc;
+        }
+
+        public void UnhookActions()
+        {
+            var moveAction = InputSystem.actions.FindAction("Esc");
+            moveAction.performed -= HandleEsc;
+
+        }
+
+        private void HandleEsc(InputAction.CallbackContext context)
+        {
+            HandleEsc();
+        }
+
 
         private void HandleEsc()
         {
