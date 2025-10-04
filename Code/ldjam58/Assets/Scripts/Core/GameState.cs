@@ -1,6 +1,10 @@
-﻿using Assets.Scripts.Core.Definitons;
-using Assets.Scripts.Core.Model;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using GameFrame.Core.Definitions;
 
 namespace Assets.Scripts.Core
 {
@@ -27,5 +31,21 @@ namespace Assets.Scripts.Core
         public Level CurrentLevel { get; set; }
         public List<Food> Foods { get; set; }
         public List<Obstacle> Obstacles { get; set; }
+
+        private World world;
+        public World World
+        {
+            get
+            {
+                return world;
+            }
+            set
+            {
+                if (world != value)
+                {
+                    world = value;
+                }
+            }
+        }
     }
 }
