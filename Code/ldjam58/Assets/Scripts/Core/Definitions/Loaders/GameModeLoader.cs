@@ -37,7 +37,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
 
                     if (loadedGameMode.PinguinDefinition != default)
                     {
-                        newGameMode.PinguinDefinition = new PinguinDefinition()
+                        newGameMode.PinguinDefinition = new PenguinDefinition()
                         {
                             Reference = loadedGameMode.PinguinDefinition.Reference,
                             Name = loadedGameMode.PinguinDefinition.Name,

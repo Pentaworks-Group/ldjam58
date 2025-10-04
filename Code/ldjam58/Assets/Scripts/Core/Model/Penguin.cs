@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Core.Model
 {
-    public class Pinguin
+    public class Penguin
     {
 
         public Vector3 position {get;set;}  
