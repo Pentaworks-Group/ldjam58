@@ -24,10 +24,9 @@ namespace Assets.Scripts.Core
                 CreatedOn = DateTime.Now,
                 CurrentScene = Constants.Scenes.GameName,
                 Mode = mode,
-                Levels = ConvertLevels()
             };
 
-            gameState.World = GenerateWorld();
+            gameState.CurrentLevel = GenerateWorld();
 
             return gameState;
         }
@@ -91,11 +90,11 @@ namespace Assets.Scripts.Core
             };
         }
 
-        private World GenerateWorld()
+        private Level GenerateWorld()
         {
-            var world = new World()
+            var world = new Level()
             {
-                Size = new GameFrame.Core.Math.Vector2(16, 16),
+                Size = new GameFrame.Core.Math.Vector2Int(16, 16),
                 Resolution = 16,
                 Chunks = new System.Collections.Generic.List<WorldChunk>()
                 {
