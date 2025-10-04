@@ -47,8 +47,9 @@ namespace Assets.Scripts.Core
         {
             var convertedLevel = new Level()
             {
-                Height = level.Height,
-                Width = level.Width,
+                Size = level.Size,
+                PinguinStartPosition = level.PinguinStartPosition,
+                Resolution = level.Resolution,
                 Name = level.Name,
                 Description = level.Description,
                 Seed = level.Seed,

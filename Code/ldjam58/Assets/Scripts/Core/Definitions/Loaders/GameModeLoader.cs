@@ -1,6 +1,5 @@
-﻿using System;
+﻿using GameFrame.Core.Definitions.Loaders;
 using System.Collections.Generic;
-using GameFrame.Core.Definitions.Loaders;
 
 namespace Assets.Scripts.Core.Definitons.Loaders
 {
@@ -28,7 +27,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                         Reference = loadedGameMode.Reference,
                         Name = loadedGameMode.Name,
                         Levels = new List<LevelDefinition>()
-                    };                        
+                    };
 
 
                     if (loadedGameMode.Levels != default)
@@ -40,6 +39,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                     {
                         newGameMode.PinguinDefinition = new PinguinDefinition()
                         {
+                            Reference = loadedGameMode.PinguinDefinition.Reference,
                             Name = loadedGameMode.PinguinDefinition.Name,
                             Sprite = loadedGameMode.PinguinDefinition.Sprite,
                         };
@@ -53,11 +53,14 @@ namespace Assets.Scripts.Core.Definitons.Loaders
         {
             foreach (var loadedItem in loadedItems)
             {
-                var targetItem = new LevelDefinition()
+                var targetLevel = new LevelDefinition()
                 {
+                    Reference = loadedItem.Reference,
+                    Name = loadedItem.Name,
+                    Description = loadedItem.Description,
                     Seed = loadedItem.Seed,
-                    Width = loadedItem.Width,
-                    Height = loadedItem.Height,
+                    Size = loadedItem.Size,
+                    Resolution = loadedItem.Resolution,
                     PinguinStartPosition = loadedItem.PinguinStartPosition,
                     FoodRandomOrder = loadedItem.FoodRandomOrder,
                     FoodRandomPosition = loadedItem.FoodRandomPosition,
@@ -67,10 +70,10 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                     Obstacles = new List<ObstaclePosDefinition>()
                 };
 
-                CheckFoods(loadedItem.Foods, targetItem.Foods);
-                CheckObstacles(loadedItem.Obstacles, targetItem.Obstacles);
+                CheckFoods(loadedItem.Foods, targetLevel.Foods);
+                CheckObstacles(loadedItem.Obstacles, targetLevel.Obstacles);
 
-                targetItems.Add(targetItem);
+                targetItems.Add(targetLevel);
             }
         }
 
