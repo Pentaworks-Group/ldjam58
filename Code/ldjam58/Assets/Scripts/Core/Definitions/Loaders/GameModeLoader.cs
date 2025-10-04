@@ -35,13 +35,13 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                         CheckLevels(loadedGameMode.Levels, newGameMode.Levels);
                     }
 
-                    if (loadedGameMode.PinguinDefinition != default)
+                    if (loadedGameMode.PenguinDefinition != default)
                     {
-                        newGameMode.PinguinDefinition = new PenguinDefinition()
+                        newGameMode.PenguinDefinition = new PenguinDefinition()
                         {
-                            Reference = loadedGameMode.PinguinDefinition.Reference,
-                            Name = loadedGameMode.PinguinDefinition.Name,
-                            Sprite = loadedGameMode.PinguinDefinition.Sprite,
+                            Reference = loadedGameMode.PenguinDefinition.Reference,
+                            Name = loadedGameMode.PenguinDefinition.Name,
+                            Sprite = loadedGameMode.PenguinDefinition.Sprite,
                         };
                     }
 

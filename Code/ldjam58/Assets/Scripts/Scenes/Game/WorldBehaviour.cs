@@ -40,9 +40,9 @@ namespace Assets.Scripts.Scenes.Game
 
                 var terrainGenerator = new TerrainGenerator(terrainMaterial, gameState.CurrentLevel);
 
-                for (int x = 0; x < gameState.CurrentLevel.Size.X; x++)
+                for (int z = 0; z < gameState.CurrentLevel.Size.Y; z++)
                 {
-                    for (int z = 0; z < gameState.CurrentLevel.Size.Y; z++)
+                    for (int x = 0; x < gameState.CurrentLevel.Size.X; x++)
                     {
                         var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
 
@@ -68,6 +68,8 @@ namespace Assets.Scripts.Scenes.Game
                 penguinBehaviour.Init(gameState.Penguin);
 
                 penguinBehaviour.transform.position = gameState.Penguin.position.ToUnity();
+
+                penguinObject.SetActive(true);
             }
         }
 

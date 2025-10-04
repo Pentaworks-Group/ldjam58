@@ -18,10 +18,8 @@ namespace Assets.Scripts.Core.Model
         /// </summary>
         public Int32 Resolution { get; set; }
         public Vector2? PinguinStartPosition { get; set; }
-        public List<Food> Foods { get; set; }
-        public List<Obstacle> Obstacles { get; set; }
-
-
+        public List<Food> Foods { get; set; } = new List<Food>();
+        public List<Obstacle> Obstacles { get; set; } = new List<Obstacle>();
 
         public List<WorldChunk> Chunks { get; set; } = new List<WorldChunk>();
     }

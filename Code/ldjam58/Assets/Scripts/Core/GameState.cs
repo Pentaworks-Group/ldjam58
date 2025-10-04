@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Core.Model;
-using GameFrame.Core.Definitions;
+﻿using Assets.Scripts.Core.Definitons;
+using Assets.Scripts.Core.Model;
 using System;
-using System.Collections.Generic;
 
 namespace Assets.Scripts.Core
 {

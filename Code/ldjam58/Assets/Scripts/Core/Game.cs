@@ -1,10 +1,12 @@
-using GameFrame.Core.Definitions;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Definitons.Loaders;
 using Assets.Scripts.Core.Persistence;
 using GameFrame.Core.Definitions.Loaders;
-using System.Collections;
+
 using UnityEngine;
 
 namespace Assets.Scripts.Core
@@ -15,6 +17,82 @@ namespace Assets.Scripts.Core
         protected override GameState InitializeGameState()
         {
             var gameMode = default(Assets.Scripts.Core.Definitons.GameMode);
+
+            if (gameMode == default)
+            {
+                gameMode = new Assets.Scripts.Core.Definitons.GameMode()
+                {
+                    Levels = new List<LevelDefinition>()
+                    {
+                        new LevelDefinition()
+                        {
+                            Name = "Test",
+                            Description = "Test",
+                            Reference = Guid.NewGuid().ToString(),
+                            Size = new GameFrame.Core.Math.Vector2Int(16, 16),
+                            Resolution = 16,
+                            Chunks = new List<WorldChunkDefinition>()
+                            {
+                                new WorldChunkDefinition(1, 6, 4),
+                                new WorldChunkDefinition(1, 7, 4),
+                                new WorldChunkDefinition(1, 8, 4),
+                                new WorldChunkDefinition(1, 9, 4),
+                                new WorldChunkDefinition(1, 10, 4),
+                                new WorldChunkDefinition(1, 6, 5),
+                                new WorldChunkDefinition(1, 10, 5),
+                                new WorldChunkDefinition(1, 5, 6),
+                                new WorldChunkDefinition(1, 6, 6),
+                                new WorldChunkDefinition(1, 7, 6),
+                                new WorldChunkDefinition(1, 8, 6),
+                                new WorldChunkDefinition(1, 9, 6),
+                                new WorldChunkDefinition(1, 10, 6),
+                                new WorldChunkDefinition(1, 11, 6),
+                                new WorldChunkDefinition(1, 4, 7),
+                                new WorldChunkDefinition(1, 5, 7),
+                                new WorldChunkDefinition(1, 6, 7),
+                                new WorldChunkDefinition(1, 7, 7),
+                                new WorldChunkDefinition(1, 8, 7),
+                                new WorldChunkDefinition(1, 9, 7),
+                                new WorldChunkDefinition(1, 10, 7),
+                                new WorldChunkDefinition(1, 11, 7),
+                                new WorldChunkDefinition(1, 12, 7),
+                                new WorldChunkDefinition(1, 4, 8),
+                                new WorldChunkDefinition(1, 5, 8),
+                                new WorldChunkDefinition(1, 6, 8),
+                                new WorldChunkDefinition(1, 7, 8),
+                                new WorldChunkDefinition(1, 8, 8),
+                                new WorldChunkDefinition(1, 9, 8),
+                                new WorldChunkDefinition(1, 10, 8),
+                                new WorldChunkDefinition(1, 11, 8),
+                                new WorldChunkDefinition(1, 12, 8),
+                                new WorldChunkDefinition(1, 4, 9),
+                                new WorldChunkDefinition(1, 5, 9),
+                                new WorldChunkDefinition(1, 7, 9),
+                                new WorldChunkDefinition(1, 8, 9),
+                                new WorldChunkDefinition(1, 9, 9),
+                                new WorldChunkDefinition(1, 11, 9),
+                                new WorldChunkDefinition(1, 12, 9),
+                                new WorldChunkDefinition(1, 12, 10),
+                                new WorldChunkDefinition(1, 4, 10),
+                                new WorldChunkDefinition(1, 5, 10),
+                                new WorldChunkDefinition(1, 6, 10),
+                                new WorldChunkDefinition(1, 7, 10),
+                                new WorldChunkDefinition(1, 8, 10),
+                                new WorldChunkDefinition(1, 9, 10),
+                                new WorldChunkDefinition(1, 10, 10),
+                                new WorldChunkDefinition(1, 11, 10),
+                                new WorldChunkDefinition(1, 12, 10),
+                                new WorldChunkDefinition(1, 5, 11),
+                                new WorldChunkDefinition(1, 6, 11),
+                                new WorldChunkDefinition(1, 7, 11),
+                                new WorldChunkDefinition(1, 9, 11),
+                                new WorldChunkDefinition(1, 10, 11),
+                                new WorldChunkDefinition(1, 11, 11),
+                            }
+                        }
+                    }
+                };
+            }
 
             var gameStateConverter = new GameStateConverter(gameMode);
 

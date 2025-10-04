@@ -12,5 +12,13 @@ namespace Assets.Scripts.Scenes.Game
         {
             this.penguin = penguin;
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider == default)
+            {
+
+            }
+        }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Core.Definitons;
-using Assets.Scripts.Core.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
+using Assets.Scripts.Core.Definitons;
+using Assets.Scripts.Core.Model;
 
 namespace Assets.Scripts.Core
 {
@@ -19,55 +19,68 @@ namespace Assets.Scripts.Core
 
         public GameState Convert()
         {
-            var gameState = new GameState
+            var gameState = new GameState()
             {
                 CreatedOn = DateTime.Now,
                 CurrentScene = Constants.Scenes.GameName,
                 Mode = mode,
             };
 
-            gameState.CurrentLevel = GenerateWorld();
+            if (!this.mode.IsRandomGenerated)
+            {
+                if (this.mode.Levels?.Count > 0)
+                {
+                    var firstLevel = this.mode.Levels[0];
+
+                    gameState.CurrentLevel = ConvertLevel(firstLevel);
+
+                }
+                else
+                {
+                    throw new Exception("Neither Levels provided nor Random flag set in GameMode!");
+                }
+            }
 
             return gameState;
         }
 
-        private List<Level> ConvertLevels()
-        {
-            var levelList = new List<Level>();
-
-            foreach (var level in mode.Levels)
-            {
-                var convertedLevel = ConvertLevel(level);
-                levelList.Add(convertedLevel);
-            }
-
-            return levelList;
-        }
-
-        private Level ConvertLevel(LevelDefinition level)
+        private Level ConvertLevel(LevelDefinition levelDefinition)
         {
             var convertedLevel = new Level()
             {
-                Size = level.Size,
-                PinguinStartPosition = level.PinguinStartPosition,
-                Resolution = level.Resolution,
-                Name = level.Name,
-                Description = level.Description,
-                Seed = level.Seed,
+                Size = levelDefinition.Size,
+                PinguinStartPosition = levelDefinition.PinguinStartPosition,
+                Resolution = levelDefinition.Resolution,
+                Name = levelDefinition.Name,
+                Description = levelDefinition.Description,
+                Seed = levelDefinition.Seed,
                 Foods = new List<Food>(),
                 Obstacles = new List<Obstacle>()
             };
 
-            foreach (var foodDef in level.Foods)
+            if (levelDefinition.Foods?.Count > 0)
             {
-                convertedLevel.Foods.Add(ConvertFood(foodDef));
+                foreach (var foodDef in levelDefinition.Foods)
+                {
+                    convertedLevel.Foods.Add(ConvertFood(foodDef));
+                }
             }
 
-            foreach (var obstacleDef in level.Obstacles)
+            if (levelDefinition.Obstacles?.Count > 0)
             {
-                convertedLevel.Obstacles.Add(ConvertObstacle(obstacleDef));
+                foreach (var obstacleDef in levelDefinition.Obstacles)
+                {
+                    convertedLevel.Obstacles.Add(ConvertObstacle(obstacleDef));
+                }
             }
 
+            if (levelDefinition.Chunks?.Count > 0)
+            {
+                foreach (var chunkDefinition in levelDefinition.Chunks)
+                {
+                    convertedLevel.Chunks.Add(ConvertChunk(chunkDefinition));
+                }
+            }
 
             return convertedLevel;
         }
@@ -90,55 +103,26 @@ namespace Assets.Scripts.Core
             };
         }
 
-        private Level GenerateWorld()
+        private WorldChunk ConvertChunk(WorldChunkDefinition chunkDefinition)
         {
-            var world = new Level()
+            var chunk = new WorldChunk()
             {
-                Size = new GameFrame.Core.Math.Vector2Int(16, 16),
-                Resolution = 16,
-                Chunks = new System.Collections.Generic.List<WorldChunk>()
-                {
-                    new WorldChunk()
-                    {
-                        DefaultTileHeight = 1,
-                        Position = new GameFrame.Core.Math.Vector2Int(2, 2),
-                        Tiles = new System.Collections.Generic.List<WorldTile>()
-                        {
-                            new WorldTile()
-                            {
-                                Position = new GameFrame.Core.Math.Vector3Int(5, 2, 5)
-                            },
-                            new WorldTile()
-                            {
-                                Position = new GameFrame.Core.Math.Vector3Int(5, 2, 6)
-                            },
-                            new WorldTile()
-                            {
-                                Position = new GameFrame.Core.Math.Vector3Int(6, 2, 6)
-                            },
-                            new WorldTile()
-                            {
-                                Position = new GameFrame.Core.Math.Vector3Int(6, 2, 5)
-                            },
-                            new WorldTile()
-                            {
-                                Position = new GameFrame.Core.Math.Vector3Int(1, 3, 1)
-                            },
-                            new WorldTile()
-                            {
-                                Position = new GameFrame.Core.Math.Vector3Int(9, 9, 9)
-                            },
-                            new WorldTile()
-                            {
-                                Position = new GameFrame.Core.Math.Vector3Int(1, 3, 9)
-                            }
-                        }
-                    }
-
-                }
+                Position = chunkDefinition.Position,
+                DefaultTileHeight = chunkDefinition.DefaultTileHeight,
             };
 
-            return world;
+            if (chunkDefinition.Tiles?.Count > 0)
+            {
+                foreach (var tileDefinition in chunkDefinition.Tiles)
+                {
+                    chunk.Tiles.Add(new WorldTile()
+                    {
+                        Position = tileDefinition
+                    });
+                }
+            }
+
+            return chunk;
         }
     }
 }
