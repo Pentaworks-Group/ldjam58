@@ -20,7 +20,7 @@ namespace Assets.Scripts.Core.Definitons
         public Int32 Resolution { get; set; }
 
         public List<WorldChunkDefinition> Chunks { get; set; } = new List<WorldChunkDefinition>();
-        public Vector2? PinguinStartPosition { get; set; }
+        public Vector2Int? PenguinStartPosition { get; set; }
         public Boolean? FoodRandomOrder { get; set; }
         public Boolean? FoodRandomPosition { get; set; }
         public Boolean? ObstacleRandomOrder { get; set; }

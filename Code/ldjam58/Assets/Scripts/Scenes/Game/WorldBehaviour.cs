@@ -3,12 +3,11 @@ using System;
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
 
-using GameFrame.Core.Collections;
 using GameFrame.Core.Extensions;
 
-using UnityVector3 = UnityEngine.Vector3;
-
 using UnityEngine;
+
+using UnityVector3 = UnityEngine.Vector3;
 
 namespace Assets.Scripts.Scenes.Game
 {
@@ -28,17 +27,19 @@ namespace Assets.Scripts.Scenes.Game
 
             this.gameState = Base.Core.Game.State;
 
-            RenderWorld();            
-            RenderPenguin();
+            if (RenderWorld())
+            {
+                RenderPenguin();
+            }
         }
 
-        private void RenderWorld()
+        private Boolean RenderWorld()
         {
             if (gameState.CurrentLevel != default)
             {
-                var tileMap = GenerateChunkMap(gameState.CurrentLevel);
-
                 var terrainGenerator = new TerrainGenerator(terrainMaterial, gameState.CurrentLevel);
+
+                var chunkMap = gameState.CurrentLevel.GetChunkMap();
 
                 for (int z = 0; z < gameState.CurrentLevel.Size.Y; z++)
                 {
@@ -49,16 +50,55 @@ namespace Assets.Scripts.Scenes.Game
                         mapChunk.transform.parent = chunkContainer.transform;
                         mapChunk.transform.localPosition = new UnityVector3(x * gameState.CurrentLevel.Resolution, 0f, z * gameState.CurrentLevel.Resolution);
 
-                        _ = tileMap.TryGetValue(x, z, out var worldChunk);
+                        _ = chunkMap.TryGetValue(x, z, out var worldChunk);
 
                         terrainGenerator.Generate(worldChunk, mapChunk);
                     }
                 }
+
+                return true;
             }
+
+            return false;
         }
 
         private void RenderPenguin()
         {
+            if (gameState.Penguin == default)
+            {
+                var startingPosition = gameState.CurrentLevel.PenguinStartPosition;
+
+                var y = 0f;
+
+                if (gameState.CurrentLevel.GetChunkMap().TryGetValue(startingPosition.X, startingPosition.Y, out var chunk))
+                {
+                    if (chunk.DefaultTileHeight.HasValue)
+                    {
+                        y = chunk.DefaultTileHeight.Value;
+                    }
+
+                    var centerOffset = gameState.CurrentLevel.Resolution / 2;
+
+                    if (chunk.GetTileMap().TryGetValue(centerOffset, centerOffset, out var centerTile))
+                    {
+                        if (centerTile.Position.Y != y)
+                        {
+                            y = centerTile.Position.Y;
+                        }
+                    }
+                }
+
+                var startPositionOffset = (0.5f * gameState.CurrentLevel.Resolution);
+
+                var startPositionX = startingPosition.X * gameState.CurrentLevel.Resolution + startPositionOffset;
+                var startPositionZ = startingPosition.Y * gameState.CurrentLevel.Resolution + startPositionOffset;
+
+                gameState.Penguin = new Penguin()
+                {
+                    Position = new GameFrame.Core.Math.Vector3(startPositionX, y, startPositionZ)
+                };
+            }
+
             if (gameState.Penguin != default)
             {
                 var penguinObject = GameObject.Instantiate(penguinTemplate, rootContainer.transform);
@@ -67,22 +107,10 @@ namespace Assets.Scripts.Scenes.Game
 
                 penguinBehaviour.Init(gameState.Penguin);
 
-                penguinBehaviour.transform.position = gameState.Penguin.position.ToUnity();
+                penguinBehaviour.transform.position = gameState.Penguin.Position.ToUnity();
 
                 penguinObject.SetActive(true);
             }
-        }
-
-        private Map<Int32, WorldChunk> GenerateChunkMap(Level world)
-        {
-            var map = new Map<Int32, WorldChunk>();
-
-            foreach (var chunk in world.Chunks)
-            {
-                map[chunk.Position.X, chunk.Position.Y] = chunk;
-            }
-
-            return map;
         }
 
         private void OnPauseToggled(Boolean isPaused)

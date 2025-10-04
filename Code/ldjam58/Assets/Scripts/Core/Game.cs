@@ -31,6 +31,7 @@ namespace Assets.Scripts.Core
                             Reference = Guid.NewGuid().ToString(),
                             Size = new GameFrame.Core.Math.Vector2Int(16, 16),
                             Resolution = 16,
+                            PenguinStartPosition = new GameFrame.Core.Math.Vector2Int(8, 7),
                             Chunks = new List<WorldChunkDefinition>()
                             {
                                 new WorldChunkDefinition(1, 6, 4),

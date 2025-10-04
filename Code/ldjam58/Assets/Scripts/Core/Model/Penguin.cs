@@ -4,9 +4,7 @@ namespace Assets.Scripts.Core.Model
 {
     public class Penguin
     {
-
-        public Vector3 position {get;set;}  
-        public Vector3 velocity {get;set;}  
-
+        public Vector3 Position { get; set; }
+        public Vector3 Velocity { get; set; }
     }
 }

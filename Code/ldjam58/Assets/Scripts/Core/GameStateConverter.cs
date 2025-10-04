@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Model;
 
+using GameFrame.Core.Math;
+
 namespace Assets.Scripts.Core
 {
     public class GameStateConverter
@@ -46,10 +48,21 @@ namespace Assets.Scripts.Core
 
         private Level ConvertLevel(LevelDefinition levelDefinition)
         {
+            var startingPosition = default(Vector2Int);
+
+            if (levelDefinition.PenguinStartPosition.HasValue)
+            {
+                startingPosition = levelDefinition.PenguinStartPosition.Value;
+            }
+            else
+            {
+                throw new Exception("Missing LevelDefinition.PenguinStartingPosition");
+            }
+
             var convertedLevel = new Level()
             {
                 Size = levelDefinition.Size,
-                PinguinStartPosition = levelDefinition.PinguinStartPosition,
+                PenguinStartPosition = startingPosition,
                 Resolution = levelDefinition.Resolution,
                 Name = levelDefinition.Name,
                 Description = levelDefinition.Description,

@@ -61,7 +61,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                     Seed = loadedItem.Seed,
                     Size = loadedItem.Size,
                     Resolution = loadedItem.Resolution,
-                    PinguinStartPosition = loadedItem.PinguinStartPosition,
+                    PenguinStartPosition = loadedItem.PenguinStartPosition,
                     FoodRandomOrder = loadedItem.FoodRandomOrder,
                     FoodRandomPosition = loadedItem.FoodRandomPosition,
                     Foods = new List<FoodPosDefinition>(),
