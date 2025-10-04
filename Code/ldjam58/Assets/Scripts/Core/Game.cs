@@ -34,5 +34,11 @@ namespace Assets.Scripts.Core
         {
             RegisterScenes(Constants.Scenes.GetAll());
         }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void GameStart()
+        {
+            Base.Core.Game.Startup();
+        }
     }
 }
