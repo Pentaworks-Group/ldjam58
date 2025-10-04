@@ -99,7 +99,7 @@ namespace Assets.Scripts.Scenes.Game
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
 
-            //collider.sharedMaterial = iceMaterial;
+            collider.sharedMaterial = iceMaterial;
             //collider.sharedMaterial = snowMaterial;
             collider.sharedMesh = mesh;
             filter.mesh = mesh;
