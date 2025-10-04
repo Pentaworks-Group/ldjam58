@@ -13,7 +13,7 @@ namespace Assets.Scripts.Core
         private readonly DefinitionCache<Definitons.GameMode> gameModeCache = new DefinitionCache<Definitons.GameMode>();
         protected override GameState InitializeGameState()
         {
-            var gameMode = default(GameFrame.Core.Definitions.GameMode);
+            var gameMode = default(Assets.Scripts.Core.Definitons.GameMode);
 
             var gameStateConverter = new GameStateConverter(gameMode);
 
