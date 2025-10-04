@@ -18,6 +18,8 @@ namespace Assets.Scripts.Scenes.Game
         public GameObject rootContainer;
 
         public Material terrainMaterial;
+        public PhysicsMaterial iceMaterial;
+        public PhysicsMaterial snowMaterial;
 
         private GameState gameState;
 
@@ -39,7 +41,7 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (gameState.CurrentLevel != default)
             {
-                var terrainGenerator = new TerrainGenerator(terrainMaterial, gameState.CurrentLevel);
+                var terrainGenerator = new TerrainGenerator(terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
 
                 var chunkMap = gameState.CurrentLevel.GetChunkMap();
 

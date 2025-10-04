@@ -20,9 +20,10 @@ namespace Assets.Scripts.Scenes.Game
         {
             var moveVector = context.ReadValue<Vector2>();
 
-            var translation = 50f * Time.deltaTime * new Vector3(moveVector.x, 0, moveVector.y);
+            var translation = 5f * new Vector3(moveVector.x, 0, moveVector.y);
 
             penguinRigidbody.AddForce(translation, ForceMode.Impulse);
+            Debug.Log($"Adding force '{translation}'");
         }
 
         private void HookActions()

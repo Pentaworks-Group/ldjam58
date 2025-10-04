@@ -8,11 +8,15 @@ namespace Assets.Scripts.Scenes.Game
     {
         private readonly Level world;
         private readonly Material terrainMaterial;
+        private readonly PhysicsMaterial iceMaterial;
+        private readonly PhysicsMaterial snowMaterial;
 
-        public TerrainGenerator(Material terrainMaterial, Level world)
+        public TerrainGenerator(Material terrainMaterial, PhysicsMaterial ice, PhysicsMaterial snow, Level world)
         {
             this.world = world;
             this.terrainMaterial = terrainMaterial;
+            this.iceMaterial = ice;
+            this.snowMaterial = snow;
         }
 
         public void Generate(WorldChunk worldChunk, GameObject chunk)
@@ -95,6 +99,8 @@ namespace Assets.Scripts.Scenes.Game
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
 
+            //collider.sharedMaterial = iceMaterial;
+            //collider.sharedMaterial = snowMaterial;
             collider.sharedMesh = mesh;
             filter.mesh = mesh;
             renderer.material = terrainMaterial;
