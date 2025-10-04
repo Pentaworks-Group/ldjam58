@@ -11,7 +11,9 @@ namespace Assets.Scripts.Scenes.Game
 {
     public class WorldBehaviour : MonoBehaviour
     {
-        public GameObject tileContainer;
+        public GameObject chunkContainer;
+        public GameObject rootContainer;
+
         public Material terrainMaterial;
 
         private GameState gameState;
@@ -22,7 +24,8 @@ namespace Assets.Scripts.Scenes.Game
 
             this.gameState = Base.Core.Game.State;
 
-            RenderWorld();
+            RenderWorld();            
+            RenderPenguin();
         }
 
         private void RenderWorld()
@@ -39,7 +42,7 @@ namespace Assets.Scripts.Scenes.Game
                     {
                         var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
 
-                        mapChunk.transform.parent = tileContainer.transform;
+                        mapChunk.transform.parent = chunkContainer.transform;
                         mapChunk.transform.localPosition = new Vector3(x * gameState.World.Resolution, 0f, z * gameState.World.Resolution);
 
                         _ = tileMap.TryGetValue(x, z, out var worldChunk);
@@ -47,6 +50,14 @@ namespace Assets.Scripts.Scenes.Game
                         terrainGenerator.Generate(worldChunk, mapChunk);
                     }
                 }
+            }
+        }
+
+        private void RenderPenguin()
+        {
+            if (gameState.Penguin != default)
+            {
+                //var penguinObject = new GameObject("Peeenguin", typeof(PenguinBehaviour));
             }
         }
 

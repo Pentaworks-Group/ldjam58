@@ -165,7 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa767d00ef013f04aa715b945650c32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Scenes.Game.WorldBehaviour
-  tileContainer: {fileID: 1232739013}
+  chunkContainer: {fileID: 1232739013}
+  obstacleContainer: {fileID: 0}
+  rootContainer: {fileID: 129315002}
   terrainMaterial: {fileID: 2100000, guid: 30bb259236c08e54da38210bec5d9186, type: 2}
 --- !u!1 &330585543
 GameObject:
@@ -459,8 +461,8 @@ Transform:
   m_GameObject: {fileID: 1230264849}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1000, y: 1000, z: 1000}
+  m_LocalPosition: {x: 250, y: 0.5, z: 250}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 129315003}
@@ -553,7 +555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232739014}
   m_Layer: 0
-  m_Name: Island
+  m_Name: ChunkContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

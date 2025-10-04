@@ -35,11 +35,13 @@ namespace Assets.Scripts.Core
         private List<Level> ConvertLevels()
         {
             var levelList = new List<Level>();
+
             foreach (var level in mode.Levels)
             {
                 var convertedLevel = ConvertLevel(level);
                 levelList.Add(convertedLevel);
             }
+
             return levelList;
         }
 
@@ -99,8 +101,8 @@ namespace Assets.Scripts.Core
                 {
                     new WorldChunk()
                     {
-                        Position = new GameFrame.Core.Math.Vector2Int(2, 2),
                         DefaultTileHeight = 1,
+                        Position = new GameFrame.Core.Math.Vector2Int(2, 2),
                         Tiles = new System.Collections.Generic.List<WorldTile>()
                         {
                             new WorldTile()
