@@ -30,6 +30,8 @@ namespace Assets.Scripts.Scenes.Game
             if (RenderWorld())
             {
                 RenderPenguin();
+
+                RenderObstacles();
             }
         }
 
@@ -111,6 +113,11 @@ namespace Assets.Scripts.Scenes.Game
 
                 penguinObject.SetActive(true);
             }
+        }
+
+        private void RenderObstacles()
+        {
+
         }
 
         private void OnPauseToggled(Boolean isPaused)

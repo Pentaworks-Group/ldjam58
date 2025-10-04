@@ -198,7 +198,7 @@ Transform:
   m_GameObject: {fileID: 154609793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -591,6 +591,7 @@ GameObject:
   - component: {fileID: 1230264853}
   - component: {fileID: 1230264852}
   - component: {fileID: 1230264851}
+  - component: {fileID: 1230264854}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -691,6 +692,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230264849}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1230264854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230264849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ba255c802265240ba58d94b92c7591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Scenes.Game.WaterBehaviour
 --- !u!1 &1232739013
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +824,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1423278834}
   - component: {fileID: 1423278835}
+  - component: {fileID: 1423278836}
   m_Layer: 0
   m_Name: PenguinTemplate
   m_TagString: Untagged
@@ -846,6 +860,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389e33b9274852c4eb2d3e2f06cec991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Scenes.Game.PenguinBehaviour
+--- !u!54 &1423278836
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423278833}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
-﻿using Assets.Scripts.Core.Definitons;
+﻿using System;
+
+using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Model;
-using System;
 
 namespace Assets.Scripts.Core
 {
@@ -26,6 +27,6 @@ namespace Assets.Scripts.Core
         public Level CurrentLevel { get; set; }
 
         public Double TimeElapsed { get; set; } = 0.0;
-
+        public String DeathReason { get; set; }
     }
 }
