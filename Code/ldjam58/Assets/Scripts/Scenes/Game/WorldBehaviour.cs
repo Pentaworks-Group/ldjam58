@@ -4,6 +4,9 @@ using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
 
 using GameFrame.Core.Collections;
+using GameFrame.Core.Extensions;
+
+using UnityVector3 = UnityEngine.Vector3;
 
 using UnityEngine;
 
@@ -12,6 +15,7 @@ namespace Assets.Scripts.Scenes.Game
     public class WorldBehaviour : MonoBehaviour
     {
         public GameObject chunkContainer;
+        public GameObject penguinTemplate;
         public GameObject rootContainer;
 
         public Material terrainMaterial;
@@ -43,7 +47,7 @@ namespace Assets.Scripts.Scenes.Game
                         var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
 
                         mapChunk.transform.parent = chunkContainer.transform;
-                        mapChunk.transform.localPosition = new Vector3(x * gameState.CurrentLevel.Resolution, 0f, z * gameState.CurrentLevel.Resolution);
+                        mapChunk.transform.localPosition = new UnityVector3(x * gameState.CurrentLevel.Resolution, 0f, z * gameState.CurrentLevel.Resolution);
 
                         _ = tileMap.TryGetValue(x, z, out var worldChunk);
 
@@ -57,7 +61,13 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (gameState.Penguin != default)
             {
-                //var penguinObject = new GameObject("Peeenguin", typeof(PenguinBehaviour));
+                var penguinObject = GameObject.Instantiate(penguinTemplate, rootContainer.transform);
+
+                var penguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
+
+                penguinBehaviour.Init(gameState.Penguin);
+
+                penguinBehaviour.transform.position = gameState.Penguin.position.ToUnity();
             }
         }
 
