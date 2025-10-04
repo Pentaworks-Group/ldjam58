@@ -1,3 +1,4 @@
+using GameFrame.Core.Definitions;
 
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Definitons.Loaders;
@@ -12,9 +13,13 @@ namespace Assets.Scripts.Core
         private readonly DefinitionCache<GameMode> gameModeCache = new DefinitionCache<GameMode>();
         protected override GameState InitializeGameState()
         {
-            return new GameState()
-            {
-            };
+            var gameMode = default(GameMode);
+
+            var gameStateConverter = new GameStateConverter(gameMode);
+
+            var gameState = gameStateConverter.Convert();
+
+            return gameState;
         }
 
         protected override PlayerOptions InitializePlayerOptions()
