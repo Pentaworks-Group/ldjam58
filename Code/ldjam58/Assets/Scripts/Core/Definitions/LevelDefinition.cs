@@ -21,6 +21,7 @@ namespace Assets.Scripts.Core.Definitons
 
         public List<WorldChunkDefinition> Chunks { get; set; } = new List<WorldChunkDefinition>();
         public Vector2Int? PenguinStartPosition { get; set; }
+        public Int32? ActiveFoodLimit { get; set; } = 1;
         public Boolean? FoodRandomOrder { get; set; }
         public Boolean? FoodRandomPosition { get; set; }
         public Boolean? ObstacleRandomOrder { get; set; }

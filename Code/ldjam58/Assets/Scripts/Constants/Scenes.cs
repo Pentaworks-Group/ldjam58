@@ -108,6 +108,32 @@ namespace Assets.Scripts.Constants
             }
         }
 
+        public const String LevelCompletedName = "LevelCompletedScene";
+        private static Scene levelCompleted;
+        public static Scene LevelCompleted
+        {
+            get
+            {
+                if (levelCompleted == default)
+                {
+                    levelCompleted = new Scene()
+                    {
+                        Name = LevelCompletedName,
+                        //AmbienceClips = new List<String>()
+                        //{
+                        //    "WoodSound"
+                        //},
+                        //BackgroundClips = new List<String>()
+                        //{
+                        //    "Background"
+                        //}
+                    };
+                }
+
+                return levelCompleted;
+            }
+        }
+
         public const String GameOverName = "GameOverScene";
         private static Scene gameOver;
         public static Scene GameOver

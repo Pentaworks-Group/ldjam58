@@ -16,7 +16,7 @@ namespace Assets.Scripts.Core
 
         public GameStateConverter(GameMode gameMode)
         {
-            this.mode = gameMode;
+            this.mode = gameMode;            
         }
 
         public GameState Convert()
@@ -26,6 +26,7 @@ namespace Assets.Scripts.Core
                 CreatedOn = DateTime.Now,
                 CurrentScene = Constants.Scenes.GameName,
                 Mode = mode,
+                Penguin = ConvertPenguin(mode.Penguin)
             };
 
             if (!this.mode.IsRandomGenerated)
@@ -34,7 +35,7 @@ namespace Assets.Scripts.Core
                 {
                     var firstLevel = this.mode.Levels[0];
 
-                    gameState.CurrentLevel = ConvertLevel(firstLevel);
+                    gameState.CurrentLevel = new LevelConverter().Convert(firstLevel);
 
                 }
                 else
@@ -46,96 +47,33 @@ namespace Assets.Scripts.Core
             return gameState;
         }
 
-        private Level ConvertLevel(LevelDefinition levelDefinition)
+        private Penguin ConvertPenguin(PenguinDefinition penguinDefinition)
         {
-            var startingPosition = default(Vector2Int);
-
-            if (levelDefinition.PenguinStartPosition.HasValue)
+            if (mode.Penguin != default)
             {
-                startingPosition = levelDefinition.PenguinStartPosition.Value;
-            }
-            else
-            {
-                throw new Exception("Missing LevelDefinition.PenguinStartingPosition");
-            }
-
-            var convertedLevel = new Level()
-            {
-                Size = levelDefinition.Size,
-                PenguinStartPosition = startingPosition,
-                Resolution = levelDefinition.Resolution,
-                Name = levelDefinition.Name,
-                Description = levelDefinition.Description,
-                Seed = levelDefinition.Seed,
-                Foods = new List<Food>(),
-                Obstacles = new List<Obstacle>()
-            };
-
-            if (levelDefinition.Foods?.Count > 0)
-            {
-                foreach (var foodDef in levelDefinition.Foods)
+                var penguin = new Penguin()
                 {
-                    convertedLevel.Foods.Add(ConvertFood(foodDef));
-                }
-            }
-
-            if (levelDefinition.Obstacles?.Count > 0)
-            {
-                foreach (var obstacleDef in levelDefinition.Obstacles)
+                    Name = penguinDefinition.Name
+                };
+                
+                if (!penguinDefinition.Strength.HasValue)
                 {
-                    convertedLevel.Obstacles.Add(ConvertObstacle(obstacleDef));
+                    throw new Exception("Missing PenguinDefinition.Strength!");
                 }
-            }
-
-            if (levelDefinition.Chunks?.Count > 0)
-            {
-                foreach (var chunkDefinition in levelDefinition.Chunks)
+                
+                penguin.Strength = penguinDefinition.Strength.Value;
+                
+                if (!penguinDefinition.MaxStrength.HasValue)
                 {
-                    convertedLevel.Chunks.Add(ConvertChunk(chunkDefinition));
+                    throw new Exception("Missing PenguinDefinition.MaxStrength!");
                 }
+                
+                penguin.MaxStrength = penguinDefinition.MaxStrength.Value;
+
+                return penguin;
             }
 
-            return convertedLevel;
-        }
-
-        private Food ConvertFood(FoodPosDefinition foodDef)
-        {
-            return new Food()
-            {
-                Definition = foodDef.FoodDefinition,
-                Position = foodDef.Position
-            };
-        }
-
-        private Obstacle ConvertObstacle(ObstaclePosDefinition obstacleDef)
-        {
-            return new Obstacle()
-            {
-                Definition = obstacleDef.ObstacleDefinition,
-                Position = obstacleDef.Position
-            };
-        }
-
-        private WorldChunk ConvertChunk(WorldChunkDefinition chunkDefinition)
-        {
-            var chunk = new WorldChunk()
-            {
-                Position = chunkDefinition.Position,
-                DefaultTileHeight = chunkDefinition.DefaultTileHeight,
-            };
-
-            if (chunkDefinition.Tiles?.Count > 0)
-            {
-                foreach (var tileDefinition in chunkDefinition.Tiles)
-                {
-                    chunk.Tiles.Add(new WorldTile()
-                    {
-                        Position = tileDefinition
-                    });
-                }
-            }
-
-            return chunk;
+            return default;
         }
     }
 }

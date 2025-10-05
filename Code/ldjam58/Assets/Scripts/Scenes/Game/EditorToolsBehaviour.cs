@@ -1,7 +1,9 @@
 
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
+using Newtonsoft.Json;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -16,6 +18,8 @@ namespace Assets.Scripts.Scenes.Game
         private LayerMask raycastLayerMask;
         [SerializeField]
         private WorldBehaviour worldBehaviour;
+        [SerializeField]
+        private TMP_InputField inputField;
 
         private EditorToolBehaviour selectedTool;
 
@@ -70,7 +74,8 @@ namespace Assets.Scripts.Scenes.Game
 
         public void SaveMap()
         {
-
+            var json = GameFrame.Core.Json.Handler.Serialize(gameState.CurrentLevel.Chunks, Formatting.Indented, new JsonSerializerSettings());
+            inputField.text = json;
         }
 
         public void SelectTool(EditorToolBehaviour toolToSelect)
@@ -78,6 +83,11 @@ namespace Assets.Scripts.Scenes.Game
             if (selectedTool != null)
             {
                 selectedTool.DeselectButton();
+                if (selectedTool == toolToSelect)
+                {
+                    selectedTool = null;
+                    return;
+                }
             }
             selectedTool = toolToSelect;
             toolToSelect.SelectButton();
@@ -130,6 +140,14 @@ namespace Assets.Scripts.Scenes.Game
                     if (desiredHeight <= 0)
                     {
                         chunk.RemoveTile(tile);
+                        if (chunk.Tiles.Count == 0)
+                        {
+                            gameState.CurrentLevel.RemoveChunk(chunk);
+                        }
+                        else
+                        {
+                            chunk.DefaultTileHeight = null;
+                        }
                     }
                     else
                     {
@@ -137,6 +155,67 @@ namespace Assets.Scripts.Scenes.Game
                     }
                 }
                 worldBehaviour.ReRenderWorld();
+            }
+        }
+
+        public void RaiseChunkLevel()
+        {
+            if (GetChunkWithRaycast(out var chunk))
+            {
+                if (chunk.DefaultTileHeight.HasValue)
+                {
+                    chunk.DefaultTileHeight += 1;
+                }
+                else
+                {
+                    chunk.DefaultTileHeight = 1;
+                }
+                worldBehaviour.ReRenderWorld();
+            }
+        }
+
+        public void LowerChunkLevel()
+        {
+            if (GetChunkWithRaycast(out var chunk))
+            {
+                if (chunk.DefaultTileHeight.HasValue)
+                {
+                    var desiredValue = chunk.DefaultTileHeight - 1;
+                    if (desiredValue < 1)
+                    {
+                        if (chunk.Tiles == null || chunk.Tiles.Count == 0)
+                        {
+                            gameState.CurrentLevel.RemoveChunk(chunk);
+                        }
+                        else
+                        {
+                            chunk.DefaultTileHeight = null;
+                        }
+
+                    }
+                    else
+                    {
+                        chunk.DefaultTileHeight -= 1;
+                    }
+                }
+                worldBehaviour.ReRenderWorld();
+            }
+        }
+
+        public void TogglePenguinGravity(EditorToolBehaviour gravityButton)
+        {
+            if (worldBehaviour.PenguinBehaviour.TryGetComponent<Rigidbody>(out Rigidbody body))
+            {
+                body.useGravity = !body.useGravity;
+                if (body.useGravity)
+                {
+                    body.linearDamping = 0;
+                }
+                else
+                {
+                    body.linearDamping = 1;
+                }
+                gravityButton.ToggleButton();
             }
         }
 
@@ -148,6 +227,17 @@ namespace Assets.Scripts.Scenes.Game
                 return true;
             }
             tile = null;
+            chunk = null;
+            return false;
+        }
+
+        private Boolean GetChunkWithRaycast(out WorldChunk chunk)
+        {
+            if (MakeRaycast(out Vector3 hitPoint))
+            {
+                GetWorldChunkFromPosition(hitPoint, out chunk);
+                return true;
+            }
             chunk = null;
             return false;
         }
@@ -174,6 +264,17 @@ namespace Assets.Scripts.Scenes.Game
         }
 
 
+        private void GetWorldChunkFromPosition(Vector3 position, out WorldChunk chunk)
+        {
+            var resolution = gameState.CurrentLevel.Resolution;
+            float x = position.x + 0.5f;
+            int xC = (int)(x / resolution);
+
+            float z = position.z + 0.5f;
+            int yC = (int)(z / resolution);
+            chunk = GetChunkFromIndixes(xC, yC);
+        }
+
         private void GetWorldTileFromPosition(Vector3 position, out WorldTile tile, out WorldChunk chunk)
         {
             var resolution = gameState.CurrentLevel.Resolution;
@@ -184,14 +285,7 @@ namespace Assets.Scripts.Scenes.Game
             float z = position.z + 0.5f;
             int yC = (int)(z / resolution);
             int yT = (int)(z % resolution);
-            if (!gameState.CurrentLevel.GetChunkMap().TryGetValue(xC, yC, out chunk))
-            {
-                chunk = new WorldChunk()
-                {
-                    Position = new GameFrame.Core.Math.Vector2Int(xC, yC)
-                };
-                gameState.CurrentLevel.AddChunk(chunk);
-            }
+            chunk = GetChunkFromIndixes(xC, yC);
             if (!chunk.GetTileMap().TryGetValue(xT, yT, out tile))
             {
                 var height = 0;
@@ -207,9 +301,19 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
+        private WorldChunk GetChunkFromIndixes(int xC, int yC)
+        {
+            WorldChunk chunk;
+            if (!gameState.CurrentLevel.GetChunkMap().TryGetValue(xC, yC, out chunk))
+            {
+                chunk = new WorldChunk()
+                {
+                    Position = new GameFrame.Core.Math.Vector2Int(xC, yC)
+                };
+                gameState.CurrentLevel.AddChunk(chunk);
+            }
 
-
-
-
+            return chunk;
+        }
     }
 }

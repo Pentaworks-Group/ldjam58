@@ -1,6 +1,833 @@
 [
-    {
-        "Reference": "Default",
-        "Name": "Default"
-    }
+  {
+    "Reference": "Default",
+    "Name": "Default",
+    "Description": "Default",
+    "IsRandomGenerated": false,
+    "IsAllowingControlWhileMoving": false,
+    "Penguin": {
+      "Reference": "DefaultPenguin",
+      "Name": "Floppy",
+      "Sprite": null,
+      "Strength": 0.5,
+      "MaxStrength": 20
+    },
+    "Levels": [
+      {
+        "Reference": "default-level-one",
+        "Name": "Level 1",
+        "Description": "Ze ferst lehfel jaa",
+        "Seed": null,
+        "Size": {
+          "X": 16,
+          "Y": 16
+        },
+        "Resolution": 16,
+        "PenguinStartPosition": {
+          "X": 8,
+          "Y": 7
+        },
+        "ActiveFoodLimit": 1,
+        "FoodRandomOrder": false,
+        "FoodRandomPosition": false,
+        "Foods": [
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 7,
+              "Y": 7
+            }
+          }
+        ],
+        "ObstacleRandomOrder": false,
+        "ObstacleRandomPosition": false,
+        "Obstacles": [],
+        "Chunks": [
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 6,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 10,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 6,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 10,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 5,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 6,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 10,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 11,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 4,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 5,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 11,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 12,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 4,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 5,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 6,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 10,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 11,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 12,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 4,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 5,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 6,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 10,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 11,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 12,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 4,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 5,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 6,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 10,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 11,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 12,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 5,
+              "Y": 11
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 6,
+              "Y": 11
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 11
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 11
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 10,
+              "Y": 11
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 11,
+              "Y": 11
+            }
+          }
+        ]
+      },
+      {
+        "Reference": "default-level-two",
+        "Name": "Level 2",
+        "Description": "Ze zweite lehfel jaa. wiht ze great hoole",
+        "Seed": null,
+        "Size": {
+          "X": 16,
+          "Y": 16
+        },
+        "Resolution": 16,
+        "PenguinStartPosition": {
+          "X": 7,
+          "Y": 7
+        },
+        "ActiveFoodLimit": 2,
+        "FoodRandomOrder": false,
+        "FoodRandomPosition": false,
+        "Foods": [
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 8,
+              "Y": 8
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 7,
+              "Y": 4
+            }
+          }
+        ],
+        "ObstacleRandomOrder": false,
+        "ObstacleRandomPosition": false,
+        "Obstacles": [],
+        "Chunks": [
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 6,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 7,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 8,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 9,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 10,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 5,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 6,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 7,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 8,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 9,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 10,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 11,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 4,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 5,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 6,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 10,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 11,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 12,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 4,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 5,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 6,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 10,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 11,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 12,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 4,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 5,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 6,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 10,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 11,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 12,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 5,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 6,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 7,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 8,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 9,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 10,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 11,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 6,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 7,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 8,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 9,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 10,
+              "Y": 10
+            }
+          }
+        ]
+      }
+    ]
+  }
 ]

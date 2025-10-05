@@ -1,28 +1,34 @@
 using System;
+using System.Collections.Generic;
 
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
 
-using GameFrame.Core.Collections;
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
-
-using UnityVector3 = UnityEngine.Vector3;
 
 namespace Assets.Scripts.Scenes.Game
 {
     public class WorldBehaviour : MonoBehaviour
     {
+        private readonly Dictionary<String, GameObject> foodTemplates = new Dictionary<String, GameObject>();
+        private readonly Dictionary<Guid, FoodBehaviour> renderedFoods = new Dictionary<Guid, FoodBehaviour>();
+
+        private GameState gameState;
+
         public GameObject chunkContainer;
         public GameObject penguinTemplate;
+        public Transform foodTemplatesContainer;
+        public Transform foodContainerTransform;
         public GameObject rootContainer;
 
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
         public PhysicsMaterial snowMaterial;
 
-        private GameState gameState;
+
+        public PenguinBehaviour PenguinBehaviour { get; private set; }
 
         private void OnGameInitialized()
         {
@@ -30,11 +36,16 @@ namespace Assets.Scripts.Scenes.Game
 
             this.gameState = Base.Core.Game.State;
 
+            LoadTemplates();
+
             if (RenderWorld())
             {
                 RenderPenguin();
 
                 RenderObstacles();
+
+                gameState.FillFoods();
+                RenderFoods();
             }
         }
 
@@ -44,6 +55,7 @@ namespace Assets.Scripts.Scenes.Game
             {
                 Destroy(child.gameObject); //works since gameobjects are destroyed after frame
             }
+
             RenderWorld();
         }
 
@@ -51,22 +63,11 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (gameState.CurrentLevel != default)
             {
-                var chunkBehaviourMap = new Map<Int32, ChunkBehaviour>();
+                var terrainGenerator = new TerrainGenerator(chunkContainer, terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
 
-                var terrainGenerator = new TerrainGenerator(chunkBehaviourMap, terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
+                var chunkBehaviourMap = terrainGenerator.Generate();
 
-                for (int z = 0; z < gameState.CurrentLevel.Size.Y; z++)
-                {
-                    for (int x = 0; x < gameState.CurrentLevel.Size.X; x++)
-                    {
-                        var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(ChunkBehaviour));
-
-                        mapChunk.transform.parent = chunkContainer.transform;
-                        mapChunk.transform.localPosition = new UnityVector3(x * gameState.CurrentLevel.Resolution, 0f, z * gameState.CurrentLevel.Resolution);
-
-                        terrainGenerator.Generate(x, z, mapChunk);
-                    }
-                }
+                //terrainGenerator.Stitch();
 
                 foreach (var chunk in chunkBehaviourMap.GetAll())
                 {
@@ -82,53 +83,128 @@ namespace Assets.Scripts.Scenes.Game
 
         private void RenderPenguin()
         {
-            if (gameState.Penguin == default)
-            {
-                var startingPosition = gameState.CurrentLevel.PenguinStartPosition;
-
-                var y = 0f;
-
-                if (gameState.CurrentLevel.GetChunkMap().TryGetValue(startingPosition.X, startingPosition.Y, out var chunk))
+            if (gameState.Penguin != default)
+            { 
+                if (gameState.Penguin.Position == GameFrame.Core.Math.Vector3.Zero)
                 {
-                    if (chunk.DefaultTileHeight.HasValue)
-                    {
-                        y = chunk.DefaultTileHeight.Value;
-                    }
+                    var startingPosition = gameState.CurrentLevel.PenguinStartPosition;
 
-                    var centerOffset = gameState.CurrentLevel.Resolution / 2;
-
-                    if (chunk.GetTileMap().TryGetValue(centerOffset, centerOffset, out var centerTile))
+                    if (TryGetPosition(startingPosition.X, startingPosition.Y, out var position))
                     {
-                        if (centerTile.Position.Y != y)
-                        {
-                            y = centerTile.Position.Y;
-                        }
+                        gameState.Penguin.Position = position;
                     }
                 }
 
-                var startPositionOffset = (0.5f * gameState.CurrentLevel.Resolution);
-
-                var startPositionX = startingPosition.X * gameState.CurrentLevel.Resolution + startPositionOffset;
-                var startPositionZ = startingPosition.Y * gameState.CurrentLevel.Resolution + startPositionOffset;
-
-                gameState.Penguin = new Penguin()
-                {
-                    Position = new GameFrame.Core.Math.Vector3(startPositionX, y, startPositionZ)
-                };
-            }
-
-            if (gameState.Penguin != default)
-            {
                 var penguinObject = GameObject.Instantiate(penguinTemplate, rootContainer.transform);
 
                 var penguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
 
                 penguinBehaviour.Init(gameState.Penguin);
+                penguinBehaviour.Eaten.AddListener(OnFoodEaten);
 
                 penguinBehaviour.transform.position = gameState.Penguin.Position.ToUnity();
 
+                this.PenguinBehaviour = penguinBehaviour;
+
                 penguinObject.SetActive(true);
             }
+            else
+            {
+                throw new Exception("GameState has no Peeeenguiiin!");
+            }
+        }
+
+        private void RenderFoods()
+        {
+            if (gameState.CurrentLevel.Foods.Count > 0)
+            {
+                foreach (var food in gameState.CurrentLevel.Foods)
+                {
+                    if (!renderedFoods.ContainsKey(food.ID))
+                    {
+                        var foodBehaviour = RenderFood(food);
+
+                        renderedFoods[food.ID] = foodBehaviour;
+                    }
+                }
+            }
+        }
+
+        private FoodBehaviour RenderFood(Food food)
+        {
+            var foodObject = GetTemplateCopy(foodTemplates, food.Definition.Reference, foodContainerTransform);
+
+            var foodBehaviour = foodObject.GetComponent<FoodBehaviour>();
+
+            foodBehaviour.Init(food);
+            //foodBehaviour.Eaten.AddListener(OnFoodEaten);
+
+            if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
+            {
+                foodBehaviour.transform.position = position.ToUnity();
+
+                foodObject.SetActive(true);
+            }
+
+            return foodBehaviour;
+        }
+
+        private void OnFoodEaten(FoodBehaviour foodBehaviour)
+        {
+            gameState.FoodEaten++;
+            gameState.CurrentLevel.Foods.Remove(foodBehaviour.Food);
+
+            renderedFoods.Remove(foodBehaviour.Food.ID);
+
+            //foodBehaviour.Eaten.RemoveAllListeners();
+            Destroy(foodBehaviour.gameObject);
+
+            gameState.FillFoods();
+
+            if (gameState.CurrentLevel.Foods.Count == 0)
+            {
+                Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.LevelCompleted);
+            }
+            else
+            {
+                RenderFoods();
+            }
+        }
+
+        private Boolean TryGetPosition(Int32 x, Int32 z, out GameFrame.Core.Math.Vector3 vector)
+        {
+            vector = GameFrame.Core.Math.Vector3.Zero;
+
+            if (gameState.CurrentLevel.GetChunkMap().TryGetValue(x, z, out var chunk))
+            {
+                var height = 0f;
+
+                if (chunk.DefaultTileHeight.HasValue)
+                {
+                    height = chunk.DefaultTileHeight.Value;
+                }
+
+                var centerOffset = gameState.CurrentLevel.Resolution / 2;
+
+                if (chunk.GetTileMap().TryGetValue(centerOffset, centerOffset, out var centerTile))
+                {
+                    if (centerTile.Position.Y != height)
+                    {
+                        height = centerTile.Position.Y;
+                    }
+                }
+
+                var startPositionOffset = (0.5f * gameState.CurrentLevel.Resolution);
+
+                var startPositionX = x * gameState.CurrentLevel.Resolution + startPositionOffset;
+                var startPositionZ = z * gameState.CurrentLevel.Resolution + startPositionOffset;
+
+                vector = new GameFrame.Core.Math.Vector3(startPositionX, height, startPositionZ);
+
+                return true;
+            }
+
+            return default;
         }
 
         private void RenderObstacles()
@@ -141,6 +217,27 @@ namespace Assets.Scripts.Scenes.Game
 
         }
 
+        private void LoadTemplates()
+        {
+            if (this.foodTemplatesContainer != null)
+            {
+                foreach (Transform template in foodTemplatesContainer)
+                {
+                    this.foodTemplates[template.name] = template.gameObject;
+                }
+            }
+        }
+
+        public GameObject GetTemplateCopy(IDictionary<String, GameObject> cache, String templateRefernce, Transform parentTransform, Boolean inWorldSpace = true)
+        {
+            if (cache.TryGetValue(templateRefernce, out var template))
+            {
+                return Instantiate(template, parentTransform, inWorldSpace);
+            }
+
+            return null;
+        }
+
         private void Awake()
         {
             Base.Core.Game.ExecuteAfterInstantation(OnGameInitialized);
@@ -148,7 +245,6 @@ namespace Assets.Scripts.Scenes.Game
 
         private void Start()
         {
-
         }
 
         private void OnEnable()

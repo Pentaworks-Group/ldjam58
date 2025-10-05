@@ -14,6 +14,11 @@ namespace Assets.Scripts.Scenes.Game
         {
             selectedImage = transform.GetChild(0).gameObject;
         }
+
+        public void ToggleButton()
+        {
+            selectedImage.SetActive(!selectedImage.activeSelf);
+        }
         public void SelectButton()
         {
             selectedImage.SetActive(true);
