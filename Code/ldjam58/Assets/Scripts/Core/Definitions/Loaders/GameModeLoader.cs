@@ -27,7 +27,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                         Reference = loadedGameMode.Reference,                       
                         Name = loadedGameMode.Name,
                         Description = loadedGameMode.Description,
-                        IsRandomGenerated = loadedGameMode.IsRandomGenerated,
+                        AreLevelsRandom = loadedGameMode.AreLevelsRandom,
                         IsAllowingControlWhileMoving = loadedGameMode.IsAllowingControlWhileMoving,
                         Levels = new List<LevelDefinition>()
                     };
@@ -67,14 +67,16 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                         Seed = loadedItem.Seed,
                         Size = loadedItem.Size,
                         Resolution = loadedItem.Resolution,
+                        IsPenguinStartPositionRandom = loadedItem.IsPenguinStartPositionRandom,
+                        ActiveFoodLimit = loadedItem.ActiveFoodLimit,
                         PenguinStartPosition = loadedItem.PenguinStartPosition,
                         FoodRandomOrder = loadedItem.FoodRandomOrder,
-                        FoodRandomPosition = loadedItem.FoodRandomPosition,
-                        Foods = new List<FoodPosDefinition>(),
+                        IsFoodPositionRandom = loadedItem.IsFoodPositionRandom,
                         ObstacleRandomOrder = loadedItem.ObstacleRandomOrder,
-                        ObstacleRandomPosition = loadedItem.ObstacleRandomPosition,
+                        IsObstaclePositionRandom = loadedItem.IsObstaclePositionRandom,
+                        Foods = new List<FoodPosDefinition>(),
+                        Chunks = new List<WorldChunkDefinition>(),
                         Obstacles = new List<ObstaclePosDefinition>(),
-                        Chunks = new List<WorldChunkDefinition>()
                     };
 
                     CheckChunks(loadedItem.Chunks, targetLevel.Chunks);

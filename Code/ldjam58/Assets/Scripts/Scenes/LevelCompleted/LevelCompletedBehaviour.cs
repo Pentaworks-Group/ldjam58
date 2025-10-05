@@ -26,6 +26,8 @@ namespace Assets.Scripts.Scenes.LevelCompleted
         public void OnNextLevelClicked()
         {
             gameState.CurrentLevel = new LevelConverter().Convert(nextLevelDefinition);
+            gameState.Penguin.Position = default;
+
             Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.Game);
         }
 

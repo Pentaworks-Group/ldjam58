@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Model;
@@ -12,27 +11,23 @@ namespace Assets.Scripts.Core
     {
         public Level Convert(LevelDefinition levelDefinition)
         {
-            var startingPosition = default(Vector2Int);
-
-            if (levelDefinition.PenguinStartPosition.HasValue)
-            {
-                startingPosition = levelDefinition.PenguinStartPosition.Value;
-            }
-            else
+            if (!levelDefinition.PenguinStartPosition.HasValue && !levelDefinition.IsPenguinStartPositionRandom.HasValue)
             {
                 throw new Exception("Missing LevelDefinition.PenguinStartingPosition");
             }
 
             var convertedLevel = new Level()
             {
-                Reference = levelDefinition.Reference,
-                Size = levelDefinition.Size,
-                PenguinStartPosition = startingPosition,
-                Resolution = levelDefinition.Resolution,
                 Name = levelDefinition.Name,
-                Description = levelDefinition.Description,
                 Seed = levelDefinition.Seed,
-                Obstacles = new List<Obstacle>()
+                Size = levelDefinition.Size,
+                Reference = levelDefinition.Reference,
+                Description = levelDefinition.Description,
+                Resolution = levelDefinition.Resolution,
+                IsPenguinStartPositionRandom = levelDefinition.IsPenguinStartPositionRandom.GetValueOrDefault(),
+                PenguinStartPosition = levelDefinition.PenguinStartPosition.GetValueOrDefault(),
+                IsFoodPositionRandom = levelDefinition.IsFoodPositionRandom.GetValueOrDefault(),
+                IsObstaclePositionRandom = levelDefinition.IsObstaclePositionRandom.GetValueOrDefault(),
             };
 
             if (levelDefinition.Foods?.Count > 0)

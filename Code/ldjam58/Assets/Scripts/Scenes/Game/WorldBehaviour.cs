@@ -67,8 +67,6 @@ namespace Assets.Scripts.Scenes.Game
 
                 var chunkBehaviourMap = terrainGenerator.Generate();
 
-                //terrainGenerator.Stitch();
-
                 foreach (var chunk in chunkBehaviourMap.GetAll())
                 {
                     chunk.Mesh.RecalculateBounds();
@@ -84,14 +82,28 @@ namespace Assets.Scripts.Scenes.Game
         private void RenderPenguin()
         {
             if (gameState.Penguin != default)
-            { 
+            {
                 if (gameState.Penguin.Position == GameFrame.Core.Math.Vector3.Zero)
                 {
-                    var startingPosition = gameState.CurrentLevel.PenguinStartPosition;
-
-                    if (TryGetPosition(startingPosition.X, startingPosition.Y, out var position))
+                    if (gameState.CurrentLevel.IsPenguinStartPositionRandom)
                     {
-                        gameState.Penguin.Position = position;
+                        for (int i = 0; i < 100; i++)
+                        {
+                            if (TryGetRandomPositionOnChunk(out var position))
+                            {
+                                gameState.Penguin.Position = position;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var startingPosition = gameState.CurrentLevel.PenguinStartPosition;
+
+                        if (TryGetPosition(startingPosition.X, startingPosition.Y, out var position))
+                        {
+                            gameState.Penguin.Position = position;
+                        }
                     }
                 }
 
@@ -137,7 +149,6 @@ namespace Assets.Scripts.Scenes.Game
             var foodBehaviour = foodObject.GetComponent<FoodBehaviour>();
 
             foodBehaviour.Init(food);
-            //foodBehaviour.Eaten.AddListener(OnFoodEaten);
 
             if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
             {
@@ -156,7 +167,6 @@ namespace Assets.Scripts.Scenes.Game
 
             renderedFoods.Remove(foodBehaviour.Food.ID);
 
-            //foodBehaviour.Eaten.RemoveAllListeners();
             Destroy(foodBehaviour.gameObject);
 
             gameState.FillFoods();
@@ -169,6 +179,24 @@ namespace Assets.Scripts.Scenes.Game
             {
                 RenderFoods();
             }
+        }
+
+        private Boolean TryGetRandomPositionOnChunk(out GameFrame.Core.Math.Vector3 position)
+        {
+            position = default;
+
+            for (int i = 0; i < 10; i++)
+            {
+                var randomX = UnityEngine.Random.Range(0, gameState.CurrentLevel.Size.X);
+                var randomY = UnityEngine.Random.Range(0, gameState.CurrentLevel.Size.Y);
+
+                if (TryGetPosition(randomX, randomY, out position))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private Boolean TryGetPosition(Int32 x, Int32 z, out GameFrame.Core.Math.Vector3 vector)

@@ -15,21 +15,20 @@ namespace Assets.Scripts.Core.Model
         public String Name { get; set; }
         public String Description { get; set; }
         public Single? Seed { get; set; }
-        /// <summary>
-        /// Chunks per axis
-        /// </summary>
         public GameFrame.Core.Math.Vector2Int Size { get; set; }
-        /// <summary>
-        /// Tiles per Chunk axis
-        /// </summary>
         public Int32 Resolution { get; set; }
+
+        public Boolean IsPenguinStartPositionRandom { get; set; }
         public Vector2Int PenguinStartPosition { get; set; }
 
+        public Boolean IsFoodPositionRandom { get; set; }
         public List<Food> Foods { get; set; } = new List<Food>();
+        public List<Food> AvailableFoods { get; set; } = new List<Food>();
+
+        public Boolean IsObstaclePositionRandom { get; set; }
         public List<Obstacle> Obstacles { get; set; } = new List<Obstacle>();
 
         public List<WorldChunk> Chunks { get; set; } = new List<WorldChunk>();
-        public List<Food> AvailableFoods { get; set; } = new List<Food>();
 
         public Map<Int32, WorldChunk> GetChunkMap()
         {
@@ -66,6 +65,6 @@ namespace Assets.Scripts.Core.Model
             chunkMap.Remove(chunk.Position.X, chunk.Position.Y);
         }
 
-        
+
     }
 }

@@ -43,7 +43,7 @@ namespace Assets.Scripts.Core
             {
                 if (currentLevel.AvailableFoods?.Count > 0)
                 {
-                    if (Mode.IsRandomGenerated)
+                    if (Mode.AreLevelsRandom)
                     {
                         // Not yet supported
                     }

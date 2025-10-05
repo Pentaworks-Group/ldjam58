@@ -29,7 +29,7 @@ namespace Assets.Scripts.Core
                 Penguin = ConvertPenguin(mode.Penguin)
             };
 
-            if (!this.mode.IsRandomGenerated)
+            if (!this.mode.AreLevelsRandom)
             {
                 if (this.mode.Levels?.Count > 0)
                 {
