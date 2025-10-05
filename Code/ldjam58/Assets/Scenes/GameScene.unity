@@ -188,15 +188,15 @@ PrefabInstance:
       propertyPath: worldBehaviour
       value: 
       objectReference: {fileID: 129315004}
-    - target: {fileID: 1378561368005543347, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
-      propertyPath: raycastLayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 8032511331408452393, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8148925081394260408, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8453437445266912692, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8548993743101136610, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8548993743101136610, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_SizeDelta.x
@@ -281,6 +281,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8703421018767605140, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710815193941228855, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
