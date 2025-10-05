@@ -6,8 +6,10 @@
     "IsRandomGenerated": false,
     "Penguin": {
       "Reference": "DefaultPenguin",
-      "Name": "Penguin",
-      "Sprite": null
+      "Name": "Floppy",
+      "Sprite": null,
+      "Strength": 0.5,
+      "MaxStrength": 20
     },
     "Levels": [
       {

@@ -83,21 +83,18 @@ namespace Assets.Scripts.Scenes.Game
 
         private void RenderPenguin()
         {
-            if (gameState.Penguin == default)
-            {
-                var startingPosition = gameState.CurrentLevel.PenguinStartPosition;
-
-                if (TryGetPosition(startingPosition.X, startingPosition.Y, out var position))
-                {
-                    gameState.Penguin = new Penguin()
-                    {
-                        Position = position
-                    };
-                }
-            }
-
             if (gameState.Penguin != default)
-            {
+            { 
+                if (gameState.Penguin.Position == GameFrame.Core.Math.Vector3.Zero)
+                {
+                    var startingPosition = gameState.CurrentLevel.PenguinStartPosition;
+
+                    if (TryGetPosition(startingPosition.X, startingPosition.Y, out var position))
+                    {
+                        gameState.Penguin.Position = position;
+                    }
+                }
+
                 var penguinObject = GameObject.Instantiate(penguinTemplate, rootContainer.transform);
 
                 var penguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
@@ -110,6 +107,10 @@ namespace Assets.Scripts.Scenes.Game
                 this.PenguinBehaviour = penguinBehaviour;
 
                 penguinObject.SetActive(true);
+            }
+            else
+            {
+                throw new Exception("GameState has no Peeeenguiiin!");
             }
         }
 
