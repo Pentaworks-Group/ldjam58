@@ -74,20 +74,25 @@ namespace Assets.Scripts.Scenes.Game
                         arrow.localScale = new Vector3(1, 1, appliedStrength);
                     }
                 }
+
                 if (isDragging && Mouse.current.leftButton.wasReleasedThisFrame)
                 {
-
                     Vector3 mousePos = Mouse.current.position.ReadValue();
 
                     var x = (mousePos.x - dragStart.x);
                     var y = (mousePos.y - dragStart.y);
 
-                    var direction = new Vector3(x, 0, y);
-                    var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
-                    direction = direction.normalized * appliedStrength;
-                    penguinRigidbody.AddForce(direction, ForceMode.Impulse);
-                    isDragging = false;
-                    Debug.Log("DragStop");
+                    if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
+                    {
+                        var direction = new Vector3(x, 0, y);
+                        var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
+                        direction = direction.normalized * appliedStrength;
+                        penguinRigidbody.AddForce(direction, ForceMode.Impulse);
+                        transform.rotation = Quaternion.LookRotation(direction);
+                        
+                        isDragging = false;
+                    }
+
                     arrow.gameObject.SetActive(false);
                 }
             }
