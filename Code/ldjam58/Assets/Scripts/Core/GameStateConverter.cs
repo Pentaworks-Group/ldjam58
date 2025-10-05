@@ -102,7 +102,7 @@ namespace Assets.Scripts.Core
         {
             return new Food()
             {
-                Definition = foodDef.FoodDefinition,
+                Definition = foodDef.Food,
                 Position = foodDef.Position
             };
         }

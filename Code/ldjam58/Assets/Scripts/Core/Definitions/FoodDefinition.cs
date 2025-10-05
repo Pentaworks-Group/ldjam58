@@ -1,5 +1,6 @@
-﻿using GameFrame.Core.Definitions;
-using System;
+﻿using System;
+
+using GameFrame.Core.Definitions;
 
 namespace Assets.Scripts.Core.Definitons
 {
