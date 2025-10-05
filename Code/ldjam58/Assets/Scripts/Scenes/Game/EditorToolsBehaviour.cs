@@ -1,8 +1,10 @@
 
+using Assets.Scripts.Core;
+using Assets.Scripts.Core.Model;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 
 namespace Assets.Scripts.Scenes.Game
 {
@@ -12,13 +14,20 @@ namespace Assets.Scripts.Scenes.Game
         private Camera Camera;
         [SerializeField]
         private LayerMask raycastLayerMask;
+        [SerializeField]
+        private WorldBehaviour worldBehaviour;
 
         private EditorToolBehaviour selectedTool;
 
         private EventSystem eventSystem;
         private bool isOverUI;
 
+        private GameState gameState;
 
+        private void Awake()
+        {
+            Base.Core.Game.ExecuteAfterInstantation(OnGameInitialized);
+        }
 
         void Start()
         {
@@ -40,6 +49,12 @@ namespace Assets.Scripts.Scenes.Game
         {
             UnhookActions();
         }
+
+        private void OnGameInitialized()
+        {
+            this.gameState = Base.Core.Game.State;
+        }
+
 
         public void HookActions()
         {
@@ -78,33 +93,127 @@ namespace Assets.Scripts.Scenes.Game
 
         public void RaiseLevel()
         {
-            MakeRaycast();
+            if (GetTileWithRaycast(out var tile, out var chunk))
+            {
+                Debug.Log("RaiseLevel: " + chunk.Position + tile.Position);
+                var desiredHeight = tile.Position.Y + 1;
+                if (chunk.DefaultTileHeight.HasValue && chunk.DefaultTileHeight.Value == desiredHeight)
+                {
+                    chunk.RemoveTile(tile);
+                }
+                else
+                {
+                    tile.Position = tile.Position.Add(0, +1, 0);
+                }
+                worldBehaviour.ReRenderWorld();
+                Debug.Log("RaiseLevel2: " + chunk.Position + tile.Position);
+            }
+
         }
 
         public void LowerLevel()
         {
-            MakeRaycast();
+            if (GetTileWithRaycast(out var tile, out var chunk))
+            {
+                Debug.Log("LowerLevel: " + chunk.Position + tile.Position);
+                var desiredHeight = tile.Position.Y - 1;
+                if (chunk.DefaultTileHeight.HasValue)
+                {
+                    if (chunk.DefaultTileHeight.Value == desiredHeight)
+                    {
+                        chunk.RemoveTile(tile);
+                    }
+                    else
+                    {
+                        tile.Position = tile.Position.Add(0, -1, 0);
+                    }
+                }
+                else
+                {
+                    if (desiredHeight <= 0)
+                    {
+                        chunk.RemoveTile(tile);
+                    }
+                    else
+                    {
+                        tile.Position = tile.Position.Add(0, -1, 0);
+                    }
+                }
+                worldBehaviour.ReRenderWorld();
+                Debug.Log("LowerLevel2: " + chunk.Position + tile.Position);
+            }
         }
 
-        private void MakeRaycast()
+        private Boolean GetTileWithRaycast(out WorldTile tile, out WorldChunk chunk)
+        {
+            if (MakeRaycast(out Vector3 hitPoint))
+            {
+                GetWorldTileFromPosition(hitPoint, out tile, out chunk);
+                return true;
+            }
+            tile = null;
+            chunk = null;
+            return false;
+        }
+
+        private Boolean MakeRaycast(out Vector3 hitPoint)
         {
             if (isOverUI)
             {
-                return;
+                hitPoint = Vector3.zero;
+                return false;
             }
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 10000))
             {
-                Vector2Int terrainHitPoint = new Vector2Int((int)hit.point.x, (int)hit.point.z);
-                Debug.Log("Did Hit " + hit.collider.gameObject.name + " x: " + hit.point.x + " z: " + hit.point.z);
+                //Debug.Log("Did Hit " + hit.collider.gameObject.name + " x: " + hit.point.x + " z: " + hit.point.z);
+                hitPoint = hit.point;
             }
             else
             {
-                Debug.Log("Did not Hit");
+                hitPoint = Vector3.zero;
             }
-
+            return true;
         }
+
+
+        private void GetWorldTileFromPosition(Vector3 position, out WorldTile tile, out WorldChunk chunk)
+        {
+            var resolution = gameState.CurrentLevel.Resolution;
+            float x = position.x + 0.5f;
+            int xC = (int)(x / resolution);
+            int xT = (int)(x % resolution);
+
+            float z = position.z + 0.5f;
+            int yC = (int)(z / resolution);
+            int yT = (int)(z % resolution);
+            if (!gameState.CurrentLevel.GetChunkMap().TryGetValue(xC, yC, out chunk))
+            {
+                chunk = new WorldChunk()
+                {
+                    Position = new GameFrame.Core.Math.Vector2Int(xC, yC)
+                };
+                gameState.CurrentLevel.AddChunk(chunk);
+            }
+            if (!chunk.GetTileMap().TryGetValue(xT, yT, out tile))
+            {
+                var height = 0;
+                if (chunk.DefaultTileHeight.HasValue)
+                {
+                    height = chunk.DefaultTileHeight.Value;
+                }
+                tile = new WorldTile()
+                {
+                    Position = new GameFrame.Core.Math.Vector3Int(xT, height, yT)
+                };
+                chunk.AddTile(tile);
+            }
+        }
+
+
+
+
 
     }
 }

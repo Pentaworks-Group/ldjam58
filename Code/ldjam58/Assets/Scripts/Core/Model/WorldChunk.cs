@@ -30,5 +30,21 @@ namespace Assets.Scripts.Core.Model
 
             return tileMap;
         }
+
+        public void AddTile(WorldTile tile)
+        {
+            if (Tiles == null)
+            {
+                Tiles = new List<WorldTile>();
+            }
+            Tiles.Add(tile);
+            tileMap[tile.Position.X, tile.Position.Z] = tile;
+        }
+
+        public void RemoveTile(WorldTile tile)
+        {
+            Tiles.Remove(tile);
+            tileMap.Remove(tile.Position.X, tile.Position.Z);
+        }
     }
 }

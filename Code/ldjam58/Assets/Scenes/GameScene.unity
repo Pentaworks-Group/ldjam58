@@ -185,6 +185,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 330585545}
     - target: {fileID: 1378561368005543347, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
+      propertyPath: worldBehaviour
+      value: 
+      objectReference: {fileID: 129315004}
+    - target: {fileID: 1378561368005543347, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: raycastLayerMask.m_Bits
       value: 64
       objectReference: {fileID: 0}

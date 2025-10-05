@@ -37,10 +37,20 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
+        public void ReRenderWorld()
+        {
+            foreach (Transform child in chunkContainer.transform)
+            {
+                Destroy(child.gameObject); //works since gameobjects are destroyed after frame
+            }
+            RenderWorld();
+        }
+
         private Boolean RenderWorld()
         {
             if (gameState.CurrentLevel != default)
             {
+                Debug.Log("RenderTerrain");
                 var terrainGenerator = new TerrainGenerator(terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
 
                 var chunkMap = gameState.CurrentLevel.GetChunkMap();

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-using GameFrame.Core.Collections;
+﻿using GameFrame.Core.Collections;
 using GameFrame.Core.Math;
+using System;
+using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 
 namespace Assets.Scripts.Core.Model
 {
@@ -43,6 +43,22 @@ namespace Assets.Scripts.Core.Model
             }
 
             return chunkMap;
+        }
+
+        public void AddChunk(WorldChunk chunk)
+        {
+            if (Chunks == null)
+            {
+                Chunks = new List<WorldChunk>();
+            }
+            Chunks.Add(chunk);
+            chunkMap[chunk.Position.X, chunk.Position.Y] = chunk;
+        }
+
+        public void RemoveChunk(WorldChunk chunk)
+        {
+            Chunks.Remove(chunk);
+            chunkMap.Remove(chunk.Position.X, chunk.Position.Y);
         }
     }
 }
