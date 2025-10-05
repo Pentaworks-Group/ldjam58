@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Scenes.Game
+namespace Assets.Scripts.Scenes.GameOver
 {
     public class GameOverBehaviour : MonoBehaviour
     {

@@ -1,35 +1,33 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Assets.Scripts.Core;
-using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Model;
 
-using GameFrame.Core.Collections;
 using GameFrame.Core.Extensions;
 
-using Unity.VisualScripting;
-
 using UnityEngine;
-
-using UnityVector3 = UnityEngine.Vector3;
 
 namespace Assets.Scripts.Scenes.Game
 {
     public class WorldBehaviour : MonoBehaviour
     {
+        private readonly Dictionary<String, GameObject> foodTemplates = new Dictionary<String, GameObject>();
+        private readonly Dictionary<Guid, FoodBehaviour> renderedFoods = new Dictionary<Guid, FoodBehaviour>();
+
+        private GameState gameState;
+
         public GameObject chunkContainer;
         public GameObject penguinTemplate;
-        public GameObject foodTemplate;
-        public GameObject foodContainer;
+        public Transform foodTemplatesContainer;
+        public Transform foodContainerTransform;
         public GameObject rootContainer;
 
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
         public PhysicsMaterial snowMaterial;
 
-        private GameState gameState;
+
         public PenguinBehaviour PenguinBehaviour { get; private set; }
 
         private void OnGameInitialized()
@@ -38,12 +36,15 @@ namespace Assets.Scripts.Scenes.Game
 
             this.gameState = Base.Core.Game.State;
 
+            LoadTemplates();
+
             if (RenderWorld())
             {
                 RenderPenguin();
 
                 RenderObstacles();
 
+                gameState.FillFoods();
                 RenderFoods();
             }
         }
@@ -65,7 +66,7 @@ namespace Assets.Scripts.Scenes.Game
                 var terrainGenerator = new TerrainGenerator(chunkContainer, terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
 
                 var chunkBehaviourMap = terrainGenerator.Generate();
-                                
+
                 //terrainGenerator.Stitch();
 
                 foreach (var chunk in chunkBehaviourMap.GetAll())
@@ -99,93 +100,74 @@ namespace Assets.Scripts.Scenes.Game
             {
                 var penguinObject = GameObject.Instantiate(penguinTemplate, rootContainer.transform);
 
-                this.PenguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
+                var penguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
 
-                PenguinBehaviour.Init(gameState.Penguin);
+                penguinBehaviour.Init(gameState.Penguin);
+                penguinBehaviour.Eaten.AddListener(OnFoodEaten);
 
-                PenguinBehaviour.transform.position = gameState.Penguin.Position.ToUnity();
+                penguinBehaviour.transform.position = gameState.Penguin.Position.ToUnity();
+
+                this.PenguinBehaviour = penguinBehaviour;
 
                 penguinObject.SetActive(true);
             }
         }
 
-        private void FillFoods()
-        {
-            var currentLevel = gameState.CurrentLevel;
-            var mode = gameState.Mode;
-            var levelDefinition = gameState.Mode.Levels.FirstOrDefault(l => l.Reference == currentLevel.Reference);
-
-            if (levelDefinition.ActiveFoodLimit.HasValue && levelDefinition.ActiveFoodLimit.Value > 0)
-            {
-                if (currentLevel.AvailableFoods?.Count > 0)
-                {
-                    if (gameState.Mode.IsRandomGenerated)
-                    {
-                        // Not yet supported
-                    }
-                    else
-                    {
-                        if (currentLevel.Foods == default)
-                        {
-                            currentLevel.Foods = new List<Food>();
-                        }
-
-                        while (currentLevel.Foods.Count < levelDefinition.ActiveFoodLimit.Value)
-                        {
-                            var food = default(Food);
-
-                            if (levelDefinition.FoodRandomOrder.HasValue)
-                            {
-                                if (levelDefinition.FoodRandomOrder.Value)
-                                {
-                                    food = currentLevel.AvailableFoods.GetRandomEntry();
-                                }
-                                else 
-                                { 
-                                    food = currentLevel.AvailableFoods[0];
-                                }
-
-                                if (food != default)
-                                {
-                                    currentLevel.AvailableFoods.Remove(food);
-                                    currentLevel.Foods.Add(food);
-
-                                    if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
-                                    {
-                                        food.Position = position;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         private void RenderFoods()
         {
-            FillFoods();
-
             if (gameState.CurrentLevel.Foods.Count > 0)
             {
                 foreach (var food in gameState.CurrentLevel.Foods)
                 {
-                    RenderFood(food);
+                    if (!renderedFoods.ContainsKey(food.ID))
+                    {
+                        var foodBehaviour = RenderFood(food);
+
+                        renderedFoods[food.ID] = foodBehaviour;
+                    }
                 }
             }
         }
 
-        private void RenderFood(Food food)
+        private FoodBehaviour RenderFood(Food food)
         {
-            var foodObject = Instantiate(foodTemplate, foodContainer.transform);
+            var foodObject = GetTemplateCopy(foodTemplates, food.Definition.Reference, foodContainerTransform);
 
             var foodBehaviour = foodObject.GetComponent<FoodBehaviour>();
 
             foodBehaviour.Init(food);
-            
-            foodBehaviour.transform.position = food.Position.ToUnity();
+            //foodBehaviour.Eaten.AddListener(OnFoodEaten);
 
-            foodObject.SetActive(true);
+            if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
+            {
+                foodBehaviour.transform.position = position.ToUnity();
+
+                foodObject.SetActive(true);
+            }
+
+            return foodBehaviour;
+        }
+
+        private void OnFoodEaten(FoodBehaviour foodBehaviour)
+        {
+            gameState.FoodEaten++;
+            gameState.CurrentLevel.Foods.Remove(foodBehaviour.Food);
+
+            renderedFoods.Remove(foodBehaviour.Food.ID);
+
+            //foodBehaviour.Eaten.RemoveAllListeners();
+            Destroy(foodBehaviour.gameObject);
+
+            gameState.FillFoods();
+
+            if (gameState.CurrentLevel.Foods.Count == 0)
+            {
+                Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.LevelCompleted);
+            }
+            else
+            {
+                RenderFoods();
+            }
         }
 
         private Boolean TryGetPosition(Int32 x, Int32 z, out GameFrame.Core.Math.Vector3 vector)
@@ -234,6 +216,27 @@ namespace Assets.Scripts.Scenes.Game
 
         }
 
+        private void LoadTemplates()
+        {
+            if (this.foodTemplatesContainer != null)
+            {
+                foreach (Transform template in foodTemplatesContainer)
+                {
+                    this.foodTemplates[template.name] = template.gameObject;
+                }
+            }
+        }
+
+        public GameObject GetTemplateCopy(IDictionary<String, GameObject> cache, String templateRefernce, Transform parentTransform, Boolean inWorldSpace = true)
+        {
+            if (cache.TryGetValue(templateRefernce, out var template))
+            {
+                return Instantiate(template, parentTransform, inWorldSpace);
+            }
+
+            return null;
+        }
+
         private void Awake()
         {
             Base.Core.Game.ExecuteAfterInstantation(OnGameInitialized);
@@ -241,7 +244,6 @@ namespace Assets.Scripts.Scenes.Game
 
         private void Start()
         {
-
         }
 
         private void OnEnable()

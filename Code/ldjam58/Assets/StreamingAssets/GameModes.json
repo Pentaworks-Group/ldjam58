@@ -422,89 +422,409 @@
             }
           }
         ]
-      }
-
-
-      // --------------------- Level 2 ----------------------
-
-      /*
-            new WorldChunkDefinition(4, 6, 4),
-                                new WorldChunkDefinition(4, 7, 4),
-                                new WorldChunkDefinition(4, 8, 4),
-                                new WorldChunkDefinition(4, 9, 4),
-                                new WorldChunkDefinition(4, 10, 4),
-
-                                new WorldChunkDefinition(4, 5, 5),
-                                new WorldChunkDefinition(3, 6, 5),
-                                new WorldChunkDefinition(3, 7, 5),
-                                new WorldChunkDefinition(3, 8, 5),
-                                new WorldChunkDefinition(3, 9, 5),
-                                new WorldChunkDefinition(3, 10, 5),
-                                new WorldChunkDefinition(4, 11, 5),
-
-                                new WorldChunkDefinition(4, 4, 6),
-                                new WorldChunkDefinition(3, 5, 6),
-                                new WorldChunkDefinition(2, 6, 6),
-                                new WorldChunkDefinition(1, 7, 6),
-                                new WorldChunkDefinition(1, 8, 6),
-                                new WorldChunkDefinition(1, 9, 6),
-                                new WorldChunkDefinition(2, 10, 6),
-                                new WorldChunkDefinition(3, 11, 6),
-                                new WorldChunkDefinition(4, 12, 6),
-
-                                new WorldChunkDefinition(4, 4, 7),
-                                new WorldChunkDefinition(3, 5, 7),
-                                new WorldChunkDefinition(2, 6, 7),
-                                new WorldChunkDefinition(1, 7, 7),
-                                new WorldChunkDefinition(1, 8, 7),
-                                new WorldChunkDefinition(1, 9, 7),
-                                new WorldChunkDefinition(2, 10, 7),
-                                new WorldChunkDefinition(3, 11, 7),
-                                new WorldChunkDefinition(4, 12, 7),
-
-                                new WorldChunkDefinition(4, 4, 8),
-                                new WorldChunkDefinition(3, 5, 8),
-                                new WorldChunkDefinition(2, 6, 8),
-                                new WorldChunkDefinition(1, 7, 8),
-                                new WorldChunkDefinition(1, 8, 8),
-                                new WorldChunkDefinition(1, 9, 8),
-                                new WorldChunkDefinition(2, 10, 8),
-                                new WorldChunkDefinition(3, 11, 8),
-                                new WorldChunkDefinition(4, 12, 8),
-
-                                new WorldChunkDefinition(4, 4, 9),
-                                new WorldChunkDefinition(3, 5, 9),
-                                new WorldChunkDefinition(2, 6, 9),
-                                new WorldChunkDefinition(1, 7, 9),
-                                new WorldChunkDefinition(1, 8, 9),
-                                new WorldChunkDefinition(1, 9, 9),
-                                new WorldChunkDefinition(2, 10, 9),
-                                new WorldChunkDefinition(3, 11, 9),
-                                new WorldChunkDefinition(4, 12, 9),
-
-                                new WorldChunkDefinition(4, 4, 10),
-                                new WorldChunkDefinition(3, 5, 10),
-                                new WorldChunkDefinition(2, 6, 10),
-                                new WorldChunkDefinition(1, 7, 10),
-                                new WorldChunkDefinition(1, 8, 10),
-                                new WorldChunkDefinition(1, 9, 10),
-                                new WorldChunkDefinition(2, 10, 10),
-                                new WorldChunkDefinition(3, 11, 10),
-                                new WorldChunkDefinition(4, 12, 10),
-
-                                new WorldChunkDefinition(4, 5, 11),
-                                new WorldChunkDefinition(3, 6, 11),
-                                new WorldChunkDefinition(3, 7, 11),
-                                new WorldChunkDefinition(3, 8, 11),
-                                new WorldChunkDefinition(3, 9, 11),
-                                new WorldChunkDefinition(3, 10, 11),
-                                new WorldChunkDefinition(4, 11, 11),
-
-                                new WorldChunkDefinition(4, 6, 12),
-                                new WorldChunkDefinition(4, 7, 12),
-                                new WorldChunkDefinition(4, 8, 12),
-                                new WorldChunkDefinition(4, 9, 12),
-                                new WorldChunkDefinition(4, 10, 12),*/
+      },
+      {
+        "Reference": "default-level-two",
+        "Name": "Level 2",
+        "Description": "Ze zweite lehfel jaa. wiht ze great hoole",
+        "Seed": null,
+        "Size": {
+          "X": 16,
+          "Y": 16
+        },
+        "Resolution": 16,
+        "PenguinStartPosition": {
+          "X": 7,
+          "Y": 7
+        },
+        "ActiveFoodLimit": 2,
+        "FoodRandomOrder": false,
+        "FoodRandomPosition": false,
+        "Foods": [
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 8,
+              "Y": 8
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 7,
+              "Y": 4
+            }
+          }
+        ],
+        "ObstacleRandomOrder": false,
+        "ObstacleRandomPosition": false,
+        "Obstacles": [],
+        "Chunks": [
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 6,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 7,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 8,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 9,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 10,
+              "Y": 4
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 5,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 6,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 7,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 8,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 9,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 10,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 11,
+              "Y": 5
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 4,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 5,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 6,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 10,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 11,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 12,
+              "Y": 6
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 4,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 5,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 6,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 10,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 11,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 12,
+              "Y": 7
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 4,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 5,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 6,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 7,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 8,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 1,
+            "Position": {
+              "X": 9,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 2,
+            "Position": {
+              "X": 10,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 11,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 12,
+              "Y": 8
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 5,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 6,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 7,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 8,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 9,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 3,
+            "Position": {
+              "X": 10,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 11,
+              "Y": 9
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 6,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 7,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 8,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 9,
+              "Y": 10
+            }
+          },
+          {
+            "DefaultTileHeight": 4,
+            "Position": {
+              "X": 10,
+              "Y": 10
+            }
+          }
         ]
+      }
+    ]
   }
 ]

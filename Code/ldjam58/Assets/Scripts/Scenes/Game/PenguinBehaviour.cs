@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Core.Model;
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
@@ -9,6 +10,8 @@ namespace Assets.Scripts.Scenes.Game
 {
     public class PenguinBehaviour : MonoBehaviour
     {
+        public UnityEvent<FoodBehaviour> Eaten = new UnityEvent<FoodBehaviour>();
+
         private Penguin penguin;
         private Rigidbody penguinRigidbody;
 
@@ -93,7 +96,6 @@ namespace Assets.Scripts.Scenes.Game
                     Debug.Log("DragStop");
                 }
             }
-            
         }
 
         private void OnEnable()
@@ -106,6 +108,12 @@ namespace Assets.Scripts.Scenes.Game
             UnhookActions();
         }
 
-
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.transform.parent.TryGetComponent<FoodBehaviour>(out var foodBehaviour))
+            {
+                Eaten.Invoke(foodBehaviour);
+            }
+        }
     }
 }

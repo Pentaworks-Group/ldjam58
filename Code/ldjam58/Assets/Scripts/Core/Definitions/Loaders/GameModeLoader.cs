@@ -104,7 +104,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
 
                     if (food.Definition != default)
                     {
-                        food.Definition = CheckItem(food.Definition, this.foodCache);
+                        targetFood.Definition = CheckItem(food.Definition, this.foodCache);
                     }
 
                     targetFoods.Add(targetFood);

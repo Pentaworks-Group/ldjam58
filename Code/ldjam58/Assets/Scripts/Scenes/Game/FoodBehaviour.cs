@@ -1,22 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Assets.Scripts.Core.Model;
+﻿using Assets.Scripts.Core.Model;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.Scripts.Scenes.Game
 {
     public class FoodBehaviour : MonoBehaviour
     {
-        private Food food;
 
-        public void Init(Food food)
+        public Food Food { get; protected set; }
+
+        public void Init( Food food)
         {
-            this.food = food;
+            this.Food = food;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.body != default)
+            {
+                if (collision.body.gameObject.TryGetComponent<PenguinBehaviour>(out _))
+                {
+                }
+            }
         }
     }
 }
