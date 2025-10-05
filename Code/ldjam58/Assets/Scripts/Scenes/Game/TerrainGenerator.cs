@@ -1,4 +1,9 @@
-﻿using Assets.Scripts.Core.Model;
+﻿using System;
+using System.ComponentModel;
+
+using Assets.Scripts.Core.Model;
+
+using GameFrame.Core.Collections;
 
 using UnityEngine;
 
@@ -10,24 +15,34 @@ namespace Assets.Scripts.Scenes.Game
         private readonly Material terrainMaterial;
         private readonly PhysicsMaterial iceMaterial;
         private readonly PhysicsMaterial snowMaterial;
+        private readonly Map<Int32, WorldChunk> chunkMap;
+        private readonly Map<Int32, ChunkBehaviour> chunkBehaviourMap;
 
-        public TerrainGenerator(Material terrainMaterial, PhysicsMaterial ice, PhysicsMaterial snow, Level world)
+        public TerrainGenerator(Map<Int32, ChunkBehaviour> chunkBehaviourMap, Material terrainMaterial, PhysicsMaterial ice, PhysicsMaterial snow, Level world)
         {
             this.world = world;
             this.terrainMaterial = terrainMaterial;
             this.iceMaterial = ice;
             this.snowMaterial = snow;
+
+            this.chunkMap = world.GetChunkMap();
+            this.chunkBehaviourMap = chunkBehaviourMap;
         }
 
-        public void Generate(WorldChunk worldChunk, GameObject chunk)
+        public ChunkBehaviour Generate(Int32 chunkX, Int32 chunkZ, GameObject chunk)
         {
+            _ = this.chunkMap.TryGetValue(chunkX, chunkZ, out var worldChunk);
             var chunkTileMap = worldChunk?.GetTileMap();
 
             var filter = chunk.GetComponent<MeshFilter>();
             var collider = chunk.GetComponent<MeshCollider>();
             var renderer = chunk.GetComponent<MeshRenderer>();
+            var chunkBehaviour = chunk.GetComponent<ChunkBehaviour>();
+
+            chunkBehaviourMap[chunkX, chunkZ] = chunkBehaviour;
 
             var mesh = new Mesh();
+            chunkBehaviour.Mesh = mesh;
 
             var worldPosition = filter.gameObject.transform.position;
 
@@ -40,7 +55,7 @@ namespace Assets.Scripts.Scenes.Game
             {
                 for (int z = 0; z <= world.Resolution; z++)
                 {
-                    var y = 0;
+                    var y = 0f;
 
                     if (worldChunk != default)
                     {
@@ -52,6 +67,47 @@ namespace Assets.Scripts.Scenes.Game
                         if (chunkTileMap.TryGetValue(x, z, out var tile))
                         {
                             y = tile.Position.Y;
+                        }
+                    }
+
+                    if (x == 0 && z == 0)
+                    {
+                        var yLeft = GetNeighbourTileHeight(chunkX - 1, chunkZ, world.Resolution, z);
+                        var yBottomLeft = GetNeighbourTileHeight(chunkX - 1, chunkZ - 1, world.Resolution, world.Resolution);
+                        var yBottom = GetNeighbourTileHeight(chunkX, chunkZ - 1, x, world.Resolution);
+
+                        if (y != yLeft || y != yBottom || y != yBottom)
+                        {
+                            var average = (y + yLeft + yBottomLeft + yBottom) / 4f;
+
+                            y = average;
+                            SetNeighbourTileHeight(chunkX - 1, chunkZ, world.Resolution, z, average);
+                            SetNeighbourTileHeight(chunkX - 1, chunkZ - 1, world.Resolution, world.Resolution, average);
+                            SetNeighbourTileHeight(chunkX, chunkZ - 1, x, world.Resolution, average);
+                        }
+                    }
+                    else if (x == 0)
+                    {
+                        var yBottom = GetNeighbourTileHeight(chunkX, chunkZ - 1, x, world.Resolution);
+
+                        if (y != yBottom)
+                        {
+                            var average = (y + yBottom) / 2;
+
+                            y = average;
+                            SetNeighbourTileHeight(chunkX, chunkZ - 1, x, world.Resolution, average);
+                        }
+                    }
+                    else if (z == 0)
+                    {
+                        var yLeft = GetNeighbourTileHeight(chunkX - 1, chunkZ, world.Resolution, z);
+
+                        if (y != yLeft)
+                        {
+                            var average = (y + yLeft) / 2;
+
+                            y = average;
+                            SetNeighbourTileHeight(chunkX - 1, chunkZ, world.Resolution, z, average);
                         }
                     }
 
@@ -104,6 +160,43 @@ namespace Assets.Scripts.Scenes.Game
             collider.sharedMesh = mesh;
             filter.mesh = mesh;
             renderer.material = terrainMaterial;
+
+            return chunkBehaviour;
+        }
+
+        private Single GetNeighbourTileHeight(Int32 chunkX, Int32 chunkZ, Int32 tileX, Int32 tileZ)
+        {
+            if (this.chunkBehaviourMap.TryGetValue(chunkX, chunkZ, out var neightbourChunk))
+            {
+                var index = GetIndex(tileX, tileZ);
+
+                var vector = neightbourChunk.Mesh.vertices[index];
+
+                return vector.y;
+            }
+
+            return default;
+        }
+
+        private Boolean SetNeighbourTileHeight(Int32 chunkX, Int32 chunkZ, Int32 tileX, Int32 tileZ, Single newY)
+        {
+            if (this.chunkBehaviourMap.TryGetValue(chunkX, chunkZ, out var neightbourChunk))
+            {
+                var index = GetIndex(tileX, tileZ);
+
+                var vector = neightbourChunk.Mesh.vertices[index];
+
+                neightbourChunk.Mesh.vertices[index] = new Vector3(vector.x, newY, vector.z);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private Int32 GetIndex(Int32 tileX, Int32 tileZ)
+        {
+            return tileX * (world.Resolution+1) + tileZ;
         }
     }
 }
