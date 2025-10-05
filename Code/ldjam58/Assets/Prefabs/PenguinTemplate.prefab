@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 2847552110030926396}
   - component: {fileID: 1605440583855288150}
   m_Layer: 0
-  m_Name: Ping_top_walk_0
+  m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
