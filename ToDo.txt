@@ -8,6 +8,7 @@ Credits:
  - 
 
 Todo:
+ - scale arrow length to maxpower
 ---------------------------------- 
   
 Bugs: 
