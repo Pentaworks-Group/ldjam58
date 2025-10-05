@@ -202,6 +202,14 @@ namespace Assets.Scripts.Scenes.Game
             if (worldBehaviour.PenguinBehaviour.TryGetComponent<Rigidbody>(out Rigidbody body))
             {
                 body.useGravity = !body.useGravity;
+                if (body.useGravity)
+                {
+                    body.linearDamping = 0;
+                }
+                else
+                {
+                    body.linearDamping = 1;
+                }
                 gravityButton.ToggleButton();
             }
         }
