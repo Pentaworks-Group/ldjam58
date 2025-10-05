@@ -11,22 +11,27 @@ Todo:
 ---------------------------------- 
   
 Bugs: 
- - 
+ - Touch input not working
  
 Exceptions: 
  - 
  
 Core:
- - 
+ - Levels
+ - Infinite game mode
    
 GamePlay:
  - 
  
 UI: 
- - 
+ - Point counter 
+ - GameMode selection
    
 Audio:
- - 
+ - Button click
+ - Flop (when penguin starts moving)
+ - Ambience
+ - Background
   
 Refactoring:
 ----------------------------------
@@ -43,7 +48,10 @@ Nice to have:
  
 Ideas:
 ----------------------------------
- -  
+ - circling orca (or random) 
+ - events (ice breaking)
+ - fart (vertical takeoff or boost)
+ 
  
  
 Delivery Items:
