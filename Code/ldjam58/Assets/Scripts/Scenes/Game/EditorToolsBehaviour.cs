@@ -95,7 +95,6 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (GetTileWithRaycast(out var tile, out var chunk))
             {
-                Debug.Log("RaiseLevel: " + chunk.Position + tile.Position);
                 var desiredHeight = tile.Position.Y + 1;
                 if (chunk.DefaultTileHeight.HasValue && chunk.DefaultTileHeight.Value == desiredHeight)
                 {
@@ -106,7 +105,6 @@ namespace Assets.Scripts.Scenes.Game
                     tile.Position = tile.Position.Add(0, +1, 0);
                 }
                 worldBehaviour.ReRenderWorld();
-                Debug.Log("RaiseLevel2: " + chunk.Position + tile.Position);
             }
 
         }
@@ -115,7 +113,6 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (GetTileWithRaycast(out var tile, out var chunk))
             {
-                Debug.Log("LowerLevel: " + chunk.Position + tile.Position);
                 var desiredHeight = tile.Position.Y - 1;
                 if (chunk.DefaultTileHeight.HasValue)
                 {
@@ -140,7 +137,6 @@ namespace Assets.Scripts.Scenes.Game
                     }
                 }
                 worldBehaviour.ReRenderWorld();
-                Debug.Log("LowerLevel2: " + chunk.Position + tile.Position);
             }
         }
 
