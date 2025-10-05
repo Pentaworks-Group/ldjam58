@@ -61,13 +61,13 @@ namespace Assets.Scripts.Core
 
             var convertedLevel = new Level()
             {
+                Reference = levelDefinition.Reference,
                 Size = levelDefinition.Size,
                 PenguinStartPosition = startingPosition,
                 Resolution = levelDefinition.Resolution,
                 Name = levelDefinition.Name,
                 Description = levelDefinition.Description,
                 Seed = levelDefinition.Seed,
-                Foods = new List<Food>(),
                 Obstacles = new List<Obstacle>()
             };
 
@@ -75,7 +75,7 @@ namespace Assets.Scripts.Core
             {
                 foreach (var foodDef in levelDefinition.Foods)
                 {
-                    convertedLevel.Foods.Add(ConvertFood(foodDef));
+                    convertedLevel.AvailableFoods.Add(ConvertFood(foodDef));
                 }
             }
 
@@ -102,8 +102,8 @@ namespace Assets.Scripts.Core
         {
             return new Food()
             {
-                Definition = foodDef.Food,
-                Position = foodDef.Position
+                Definition = foodDef.Definition,
+                Position = new Vector3(foodDef.Position.X, 0, foodDef.Position.Y),
             };
         }
 

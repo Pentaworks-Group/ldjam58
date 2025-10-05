@@ -24,11 +24,12 @@
           "X": 8,
           "Y": 7
         },
+        "ActiveFoodLimit": 1,
         "FoodRandomOrder": false,
         "FoodRandomPosition": false,
         "Foods": [
           {
-            "Food": {
+            "Definition": {
               "IsReferenced": true,
               "Reference": "Fish"
             },

@@ -7,7 +7,7 @@ namespace Assets.Scripts.Core.Model
     public class Food
     {
         public FoodDefinition Definition { get; set; }
-        public Vector2 Position { get; set; }
+        public Vector3 Position { get; set; }
 
     }
 }

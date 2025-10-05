@@ -102,9 +102,9 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                         Position = food.Position,
                     };
 
-                    if (food.Food != default)
+                    if (food.Definition != default)
                     {
-                        food.Food = CheckItem(food.Food, this.foodCache);
+                        food.Definition = CheckItem(food.Definition, this.foodCache);
                     }
 
                     targetFoods.Add(targetFood);
