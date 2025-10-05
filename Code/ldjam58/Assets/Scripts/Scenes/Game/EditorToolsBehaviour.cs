@@ -74,7 +74,7 @@ namespace Assets.Scripts.Scenes.Game
 
         public void SaveMap()
         {
-            var json = GameFrame.Core.Json.Handler.Serialize(gameState.CurrentLevel.Chunks, Formatting.None, new JsonSerializerSettings());
+            var json = GameFrame.Core.Json.Handler.Serialize(gameState.CurrentLevel.Chunks, Formatting.Indented, new JsonSerializerSettings());
             inputField.text = json;
         }
 
@@ -194,6 +194,15 @@ namespace Assets.Scripts.Scenes.Game
                     }
                 }
                 worldBehaviour.ReRenderWorld();
+            }
+        }
+
+        public void TogglePenguinGravity(EditorToolBehaviour gravityButton)
+        {
+            if (worldBehaviour.PenguinBehaviour.TryGetComponent<Rigidbody>(out Rigidbody body))
+            {
+                body.useGravity = !body.useGravity;
+                gravityButton.ToggleButton();
             }
         }
 

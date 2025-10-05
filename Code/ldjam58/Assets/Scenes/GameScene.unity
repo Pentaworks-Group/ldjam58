@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: worldBehaviour
       value: 
       objectReference: {fileID: 129315004}
+    - target: {fileID: 7488355296707199546, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8032511331408452393, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

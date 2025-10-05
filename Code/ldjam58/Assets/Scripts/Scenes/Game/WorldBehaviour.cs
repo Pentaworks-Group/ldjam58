@@ -23,6 +23,7 @@ namespace Assets.Scripts.Scenes.Game
         public PhysicsMaterial snowMaterial;
 
         private GameState gameState;
+        public PenguinBehaviour PenguinBehaviour { get; private set; }
 
         private void OnGameInitialized()
         {
@@ -110,11 +111,11 @@ namespace Assets.Scripts.Scenes.Game
             {
                 var penguinObject = GameObject.Instantiate(penguinTemplate, rootContainer.transform);
 
-                var penguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
+                this.PenguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
 
-                penguinBehaviour.Init(gameState.Penguin);
+                PenguinBehaviour.Init(gameState.Penguin);
 
-                penguinBehaviour.transform.position = gameState.Penguin.Position.ToUnity();
+                PenguinBehaviour.transform.position = gameState.Penguin.Position.ToUnity();
 
                 penguinObject.SetActive(true);
             }
