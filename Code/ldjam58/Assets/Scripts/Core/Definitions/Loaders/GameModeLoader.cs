@@ -28,6 +28,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                         Name = loadedGameMode.Name,
                         Description = loadedGameMode.Description,
                         IsRandomGenerated = loadedGameMode.IsRandomGenerated,
+                        IsAllowingControlWhileMoving = loadedGameMode.IsAllowingControlWhileMoving,
                         Levels = new List<LevelDefinition>()
                     };
 
