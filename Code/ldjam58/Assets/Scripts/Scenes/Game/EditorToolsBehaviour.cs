@@ -83,6 +83,11 @@ namespace Assets.Scripts.Scenes.Game
             if (selectedTool != null)
             {
                 selectedTool.DeselectButton();
+                if (selectedTool = toolToSelect)
+                {
+                    selectedTool = null;
+                    return;
+                }
             }
             selectedTool = toolToSelect;
             toolToSelect.SelectButton();
