@@ -1,0 +1,536 @@
+[
+  {
+    "Position": {
+      "X": 12,
+      "Y": 6
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": [
+      {
+        "Position": {
+          "X": 5,
+          "Y": 3,
+          "Z": 6
+        }
+      }
+    ]
+  },
+  {
+    "Position": {
+      "X": 8,
+      "Y": 7
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 11,
+      "Y": 7
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": [
+      {
+        "Position": {
+          "X": 12,
+          "Y": 4,
+          "Z": 4
+        }
+      }
+    ]
+  },
+  {
+    "Position": {
+      "X": 12,
+      "Y": 7
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": [
+      {
+        "Position": {
+          "X": 7,
+          "Y": 3,
+          "Z": 2
+        }
+      },
+      {
+        "Position": {
+          "X": 6,
+          "Y": 5,
+          "Z": 9
+        }
+      },
+      {
+        "Position": {
+          "X": 8,
+          "Y": 5,
+          "Z": 8
+        }
+      }
+    ]
+  },
+  {
+    "Position": {
+      "X": 11,
+      "Y": 5
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 5
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 8,
+      "Y": 5
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 9,
+      "Y": 5
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 10,
+      "Y": 7
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 8,
+      "Y": 6
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 4,
+      "Y": 7
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 4,
+      "Y": 8
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 8
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 9
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 4,
+      "Y": 9
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 9,
+      "Y": 8
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 8,
+      "Y": 8
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 11,
+      "Y": 8
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 9,
+      "Y": 12
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 7,
+      "Y": 12
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 12
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 5,
+      "Y": 11
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 11
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 7,
+      "Y": 11
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 8,
+      "Y": 11
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 9,
+      "Y": 11
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 10,
+      "Y": 11
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 11,
+      "Y": 11
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 12,
+      "Y": 8
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 12,
+      "Y": 9
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 12,
+      "Y": 10
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 11,
+      "Y": 10
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 10,
+      "Y": 10
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 4,
+      "Y": 10
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 8,
+      "Y": 9
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 9,
+      "Y": 9
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 10,
+      "Y": 9
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 11,
+      "Y": 9
+    },
+    "DefaultTileHeight": null,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 9,
+      "Y": 6
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 16,
+      "Y": 5
+    },
+    "DefaultTileHeight": 2,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 10,
+      "Y": 5
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 10,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 11,
+      "Y": 3
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 12,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 13,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 14,
+      "Y": 5
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 14,
+      "Y": 6
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 14,
+      "Y": 7
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 10,
+      "Y": 8
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 8,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 9,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 7,
+      "Y": 6
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 6
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 5,
+      "Y": 6
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 4,
+      "Y": 6
+    },
+    "DefaultTileHeight": 4,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 5,
+      "Y": 9
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 7,
+      "Y": 9
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 7
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 5,
+      "Y": 5
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 5,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 6,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  },
+  {
+    "Position": {
+      "X": 7,
+      "Y": 4
+    },
+    "DefaultTileHeight": 1,
+    "Tiles": null
+  }
+]
