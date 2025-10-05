@@ -51,22 +51,11 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (gameState.CurrentLevel != default)
             {
-                var chunkBehaviourMap = new Map<Int32, ChunkBehaviour>();
+                var terrainGenerator = new TerrainGenerator(chunkContainer, terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
 
-                var terrainGenerator = new TerrainGenerator(chunkBehaviourMap, terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
-
-                for (int z = 0; z < gameState.CurrentLevel.Size.Y; z++)
-                {
-                    for (int x = 0; x < gameState.CurrentLevel.Size.X; x++)
-                    {
-                        var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(ChunkBehaviour));
-
-                        mapChunk.transform.parent = chunkContainer.transform;
-                        mapChunk.transform.localPosition = new UnityVector3(x * gameState.CurrentLevel.Resolution, 0f, z * gameState.CurrentLevel.Resolution);
-
-                        terrainGenerator.Generate(x, z, mapChunk);
-                    }
-                }
+                var chunkBehaviourMap = terrainGenerator.Generate();
+                                
+                //terrainGenerator.Stitch();
 
                 foreach (var chunk in chunkBehaviourMap.GetAll())
                 {
