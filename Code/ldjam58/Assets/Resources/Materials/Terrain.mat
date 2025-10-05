@@ -105,7 +105,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _IceHeight: 1
-    - _IceThreshold: 2
+    - _IceThreshold: 4
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
