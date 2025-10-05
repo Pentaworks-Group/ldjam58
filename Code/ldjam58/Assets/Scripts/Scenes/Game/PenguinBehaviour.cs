@@ -40,6 +40,13 @@ namespace Assets.Scripts.Scenes.Game
             moveAction.performed -= OnMove;
         }
 
+        private void Update()
+        {
+            var currentCameraPosition = Camera.main.transform.position;
+
+            Camera.main.transform.position = Vector3.Lerp(currentCameraPosition, new Vector3(this.transform.position.x, currentCameraPosition.y, this.transform.position.z), 0.1f );
+        }
+
         private void OnEnable()
         {
             HookActions();
