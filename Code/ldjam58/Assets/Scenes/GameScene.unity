@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 1378561368005543347, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
+      propertyPath: raycastLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 8032511331408452393, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -1061,13 +1065,13 @@ GameObject:
   - component: {fileID: 1423278834}
   - component: {fileID: 1423278835}
   - component: {fileID: 1423278836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PenguinTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1423278834
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,7 +1139,7 @@ GameObject:
   - component: {fileID: 1644707026}
   - component: {fileID: 1644707025}
   - component: {fileID: 1644707024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

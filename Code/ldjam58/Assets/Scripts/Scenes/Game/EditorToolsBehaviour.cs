@@ -1,8 +1,8 @@
-using System;
-using UnityEditor;
+
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using UnityEngine.InputSystem.UI;
 
 namespace Assets.Scripts.Scenes.Game
 {
@@ -10,8 +10,26 @@ namespace Assets.Scripts.Scenes.Game
     {
         [SerializeField]
         private Camera Camera;
+        [SerializeField]
+        private LayerMask raycastLayerMask;
 
         private EditorToolBehaviour selectedTool;
+
+        private EventSystem eventSystem;
+        private bool isOverUI;
+
+
+
+        void Start()
+        {
+            eventSystem = EventSystem.current;
+        }
+
+        void Update()
+        {
+            isOverUI = eventSystem.IsPointerOverGameObject();
+        }
+
 
         private void OnEnable()
         {
@@ -66,20 +84,23 @@ namespace Assets.Scripts.Scenes.Game
         public void LowerLevel()
         {
             MakeRaycast();
-        } 
+        }
 
         private void MakeRaycast()
         {
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.transform.position, Camera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
-
+            if (isOverUI)
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
+                return;
+            }
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 10000))
+            {
+                Vector2Int terrainHitPoint = new Vector2Int((int)hit.point.x, (int)hit.point.z);
+                Debug.Log("Did Hit " + hit.collider.gameObject.name + " x: " + hit.point.x + " z: " + hit.point.z);
             }
             else
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
                 Debug.Log("Did not Hit");
             }
 
