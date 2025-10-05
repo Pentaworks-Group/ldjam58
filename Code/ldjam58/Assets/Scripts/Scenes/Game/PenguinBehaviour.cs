@@ -2,9 +2,7 @@
 
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Scenes.Game
 {
