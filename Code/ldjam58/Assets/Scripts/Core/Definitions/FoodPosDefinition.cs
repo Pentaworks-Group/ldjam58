@@ -5,7 +5,7 @@ namespace Assets.Scripts.Core.Definitons
 {
     public class FoodPosDefinition : BaseDefinition
     {
-        public FoodDefinition FoodDefinition { get; set; }
+        public FoodDefinition Definition { get; set; }
         public Vector2 Position { get; set; }
     }
 }

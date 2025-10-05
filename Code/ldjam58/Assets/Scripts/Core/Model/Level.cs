@@ -1,14 +1,16 @@
-﻿using GameFrame.Core.Collections;
-using GameFrame.Core.Math;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine.Tilemaps;
+
+using GameFrame.Core.Collections;
+using GameFrame.Core.Math;
 
 namespace Assets.Scripts.Core.Model
 {
     public class Level
     {
         private Map<Int32, WorldChunk> chunkMap;
+
+        public String Reference { get; set; }
 
         public String Name { get; set; }
         public String Description { get; set; }
@@ -22,10 +24,12 @@ namespace Assets.Scripts.Core.Model
         /// </summary>
         public Int32 Resolution { get; set; }
         public Vector2Int PenguinStartPosition { get; set; }
+
         public List<Food> Foods { get; set; } = new List<Food>();
         public List<Obstacle> Obstacles { get; set; } = new List<Obstacle>();
 
         public List<WorldChunk> Chunks { get; set; } = new List<WorldChunk>();
+        public List<Food> AvailableFoods { get; set; } = new List<Food>();
 
         public Map<Int32, WorldChunk> GetChunkMap()
         {
@@ -51,6 +55,7 @@ namespace Assets.Scripts.Core.Model
             {
                 Chunks = new List<WorldChunk>();
             }
+
             Chunks.Add(chunk);
             chunkMap[chunk.Position.X, chunk.Position.Y] = chunk;
         }
@@ -60,5 +65,7 @@ namespace Assets.Scripts.Core.Model
             Chunks.Remove(chunk);
             chunkMap.Remove(chunk.Position.X, chunk.Position.Y);
         }
+
+        
     }
 }

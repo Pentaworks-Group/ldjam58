@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Definitons.Loaders;
@@ -17,6 +18,11 @@ namespace Assets.Scripts.Core
         protected override GameState InitializeGameState()
         {
             var gameMode = default(Assets.Scripts.Core.Definitons.GameMode);
+                        
+            if (gameMode == default)
+            {
+                gameMode = gameModeCache.Values.FirstOrDefault();
+            }
 
             if (gameMode == default)
             {
@@ -109,9 +115,9 @@ namespace Assets.Scripts.Core
                                 new WorldChunkDefinition(4, 4, 6),
                                 new WorldChunkDefinition(3, 5, 6),
                                 new WorldChunkDefinition(2, 6, 6),
-                                new WorldChunkDefinition(1, 7, 6),
-                                new WorldChunkDefinition(1, 8, 6),
-                                new WorldChunkDefinition(1, 9, 6),
+                                new WorldChunkDefinition(2, 7, 6),
+                                new WorldChunkDefinition(2, 8, 6),
+                                new WorldChunkDefinition(2, 9, 6),
                                 new WorldChunkDefinition(2, 10, 6),
                                 new WorldChunkDefinition(3, 11, 6),
                                 new WorldChunkDefinition(4, 12, 6),
@@ -149,9 +155,9 @@ namespace Assets.Scripts.Core
                                 new WorldChunkDefinition(4, 4, 10),
                                 new WorldChunkDefinition(3, 5, 10),
                                 new WorldChunkDefinition(2, 6, 10),
-                                new WorldChunkDefinition(1, 7, 10),
-                                new WorldChunkDefinition(1, 8, 10),
-                                new WorldChunkDefinition(1, 9, 10),
+                                new WorldChunkDefinition(2, 7, 10),
+                                new WorldChunkDefinition(2, 8, 10),
+                                new WorldChunkDefinition(2, 9, 10),
                                 new WorldChunkDefinition(2, 10, 10),
                                 new WorldChunkDefinition(3, 11, 10),
                                 new WorldChunkDefinition(4, 12, 10),
