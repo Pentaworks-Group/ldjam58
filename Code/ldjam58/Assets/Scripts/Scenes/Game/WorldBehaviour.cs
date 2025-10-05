@@ -3,6 +3,7 @@ using System;
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
 
+using GameFrame.Core.Collections;
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
@@ -50,24 +51,27 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (gameState.CurrentLevel != default)
             {
-                Debug.Log("RenderTerrain");
-                var terrainGenerator = new TerrainGenerator(terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
+                var chunkBehaviourMap = new Map<Int32, ChunkBehaviour>();
 
-                var chunkMap = gameState.CurrentLevel.GetChunkMap();
+                var terrainGenerator = new TerrainGenerator(chunkBehaviourMap, terrainMaterial, iceMaterial, snowMaterial, gameState.CurrentLevel);
 
                 for (int z = 0; z < gameState.CurrentLevel.Size.Y; z++)
                 {
                     for (int x = 0; x < gameState.CurrentLevel.Size.X; x++)
                     {
-                        var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
+                        var mapChunk = new GameObject($"Chunk-{x}-{z}", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(ChunkBehaviour));
 
                         mapChunk.transform.parent = chunkContainer.transform;
                         mapChunk.transform.localPosition = new UnityVector3(x * gameState.CurrentLevel.Resolution, 0f, z * gameState.CurrentLevel.Resolution);
 
-                        _ = chunkMap.TryGetValue(x, z, out var worldChunk);
-
-                        terrainGenerator.Generate(worldChunk, mapChunk);
+                        terrainGenerator.Generate(x, z, mapChunk);
                     }
+                }
+
+                foreach (var chunk in chunkBehaviourMap.GetAll())
+                {
+                    chunk.Mesh.RecalculateBounds();
+                    chunk.Mesh.RecalculateNormals();
                 }
 
                 return true;
