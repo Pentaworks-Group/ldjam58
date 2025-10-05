@@ -13,7 +13,6 @@ namespace Assets.Scripts.Scenes.Game
         private Rigidbody penguinRigidbody;
 
         private Vector3 dragStart;
-        private Vector3 dragStartWorld;
         private float strength = 0.1f;
         private float maxStrength = 20f;
         private bool isDragging = false;
@@ -59,47 +58,41 @@ namespace Assets.Scripts.Scenes.Game
             {
                 dragStart = Mouse.current.position.ReadValue();
                 arrow.gameObject.SetActive(true);
-                dragStartWorld = Camera.main.ScreenToWorldPoint(dragStart);
                 isDragging = true;
-                Debug.Log("DragStart");
             }
             else
             {
                 if (isDragging)
                 {
                     Vector3 mousePos = Mouse.current.position.ReadValue();
-                    //Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
                     var pos = transform.position;
                     var x = mousePos.x - dragStart.x;
                     var y = mousePos.y - dragStart.y;
                     if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
                     {
-                        // Rotate only on the Y axis (for 2D, use Vector3.forward)
                         var direction = new Vector3(x, 0, y);
                         arrow.rotation = Quaternion.LookRotation(direction);
                         var appliedStrength = Mathf.Min(direction.magnitude * strength, 5);
                         arrow.localScale = new Vector3(1, 1, appliedStrength);
-                        Debug.Log("direction: " + direction);
-                    }
-                    else
-                    {
-                        Debug.Log("ZeroDist: " + dragStart + " " + dragStartWorld + " " + mousePos);
                     }
                 }
                 if (isDragging && Mouse.current.leftButton.wasReleasedThisFrame)
                 {
+
                     Vector3 mousePos = Mouse.current.position.ReadValue();
 
                     var x = (mousePos.x - dragStart.x);
                     var y = (mousePos.y - dragStart.y);
-
-                    var direction = new Vector3(x, 0, y);
-                    var appliedStrength = Mathf.Min(direction.magnitude * strength, maxStrength);
-                    direction = direction.normalized * appliedStrength;
-                    penguinRigidbody.AddForce(direction, ForceMode.Impulse);
-                    isDragging = false;
-                    Debug.Log("DragStop");
-                    arrow.gameObject.SetActive(false);
+                    if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
+                    {
+                        var direction = new Vector3(x, 0, y);
+                        var appliedStrength = Mathf.Min(direction.magnitude * strength, maxStrength);
+                        direction = direction.normalized * appliedStrength;
+                        penguinRigidbody.AddForce(direction, ForceMode.Impulse);
+                        transform.rotation = Quaternion.LookRotation(direction);
+                        isDragging = false;
+                        arrow.gameObject.SetActive(false);
+                    }
                 }
             }
 
