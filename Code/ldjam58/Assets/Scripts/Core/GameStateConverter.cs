@@ -26,6 +26,7 @@ namespace Assets.Scripts.Core
                 CreatedOn = DateTime.Now,
                 CurrentScene = Constants.Scenes.GameName,
                 Mode = mode,
+                Penguin = ConvertPenguin(mode.Penguin)
             };
 
             if (!this.mode.IsRandomGenerated)
@@ -44,6 +45,35 @@ namespace Assets.Scripts.Core
             }
 
             return gameState;
+        }
+
+        private Penguin ConvertPenguin(PenguinDefinition penguinDefinition)
+        {
+            if (mode.Penguin != default)
+            {
+                var penguin = new Penguin()
+                {
+                    Name = penguinDefinition.Name
+                };
+                
+                if (!penguinDefinition.Strength.HasValue)
+                {
+                    throw new Exception("Missing PenguinDefinition.Strength!");
+                }
+                
+                penguin.Strength = penguinDefinition.Strength.Value;
+                
+                if (!penguinDefinition.MaxStrength.HasValue)
+                {
+                    throw new Exception("Missing PenguinDefinition.MaxStrength!");
+                }
+                
+                penguin.MaxStrength = penguinDefinition.MaxStrength.Value;
+
+                return penguin;
+            }
+
+            return default;
         }
     }
 }

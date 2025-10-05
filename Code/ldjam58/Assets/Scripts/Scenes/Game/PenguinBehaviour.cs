@@ -14,8 +14,6 @@ namespace Assets.Scripts.Scenes.Game
         private Rigidbody penguinRigidbody;
 
         private Vector3 dragStart;
-        private float strength = 0.1f;
-        private float maxStrength = 20f;
         private bool isDragging = false;
         [SerializeField]
         private Transform arrow;
@@ -35,7 +33,6 @@ namespace Assets.Scripts.Scenes.Game
             penguinRigidbody.AddForce(translation, ForceMode.Impulse);
             Debug.Log($"Adding force '{translation}'");
         }
-
 
         private void HookActions()
         {
@@ -73,7 +70,7 @@ namespace Assets.Scripts.Scenes.Game
                     {
                         var direction = new Vector3(x, 0, y);
                         arrow.rotation = Quaternion.LookRotation(direction);
-                        var appliedStrength = Mathf.Min(direction.magnitude * strength, 5);
+                        var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, 5);
                         arrow.localScale = new Vector3(1, 1, appliedStrength);
                     }
                 }
@@ -84,16 +81,14 @@ namespace Assets.Scripts.Scenes.Game
 
                     var x = (mousePos.x - dragStart.x);
                     var y = (mousePos.y - dragStart.y);
-                    if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
-                    {
-                        var direction = new Vector3(x, 0, y);
-                        var appliedStrength = Mathf.Min(direction.magnitude * strength, maxStrength);
-                        direction = direction.normalized * appliedStrength;
-                        penguinRigidbody.AddForce(direction, ForceMode.Impulse);
-                        transform.rotation = Quaternion.LookRotation(direction);
-                        isDragging = false;
-                        arrow.gameObject.SetActive(false);
-                    }
+
+                    var direction = new Vector3(x, 0, y);
+                    var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
+                    direction = direction.normalized * appliedStrength;
+                    penguinRigidbody.AddForce(direction, ForceMode.Impulse);
+                    isDragging = false;
+                    Debug.Log("DragStop");
+                    arrow.gameObject.SetActive(false);
                 }
             }
         }

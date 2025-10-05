@@ -8,5 +8,7 @@ namespace Assets.Scripts.Core.Definitons
     {
         public String Name { get; set; }
         public String Sprite { get; set; }
+        public Single? Strength { get; set; }
+        public Single? MaxStrength { get; set; }
     }
 }
