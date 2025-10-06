@@ -8,17 +8,15 @@ Credits:
  - 
 
 Todo:
- - scale arrow length to maxpower
+ 
 ---------------------------------- 
   
 Bugs: 
- - Touch input not working
- 
+  
 Exceptions: 
  - 
  
 Core:
- - Levels
  - Infinite game mode
    
 GamePlay:
