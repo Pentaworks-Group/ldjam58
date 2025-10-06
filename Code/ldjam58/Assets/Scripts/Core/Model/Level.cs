@@ -64,7 +64,5 @@ namespace Assets.Scripts.Core.Model
             Chunks.Remove(chunk);
             chunkMap.Remove(chunk.Position.X, chunk.Position.Y);
         }
-
-
     }
 }
