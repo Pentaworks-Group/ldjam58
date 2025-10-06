@@ -58,13 +58,6 @@ namespace Assets.Scripts.Core
                     Name = penguinDefinition.Name
                 };
 
-                if (!penguinDefinition.Strength.HasValue)
-                {
-                    throw new Exception("Missing PenguinDefinition.Strength!");
-                }
-
-                penguin.Strength = penguinDefinition.Strength.Value;
-
                 if (!penguinDefinition.MaxStrength.HasValue)
                 {
                     throw new Exception("Missing PenguinDefinition.MaxStrength!");

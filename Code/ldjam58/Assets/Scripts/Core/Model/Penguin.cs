@@ -9,7 +9,6 @@ namespace Assets.Scripts.Core.Model
         public String Name { get; set; }
         public Vector3 Position { get; set; }
         public Vector3 Velocity { get; set; }
-        public Single Strength { get; set; }
         public Single MaxStrength { get; set; }
     }
 }

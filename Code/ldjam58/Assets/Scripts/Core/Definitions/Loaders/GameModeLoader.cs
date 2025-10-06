@@ -45,7 +45,6 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                             Reference = loadedGameMode.Penguin.Reference,
                             Name = loadedGameMode.Penguin.Name,
                             Sprite = loadedGameMode.Penguin.Sprite,
-                            Strength = loadedGameMode.Penguin.Strength,
                             MaxStrength = loadedGameMode.Penguin.MaxStrength
                         };
                     }

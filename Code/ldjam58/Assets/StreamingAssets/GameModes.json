@@ -9,7 +9,6 @@
       "Reference": "DefaultPenguin",
       "Name": "Floppy",
       "Sprite": null,
-      "Strength": 0.5,
       "MaxStrength": 20
     },
     "Levels": [

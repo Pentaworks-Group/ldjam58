@@ -24,10 +24,8 @@ namespace Assets.Scripts.Scenes.Game
 
         private Boolean IsAllowingControlWhileMoving;
         private Boolean isMoving;
-        private float arrowScaler;
-        private float arrowMaxLength = 10f;
-
-        private Boolean isTouching = false;
+        private float maxDragDistance = 250f;
+        private float maxArrowLength = 10;
 
         public void Init(Penguin penguin)
         {
@@ -35,7 +33,6 @@ namespace Assets.Scripts.Scenes.Game
             this.penguinRigidbody = GetComponent<Rigidbody>();
             this.penguinAnimator = transform.Find("Animator").GetComponent<Animator>();
             IsAllowingControlWhileMoving = Base.Core.Game.State.Mode.IsAllowingControlWhileMoving;
-            arrowScaler = arrowMaxLength / penguin.MaxStrength;
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -119,13 +116,11 @@ namespace Assets.Scripts.Scenes.Game
             var pos = transform.position;
             var x = pointerPosition.x - dragStart.x;
             var y = pointerPosition.y - dragStart.y;
-            if (Mathf.Abs(x) > 0.2f && Mathf.Abs(y) > 0.2f)
+            if (Mathf.Abs(x) > 0.3f || Mathf.Abs(y) > 0.3f)
             {
                 var direction = new UnityVector3(x, 0, y);
                 arrow.rotation = Quaternion.LookRotation(direction);
-
-                var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
-                var arrowLegth = appliedStrength * arrowScaler;
+                var arrowLegth = GetPercentage(direction) * maxArrowLength;
                 arrow.localScale = new UnityVector3(1, 1, arrowLegth);
                 arrow.gameObject.SetActive(true);
             }
@@ -137,7 +132,6 @@ namespace Assets.Scripts.Scenes.Game
 
         private void StartDrag(InputAction.CallbackContext context)
         {
-            Debug.Log(".activeTouches.Count: " + UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count);
             if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > 1) {
                 DiscontinourDragging();
                 return; 
@@ -150,6 +144,13 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
+        private float GetPercentage(UnityVector3 direction) {
+            var percentage = direction.magnitude / maxDragDistance;
+            percentage = Mathf.Min(percentage, 1);
+            return percentage;
+        }
+
+
         public void StopDrag(InputAction.CallbackContext context)
         {
             if (isDragging)
@@ -158,13 +159,12 @@ namespace Assets.Scripts.Scenes.Game
                 var pos = transform.position;
                 var x = pointerPosition.x - dragStart.x;
                 var y = pointerPosition.y - dragStart.y;
-                if (Mathf.Abs(x) > 0.2f && Mathf.Abs(y) > 0.2f)
+                if (Mathf.Abs(x) > 0.3f || Mathf.Abs(y) > 0.3f)
                 {
                     var direction = new UnityVector3(x, 0, y);
 
-                    var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
-
-                    direction = direction.normalized * appliedStrength;
+                    var appliedStrength = GetPercentage(direction) * penguin.MaxStrength;
+                    direction = appliedStrength * direction.normalized ;
                     penguinRigidbody.AddForce(direction, ForceMode.Impulse);
                     transform.rotation = Quaternion.LookRotation(direction);
                 }
