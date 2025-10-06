@@ -23,7 +23,6 @@ GamePlay:
  - 
  
 UI: 
- - Point counter 
  - GameMode selection
    
 Audio:
