@@ -15,9 +15,9 @@ namespace Assets.Scripts.Scenes.Game
         private InputAction touch0pos;
         private InputAction touch1pos;
 
-        private void Start()
+
+        private void DefineActions()
         {
-            // pinch gesture
             touch0contact = new InputAction
             (
                 type: InputActionType.Button,
@@ -89,6 +89,8 @@ namespace Assets.Scripts.Scenes.Game
         {
             var moveAction = InputSystem.actions.FindAction("Scroll");
             moveAction.performed += HandleScroll;
+
+            DefineActions();
 
             touch0contact.performed += IncreaseCountTouch;
             touch1contact.performed += IncreaseCountTouch;
