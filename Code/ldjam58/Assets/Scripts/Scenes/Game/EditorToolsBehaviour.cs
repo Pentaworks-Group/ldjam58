@@ -5,10 +5,11 @@ using System.Linq;
 
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
+
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+
 using TMPro;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -29,6 +30,7 @@ namespace Assets.Scripts.Scenes.Game
         private EditorToolBehaviour selectedTool;
 
         private EventSystem eventSystem;
+        private Boolean isOverUI;
 
         private GameState gameState;
 
@@ -280,6 +282,12 @@ namespace Assets.Scripts.Scenes.Game
 
         private Boolean MakeRaycast(out Vector3 hitPoint)
         {
+            if (isOverUI)
+            {
+                hitPoint = Vector3.zero;
+                return false;
+            }
+
             hitPoint = Vector3.zero;
 
             PointerEventData pointerData = new PointerEventData(EventSystem.current)
