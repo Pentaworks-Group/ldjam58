@@ -26,6 +26,9 @@ namespace Assets.Scripts.Scenes.Game
         [SerializeField]
         private Transform arrow;
 
+        [SerializeField]
+        private AudioSource slideAudioSource;
+
         private Boolean isAllowingControlWhileMoving;
         private Boolean isMoving;
         private float maxDragDistance = 250f;
@@ -37,6 +40,9 @@ namespace Assets.Scripts.Scenes.Game
             this.penguinRigidbody = GetComponent<Rigidbody>();
             this.penguinAnimator = transform.Find("Animator").GetComponent<Animator>();
             isAllowingControlWhileMoving = Base.Core.Game.State.Mode.IsAllowingControlWhileMoving;
+
+            slideAudioSource.volume = GameFrame.Base.Audio.Effects.Volume;
+            GameFrame.Base.Audio.Effects.VolumeChanged.AddListener(OnEffectsVolumeChanged);
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -88,11 +94,17 @@ namespace Assets.Scripts.Scenes.Game
             penguin.Position = transform.position.ToFrame();
             penguin.Velocity = penguinRigidbody.linearVelocity.ToFrame();
 
-            if (penguin.Velocity.LengthSquared > 0.01f)
+            var vector2 = new Vector2(penguin.Velocity.X, penguin.Velocity.Z);
+
+            if (vector2.magnitude > 0.01f)
             {
                 if (!isMoving)
                 {
                     penguinAnimator.SetTrigger("StartSlide");
+
+                    GameFrame.Base.Audio.Effects.Play("Flop");
+
+                    this.slideAudioSource.Play();
                 }
 
                 isMoving = true;
@@ -102,6 +114,7 @@ namespace Assets.Scripts.Scenes.Game
                 if (isMoving)
                 {
                     penguinAnimator.SetTrigger("StartWalk");
+                    this.slideAudioSource.Stop();
                 }
 
                 isMoving = false;
@@ -174,7 +187,7 @@ namespace Assets.Scripts.Scenes.Game
                     direction = appliedStrength * direction.normalized;
                     penguinRigidbody.AddForce(direction, ForceMode.Impulse);
                     transform.rotation = Quaternion.LookRotation(direction);
-
+                                        
                     Base.Core.Game.State.MovementCounter++;
                 }
             }
@@ -186,6 +199,14 @@ namespace Assets.Scripts.Scenes.Game
         {
             isDragging = false;
             arrow.gameObject.SetActive(false);
+        }
+
+        private void OnEffectsVolumeChanged(Single newVolume)
+        {
+            if (slideAudioSource != null)
+            {
+                slideAudioSource.volume = newVolume;
+            }
         }
 
         private void OnEnable()

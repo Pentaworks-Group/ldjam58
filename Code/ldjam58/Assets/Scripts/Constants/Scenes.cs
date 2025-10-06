@@ -93,15 +93,12 @@ namespace Assets.Scripts.Constants
                     game = new Scene()
                     {
                         Name = GameName,
-                        IsStoppingBackgroundMusic = true
+                        IsStoppingBackgroundMusic = true,
                         //AmbienceClips = new List<String>()
                         //{
                         //    "WoodSound"
                         //},
-                        //BackgroundClips = new List<String>()
-                        //{
-                        //    "Background"
-                        //}
+                        BackgroundClips = new List<String>() { }
                     };
                 }
 

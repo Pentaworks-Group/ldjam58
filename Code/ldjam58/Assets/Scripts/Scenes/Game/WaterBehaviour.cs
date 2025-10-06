@@ -8,9 +8,11 @@ namespace Assets.Scripts.Scenes.Game
         {
             if (collision.body != default)
             {
-                if (collision.body.gameObject.TryGetComponent<PenguinBehaviour>(out _))
+                if (collision.body.gameObject.TryGetComponent<PenguinBehaviour>(out var penguinBehaviour))
                 {
                     var gameState = Base.Core.Game.State;
+
+                    GameFrame.Base.Audio.Effects.Play("Plopp");
 
                     gameState.DeathReason = "falling into water and being eaten by an Orca.";
                     gameState.RemainingLives--;
