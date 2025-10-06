@@ -448,9 +448,12 @@ namespace Assets.Scripts.Scenes.Game
 
                 foreach (var tile in sourceTiles)
                 {
-                    if (!cleanedTiles.Any(t => t.Position == tile.Position))
+                    if (tile.Position != default)
                     {
-                        cleanedTiles.Add(new WorldTile() { Position = tile.Position });
+                        if (!cleanedTiles.Any(t => t.Position == tile.Position))
+                        {
+                            cleanedTiles.Add(new WorldTile() { Position = tile.Position });
+                        }
                     }
                 }
             }
