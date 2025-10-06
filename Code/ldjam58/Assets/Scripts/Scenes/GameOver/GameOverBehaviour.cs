@@ -19,6 +19,8 @@ namespace Assets.Scripts.Scenes.GameOver
 
         public void OnRetryClicked()
         {
+            Base.Core.Game.PlayButtonSound();
+
             gameState.Penguin.Position = default;
             gameState.DeathReason = default;
             Assets.Scripts.Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.Game);
@@ -26,6 +28,8 @@ namespace Assets.Scripts.Scenes.GameOver
 
         public void OnToMainMenuButtonClicked()
         {
+            Base.Core.Game.PlayButtonSound();
+
             Base.Core.Game.Stop();
             Assets.Scripts.Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.MainMenu);
         }
