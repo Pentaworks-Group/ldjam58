@@ -387,9 +387,8 @@ namespace Assets.Scripts.Scenes.Game
 
             if (penguinBehaviour != default)
             {
+                gameState.RemainingLives--;
                 Base.Core.Game.ChangeScene(Constants.Scenes.ShootingStars);
-
-                //Fly the penguin back to starting point
             }
         }
     }
