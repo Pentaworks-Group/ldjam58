@@ -6,6 +6,8 @@ using Assets.Scripts.Core.Model;
 
 using GameFrame.Core.Extensions;
 
+using TMPro;
+
 using UnityEngine;
 
 namespace Assets.Scripts.Scenes.Game
@@ -23,10 +25,11 @@ namespace Assets.Scripts.Scenes.Game
         public Transform foodContainerTransform;
         public GameObject rootContainer;
 
+        public TMP_Text currentLevelText;
+
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
         public PhysicsMaterial snowMaterial;
-
 
         public PenguinBehaviour PenguinBehaviour { get; private set; }
 
@@ -46,6 +49,8 @@ namespace Assets.Scripts.Scenes.Game
 
                 gameState.FillFoods();
                 RenderFoods();
+
+                currentLevelText.text = gameState.CurrentLevel.Name;
             }
         }
 
@@ -155,7 +160,7 @@ namespace Assets.Scripts.Scenes.Game
             foodBehaviour.Init(food);
 
             var hasValidPosition = false;
-            
+
             if (gameState.CurrentLevel.IsFoodPositionRandom)
             {
                 for (int i = 0; i < 100; i++)
