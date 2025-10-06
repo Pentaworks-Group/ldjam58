@@ -438,7 +438,7 @@ namespace Assets.Scripts.Scenes.Game
             return cleanChunks;
         }
 
-        private Boolean CleanTiles(List<WorldTile> sourceTiles, out List<WorldTile>? cleanedTiles)
+        private Boolean CleanTiles(List<WorldTile> sourceTiles, out List<WorldTile> cleanedTiles)
         {
             cleanedTiles = default;
 
