@@ -387,7 +387,7 @@ namespace Assets.Scripts.Scenes.Game
 
             if (penguinBehaviour != default)
             {
-                GameFrame.Base.Audio.Effects.Play("ShootingStars");
+                Base.Core.Game.ChangeScene(Constants.Scenes.ShootingStars);
 
                 //Fly the penguin back to starting point
             }
