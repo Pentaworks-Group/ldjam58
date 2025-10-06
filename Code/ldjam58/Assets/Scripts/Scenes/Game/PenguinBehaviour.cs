@@ -110,6 +110,11 @@ namespace Assets.Scripts.Scenes.Game
 
         private void DragHandling()
         {
+            if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > 1)
+            {
+                DiscontinourDragging();
+                return;
+            }
             var pointerPosition = Pointer.current.position.ReadValue();
             var pos = transform.position;
             var x = pointerPosition.x - dragStart.x;
@@ -132,6 +137,7 @@ namespace Assets.Scripts.Scenes.Game
 
         private void StartDrag(InputAction.CallbackContext context)
         {
+            Debug.Log(".activeTouches.Count: " + UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count);
             if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > 1) {
                 DiscontinourDragging();
                 return; 
