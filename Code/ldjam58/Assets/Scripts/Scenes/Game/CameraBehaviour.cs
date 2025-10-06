@@ -10,51 +10,41 @@ namespace Assets.Scripts.Scenes.Game
         private float prevMagnitude = 0;
         private int touchCount = 0;
         private float touchZoomFactor = .5f;
+        private InputAction touch0contact;
+        private InputAction touch1contact;
+        private InputAction touch0pos;
+        private InputAction touch1pos;
 
         private void Start()
         {
             // pinch gesture
-            var touch0contact = new InputAction
+            touch0contact = new InputAction
             (
                 type: InputActionType.Button,
                 binding: "<Touchscreen>/touch0/press"
             );
             touch0contact.Enable();
-            var touch1contact = new InputAction
+            touch1contact = new InputAction
             (
                 type: InputActionType.Button,
                 binding: "<Touchscreen>/touch1/press"
             );
             touch1contact.Enable();
 
-            touch0contact.performed += IncreaseCountTouch;
-            touch1contact.performed += IncreaseCountTouch;
-            touch0contact.canceled += DecreaseCountTouch;
-            touch1contact.canceled += DecreaseCountTouch;
 
-            var touch0pos = new InputAction
+
+            touch0pos = new InputAction
             (
                 type: InputActionType.Value,
                 binding: "<Touchscreen>/touch0/position"
             );
             touch0pos.Enable();
-            var touch1pos = new InputAction
+            touch1pos = new InputAction
             (
                 type: InputActionType.Value,
                 binding: "<Touchscreen>/touch1/position"
             );
             touch1pos.Enable();
-            touch1pos.performed += _ =>
-            {
-                if (touchCount < 2)
-                    return;
-                var magnitude = (touch0pos.ReadValue<Vector2>() - touch1pos.ReadValue<Vector2>()).magnitude;
-                if (prevMagnitude == 0)
-                    prevMagnitude = magnitude;
-                var difference = magnitude - prevMagnitude;
-                prevMagnitude = magnitude;
-                MoveCam(-difference * touchZoomFactor);
-            };
         }
 
         private void IncreaseCountTouch(InputAction.CallbackContext contex)
@@ -66,6 +56,22 @@ namespace Assets.Scripts.Scenes.Game
         {
             touchCount--;
             prevMagnitude = 0;
+        }
+
+        private void PerformTouchZoom(InputAction.CallbackContext contex)
+        {
+            if (touchCount < 2)
+            {
+                return;
+            }
+            var magnitude = (touch0pos.ReadValue<Vector2>() - touch1pos.ReadValue<Vector2>()).magnitude;
+            if (prevMagnitude == 0)
+            {
+                prevMagnitude = magnitude;
+            }
+            var difference = magnitude - prevMagnitude;
+            prevMagnitude = magnitude;
+            MoveCam(-difference * touchZoomFactor);
         }
 
 
@@ -83,6 +89,12 @@ namespace Assets.Scripts.Scenes.Game
         {
             var moveAction = InputSystem.actions.FindAction("Scroll");
             moveAction.performed += HandleScroll;
+
+            touch0contact.performed += IncreaseCountTouch;
+            touch1contact.performed += IncreaseCountTouch;
+            touch0contact.canceled += DecreaseCountTouch;
+            touch1contact.canceled += DecreaseCountTouch;
+            touch1pos.performed += PerformTouchZoom;
         }
 
         public void UnhookActions()
@@ -90,6 +102,12 @@ namespace Assets.Scripts.Scenes.Game
             var moveAction = InputSystem.actions.FindAction("Scroll");
             moveAction.performed -= HandleScroll;
 
+
+            touch0contact.performed -= IncreaseCountTouch;
+            touch1contact.performed -= IncreaseCountTouch;
+            touch0contact.canceled -= DecreaseCountTouch;
+            touch1contact.canceled -= DecreaseCountTouch;
+            touch1pos.performed -= PerformTouchZoom;
         }
 
         private void HandleScroll(InputAction.CallbackContext context)
