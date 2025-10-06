@@ -35,16 +35,14 @@ namespace Assets.Scripts.Prefabs.Menus
             continueButton = transform.Find("ToggleArea/Background/Background/Header/Continue").GetComponent<Button>();
 
             currentOpenMenu = transform.Find("ToggleArea/Background/Background/Header/Openmenu").GetComponent<TMP_Text>();
+
+
         }
 
         void Start()
         {
             menuToggle.SetActive(false);
-            if (PlayerPrefs.GetInt("TutorialShown") == 0)
-            {
-                ToggleMenu();
-                OpenTutorial();
-            }
+            Base.Core.Game.ExecuteAfterInstantation(OnGameInitialised);
         }
 
         private void OnEnable()
@@ -75,6 +73,15 @@ namespace Assets.Scripts.Prefabs.Menus
             HandleEsc();
         }
 
+        private void OnGameInitialised()
+        {
+            if (PlayerPrefs.GetInt("TutorialShown") == 0)
+            {
+                Pause();
+                SetObjectsHideActive(false);
+                OpenTutorial();
+            }
+        }
 
         private void HandleEsc()
         {
@@ -96,13 +103,21 @@ namespace Assets.Scripts.Prefabs.Menus
             menuToggle.SetActive(false);
 
             OpeningSubMenu(CloseTutorial);
-            PlayerPrefs.SetInt("TutorialShown", 1);
         }
 
         public void CloseTutorial()
         {
             Tutorial.SetActive(false);
-            menuToggle.SetActive(true);
+            if (PlayerPrefs.GetInt("TutorialShown") != 0)
+            {
+                menuToggle.SetActive(true);
+            }
+            else
+            {
+                SetObjectsHideActive(true);
+                UnPause();
+            }
+            PlayerPrefs.SetInt("TutorialShown", 1);
             Base.Core.Game.PlayButtonSound();
         }
 
@@ -117,27 +132,39 @@ namespace Assets.Scripts.Prefabs.Menus
                 else
                 {
                     Hide();
-                    Base.Core.Game.UnPause();
-
-                    foreach (GameObject gameObject in ObjectsToHide)
-                    {
-                        gameObject.SetActive(true);
-                    }
+                    SetObjectsHideActive(true);
+                    UnPause();
                 }
             }
             else
             {
-                Base.Core.Game.Pause();
-                Cursor.lockState = CursorLockMode.None;
 
-                foreach (GameObject gameObject in ObjectsToHide)
-                {
-                    gameObject.SetActive(false);
-                }
+                SetObjectsHideActive(false);
 
                 Show();
+                Pause();
 
                 Base.Core.Game.PlayButtonSound();
+            }
+        }
+
+        private void Pause()
+        {
+            Time.timeScale = 0;
+            Base.Core.Game.Pause();
+        }
+
+        private void UnPause()
+        {
+            Time.timeScale = 1;
+            Base.Core.Game.UnPause();
+        }
+
+        private void SetObjectsHideActive(bool setActive)
+        {
+            foreach (GameObject gameObject in ObjectsToHide)
+            {
+                gameObject.SetActive(setActive);
             }
         }
 
@@ -158,18 +185,12 @@ namespace Assets.Scripts.Prefabs.Menus
         public void Hide()
         {
             menuToggle.SetActive(false);
-
-            Time.timeScale = 1;
-
             Base.Core.Game.PlayButtonSound();
         }
 
         public void Show()
         {
-            Time.timeScale = 0;
-
             SetVisible(pauseMenu: true);
-
             menuToggle.SetActive(true);
         }
 

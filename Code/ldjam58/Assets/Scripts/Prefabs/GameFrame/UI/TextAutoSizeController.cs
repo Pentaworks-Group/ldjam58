@@ -22,121 +22,53 @@ namespace Assets.Scripts
         [SerializeField] private bool _executeOnUpdate;
         [SerializeField] private bool _searchChildren = false;
         private int _currentIndex;
+        private float smallestSize;
 
         private void Start()
         {
-            if (_searchChildren)
-            {
-                var tt = transform.GetComponentsInChildren<TMP_Text>(true);
-                _labels = new List<TMP_Text>(tt);
-                
-                foreach (var element in elementsToIgnore)
-                {
-                    _labels.Remove(element);
-                }
-
-                Execute();
-            }
-        }
-
-        public void ForceChildren()
-        {
-            var tt = transform.GetComponentsInChildren<TMP_Text>(true);
-            _labels = new List<TMP_Text>(tt);
-            Execute();
+            GatherTexts();
+            SetAutoResizeTrue();
+            SetSmallestSize();
         }
 
         public void AddLabel(TMP_Text label)
         {
-            if ( label != null)
+            if (label != null)
             {
                 this._labels.Add(label);
             }
         }
 
-        public void Execute()
+        private void GatherTexts()
         {
-            if (_labels.Count == 0)
+            var tt = transform.GetComponentsInChildren<TMP_Text>(true);
+            _labels = new List<TMP_Text>(tt);
+
+            foreach (var element in elementsToIgnore)
             {
-                return;
-            }
-
-            int count = _labels.Count;
-
-            int index = 0;
-            float maxLength = 0;
-
-            for (int i = 0; i < count; i++)
-            {
-                float length = 0;
-
-                switch (_pattern)
-                {
-                    case TextResizePattern.IgnoreRichText:
-                        length = _labels[i].GetParsedText().Length;
-                        break;
-
-                    case TextResizePattern.AllCharacters:
-                        length = _labels[i].text.Length;
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                if (length > maxLength)
-                {
-                    maxLength = length;
-                    index = i;
-                }
-            }
-
-            if (_currentIndex != index)
-            {
-                OnChanged(index);
+                _labels.Remove(element);
             }
         }
 
-        private void OnChanged(int index)
+        private void SetAutoResizeTrue()
         {
-            // Disable auto size on previous
-            _labels[_currentIndex].enableAutoSizing = false;
-
-            _currentIndex = index;
-
-            // Force an update of the candidate text object so we can retrieve its optimum point size.
-            _labels[index].enableAutoSizing = true;
-            _labels[index].ForceMeshUpdate();
-        }
-
-        private void OnUpdateCheck()
-        {
-            // Iterate over all other text objects to set the point size
-            int count = _labels.Count;
-
-            if (count > 0)
+            Debug.Log("Resizing");
+            smallestSize = 999999999;
+            foreach (var element in _labels)
             {
-                float optimumPointSize = _labels[_currentIndex].fontSize;
-
-                for (int i = 0; i < count; i++)
-                {
-                    if (_currentIndex != i)
-                    {
-                        _labels[i].enableAutoSizing = false;
-                        _labels[i].fontSize = optimumPointSize;
-                    }
-                }
+                element.enableAutoSizing = true;
+                element.ForceMeshUpdate();
+                element.enableAutoSizing = false;
+                smallestSize = Mathf.Min(smallestSize, element.fontSize);
             }
         }
 
-        private void Update()
+        private void SetSmallestSize()
         {
-            if (_executeOnUpdate)
+            foreach (var element in _labels)
             {
-                Execute();
+                element.fontSize = smallestSize;
             }
-
-            OnUpdateCheck();
         }
     }
 }
