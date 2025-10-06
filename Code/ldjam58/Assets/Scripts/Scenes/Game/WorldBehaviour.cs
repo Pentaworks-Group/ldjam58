@@ -28,6 +28,7 @@ namespace Assets.Scripts.Scenes.Game
         public TMP_Text currentLevelText;
         public TMP_Text remainingLivesText;
         public TMP_Text currentScoreText;
+        public TMP_Text elapsedTimeText;
 
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
@@ -350,6 +351,15 @@ namespace Assets.Scripts.Scenes.Game
         private void Awake()
         {
             Base.Core.Game.ExecuteAfterInstantation(OnGameInitialized);
+        }
+
+        private void Update()
+        {
+            if (Base.Core.Game.IsRunning)
+            {
+                this.gameState.TimeElapsed += Time.deltaTime;
+                this.elapsedTimeText.text = String.Format("{0:#####0.0}", this.gameState.TimeElapsed);
+            }
         }
 
         private void Start()
