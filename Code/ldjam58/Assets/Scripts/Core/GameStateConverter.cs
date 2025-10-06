@@ -33,7 +33,7 @@ namespace Assets.Scripts.Core
             {
                 if (this.mode.Levels?.Count > 0)
                 {
-                    var firstLevel = this.mode.Levels[2];
+                    var firstLevel = this.mode.Levels[4];
 
                     gameState.CurrentLevel = new LevelConverter().Convert(firstLevel);
 
