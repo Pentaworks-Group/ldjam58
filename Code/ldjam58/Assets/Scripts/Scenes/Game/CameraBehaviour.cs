@@ -71,7 +71,7 @@ namespace Assets.Scripts.Scenes.Game
             }
             var difference = magnitude - prevMagnitude;
             prevMagnitude = magnitude;
-            MoveCam(-difference * touchZoomFactor);
+            MoveCam(difference * touchZoomFactor);
         }
 
 
