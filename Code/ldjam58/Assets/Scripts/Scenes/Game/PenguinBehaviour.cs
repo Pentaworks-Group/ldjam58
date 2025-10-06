@@ -1,14 +1,10 @@
-﻿using System;
-
-using Assets.Scripts.Constants;
+﻿using Assets.Scripts.Constants;
 using Assets.Scripts.Core.Model;
-
 using GameFrame.Core.Extensions;
-
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-
 using UnityVector3 = UnityEngine.Vector3;
 
 namespace Assets.Scripts.Scenes.Game
@@ -30,6 +26,8 @@ namespace Assets.Scripts.Scenes.Game
         private Boolean isMoving;
         private float arrowScaler;
         private float arrowMaxLength = 10f;
+
+        private Boolean isTouching = false;
 
         public void Init(Penguin penguin)
         {
@@ -101,46 +99,97 @@ namespace Assets.Scripts.Scenes.Game
 
         private void HandleMouseControl()
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            bool dragStart = false;
+            bool dragStop = false;
+            Vector2 pos = Vector2.zero;
+            if (Touchscreen.current != null)
             {
-                dragStart = Mouse.current.position.ReadValue();
-                arrow.gameObject.SetActive(true);
-                isDragging = true;
+
+                if (Input.touchCount >= 1)
+                {
+                    Touch touch = Input.GetTouch(0);
+                    pos = touch.position;
+                    Debug.Log("Input.touchCount >= 1: " + pos);
+                    if (Input.touchCount == 1 && touch.phase == UnityEngine.TouchPhase.Began)
+                    {
+                        dragStart = true;
+                        isTouching = true;
+                    }
+                    if (isTouching && touch.phase == UnityEngine.TouchPhase.Ended)
+                    {
+                        dragStop = true;
+                        isTouching = false;
+                        Debug.Log("TouchPhase.Ended");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Input.touchCount < 1: " + Input.touchCount);
+                }
+
+            }
+            if (Mouse.current != null)
+            {
+                pos = Mouse.current.position.ReadValue();
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    dragStart = true;
+                }
+                else if (Mouse.current.leftButton.wasReleasedThisFrame)
+                {
+                    dragStop = true;
+                }
+            }
+            if (dragStart)
+            {
+                StartDrag(pos);
             }
             else
             {
-                if (isDragging)
+                DragHandling(pos, dragStop);
+            }
+        }
+
+        private void DragHandling(Vector2 pointerPosition, bool dragStop)
+        {
+            if (isDragging)
+            {
+                var pos = transform.position;
+                var x = pointerPosition.x - dragStart.x;
+                var y = pointerPosition.y - dragStart.y;
+                if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
                 {
-                    UnityVector3 mousePos = Mouse.current.position.ReadValue();
-                    var pos = transform.position;
-                    var x = mousePos.x - dragStart.x;
-                    var y = mousePos.y - dragStart.y;
-                    if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
+                    var direction = new UnityVector3(x, 0, y);
+                    arrow.rotation = Quaternion.LookRotation(direction);
+
+                    var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
+                    var arrowLegth = appliedStrength * arrowScaler;
+                    arrow.localScale = new UnityVector3(1, 1, arrowLegth);
+
+                    if (dragStop)
                     {
-                        var direction = new UnityVector3(x, 0, y);
-                        arrow.rotation = Quaternion.LookRotation(direction);
 
-                        var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
-                        var arrowLegth = appliedStrength * arrowScaler;
-                        arrow.localScale = new UnityVector3(1, 1, arrowLegth);
+                        direction = direction.normalized * appliedStrength;
+                        penguinRigidbody.AddForce(direction, ForceMode.Impulse);
+                        transform.rotation = Quaternion.LookRotation(direction);
 
-                        if (Mouse.current.leftButton.wasReleasedThisFrame)
-                        {
-                            direction = direction.normalized * appliedStrength;
-                            penguinRigidbody.AddForce(direction, ForceMode.Impulse);
-                            transform.rotation = Quaternion.LookRotation(direction);
-
-                            isDragging = false;
-                            arrow.gameObject.SetActive(false);
-                        }
-                    }
-                    else if (Mouse.current.leftButton.wasReleasedThisFrame)
-                    {
                         isDragging = false;
                         arrow.gameObject.SetActive(false);
                     }
                 }
+                else if (dragStop)
+                {
+                    isDragging = false;
+                    arrow.gameObject.SetActive(false);
+                }
             }
+        }
+
+        private void StartDrag(Vector2 position)
+        {
+            dragStart = position;
+            arrow.gameObject.SetActive(true);
+            isDragging = true;
         }
 
         private void OnEnable()
