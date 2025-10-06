@@ -8,7 +8,7 @@ Try to eat all the fish on the ice - but avoid the water.. there is great evil w
 
 ## Links
 
-[Ludum Dare(https://ldjam.com/events/ludum-dare/58/f-l-o-p)
+[Ludum Dare](https://ldjam.com/events/ludum-dare/58/f-l-o-p)
 [Itch.IO](https://pentaworks.itch.io/flop-ldjam-58)
 
 ## How to play
