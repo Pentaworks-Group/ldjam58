@@ -19,9 +19,9 @@ namespace Assets.Scripts.Prefabs.Menus
         [SerializeField]
         private TMP_Text startedOnText;
         [SerializeField]
-        private TMP_Text balanceText;
+        private TMP_Text scoreText;
         [SerializeField]
-        private TMP_Text depthText;
+        private TMP_Text levelText;
         [SerializeField]
         private TMP_Text timeElapsedText;
 
@@ -78,6 +78,9 @@ namespace Assets.Scripts.Prefabs.Menus
                 this.savedOnText.text = selectedSlot.SavedOn.ToString("G");
                 this.startedOnText.text = selectedSlot.StartedOn.ToString("G");
                 this.timeElapsedText.text = TimeSpan.FromSeconds(selectedSlot.TimeElapsed).ToString("hh\\:mm\\:ss");
+
+                this.scoreText.text = selectedSlot.Score.ToString("G");
+                this.levelText.text = selectedSlot.Level;
 
                 this.detailsContainer.SetActive(true);
             }

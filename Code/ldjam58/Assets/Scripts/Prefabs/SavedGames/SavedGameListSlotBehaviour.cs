@@ -14,8 +14,8 @@ namespace Assets.Scripts.Prefabs.Menus
     {
         private TMP_Text savedOnText;
         private TMP_Text timePlayedText;
-        private TMP_Text depthText;
-        private TMP_Text moneyText;
+        private TMP_Text levelText;
+        private TMP_Text scoreText;
 
         public override void RudeAwake()
         {
@@ -29,14 +29,14 @@ namespace Assets.Scripts.Prefabs.Menus
                 throw new System.Exception("Failed to get Text 'TimePlayedText'!");
             }
 
-            if (!transform.TryFindAndGetComponent("Content/DepthText", out depthText))
+            if (!transform.TryFindAndGetComponent("Content/LevelText", out levelText))
             {
-                throw new System.Exception("Failed to get Text 'DepthText'!");
+                throw new System.Exception("Failed to get Text 'LevelText'!");
             }
 
-            if (!transform.TryFindAndGetComponent("Content/MoneyText", out moneyText))
+            if (!transform.TryFindAndGetComponent("Content/ScoreText", out scoreText))
             {
-                throw new System.Exception("Failed to get Text 'MoneyText'!");
+                throw new System.Exception("Failed to get Text 'ScoreText'!");
             }
         }
 
@@ -44,6 +44,8 @@ namespace Assets.Scripts.Prefabs.Menus
         {
             this.savedOnText.text = this.content.SavedOn.ToString("G");
             this.timePlayedText.text = TimeSpan.FromSeconds(this.content.TimeElapsed).ToString("hh\\:mm\\:ss");
+            this.scoreText.text = this.content.Score.ToString("G");
+            this.levelText.text = this.content.Level;
         }
     }
 }
