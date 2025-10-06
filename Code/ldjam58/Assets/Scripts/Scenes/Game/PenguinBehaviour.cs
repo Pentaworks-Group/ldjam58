@@ -108,7 +108,6 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
-
         private void DragHandling()
         {
             if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > 1)
