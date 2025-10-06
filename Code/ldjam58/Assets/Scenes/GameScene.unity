@@ -179,7 +179,7 @@ MonoBehaviour:
   currentScoreText: {fileID: 1129891180125183756}
   elapsedTimeText: {fileID: 1129891180125183757}
   movementCounterText: {fileID: 507633516}
-  terrainMaterial: {fileID: 2100000, guid: 39778bc3655890f42b160fa74e6e40e9, type: 2}
+  terrainMaterial: {fileID: 2100000, guid: 30bb259236c08e54da38210bec5d9186, type: 2}
   iceMaterial: {fileID: 13400000, guid: 6aaa249ea79818b4890b5bd1bf5b7326, type: 2}
   snowMaterial: {fileID: 13400000, guid: c93ed6060154caa4fab7716732d161c6, type: 2}
 --- !u!65 &129315005
