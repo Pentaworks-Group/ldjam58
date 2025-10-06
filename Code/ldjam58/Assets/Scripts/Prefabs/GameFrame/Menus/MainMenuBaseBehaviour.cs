@@ -43,6 +43,11 @@ namespace Assets.Scripts.Scenes.Menues
             Base.Core.Game.Start();
         }
 
+        public void Test()
+        {
+            Debug.Log("Test");
+        }
+
         public void ShowOptions()
         {
             Base.Core.Game.PlayButtonSound();

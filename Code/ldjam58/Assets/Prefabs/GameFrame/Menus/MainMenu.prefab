@@ -273,8 +273,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 52.2
+  m_fontSizeBase: 52.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -519,11 +519,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSizeBase
-      value: 72
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_enableAutoSizing
@@ -756,11 +756,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSizeBase
-      value: 72
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_enableAutoSizing
@@ -981,7 +981,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 52.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 52.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -1202,7 +1210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSizeBase
@@ -1649,11 +1657,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_fontSizeBase
-      value: 72
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 7608950044036777821, guid: b7f9d449c77d45a40b641cec4a687136, type: 3}
       propertyPath: m_enableAutoSizing

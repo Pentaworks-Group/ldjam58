@@ -1724,6 +1724,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmbeddedPauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 4262049977769093552, guid: 7b2fe0584c8a0174381cac336b43d8a5, type: 3}
+      propertyPath: m_text
+      value: 'Penguin hunrgy, search for food.
+
+
+        Avoid Water!'
+      objectReference: {fileID: 0}
     - target: {fileID: 7418690482044548193, guid: 7b2fe0584c8a0174381cac336b43d8a5, type: 3}
       propertyPath: ObjectsToHide.Array.size
       value: 2
