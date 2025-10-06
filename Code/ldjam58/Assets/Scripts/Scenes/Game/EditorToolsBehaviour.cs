@@ -1,5 +1,7 @@
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
@@ -28,7 +30,7 @@ namespace Assets.Scripts.Scenes.Game
         private EditorToolBehaviour selectedTool;
 
         private EventSystem eventSystem;
-        private bool isOverUI;
+        private Boolean isOverUI;
 
         private GameState gameState;
 
@@ -47,7 +49,6 @@ namespace Assets.Scripts.Scenes.Game
             isOverUI = eventSystem.IsPointerOverGameObject();
         }
 
-
         private void OnEnable()
         {
             HookActions();
@@ -63,7 +64,6 @@ namespace Assets.Scripts.Scenes.Game
             this.gameState = Base.Core.Game.State;
         }
 
-
         public void HookActions()
         {
             var moveAction = InputSystem.actions.FindAction("Click");
@@ -78,7 +78,15 @@ namespace Assets.Scripts.Scenes.Game
 
         public void SaveMap()
         {
-            var json = GameFrame.Core.Json.Handler.Serialize(gameState.CurrentLevel.Chunks, Formatting.Indented, new JsonSerializerSettings());
+            var cleanedChunks = CleanChunks(gameState.CurrentLevel.Chunks);
+
+            var saveContainer = new
+            {
+                Chunks = cleanedChunks
+            };
+
+            var json = GameFrame.Core.Json.Handler.Serialize(saveContainer, Formatting.Indented, new JsonSerializerSettings());
+
             inputField.text = json;
         }
 
@@ -87,12 +95,14 @@ namespace Assets.Scripts.Scenes.Game
             if (selectedTool != null)
             {
                 selectedTool.DeselectButton();
+
                 if (selectedTool == toolToSelect)
                 {
                     selectedTool = null;
                     return;
                 }
             }
+
             selectedTool = toolToSelect;
             toolToSelect.SelectButton();
         }
@@ -118,9 +128,9 @@ namespace Assets.Scripts.Scenes.Game
                 {
                     tile.Position = tile.Position.Add(0, +1, 0);
                 }
+
                 worldBehaviour.ReRenderWorld();
             }
-
         }
 
         public void LowerLevel()
@@ -128,22 +138,13 @@ namespace Assets.Scripts.Scenes.Game
             if (GetTileWithRaycast(out var tile, out var chunk))
             {
                 var desiredHeight = tile.Position.Y - 1;
+
                 if (chunk.DefaultTileHeight.HasValue)
                 {
                     if (chunk.DefaultTileHeight.Value == desiredHeight)
                     {
                         chunk.RemoveTile(tile);
-                    }
-                    else
-                    {
-                        tile.Position = tile.Position.Add(0, -1, 0);
-                    }
-                }
-                else
-                {
-                    if (desiredHeight <= 0)
-                    {
-                        chunk.RemoveTile(tile);
+
                         if (chunk.Tiles.Count == 0)
                         {
                             gameState.CurrentLevel.RemoveChunk(chunk);
@@ -158,6 +159,27 @@ namespace Assets.Scripts.Scenes.Game
                         tile.Position = tile.Position.Add(0, -1, 0);
                     }
                 }
+                else
+                {
+                    if (desiredHeight <= 0)
+                    {
+                        chunk.RemoveTile(tile);
+
+                        if (chunk.Tiles.Count == 0)
+                        {
+                            gameState.CurrentLevel.RemoveChunk(chunk);
+                        }
+                        else
+                        {
+                            chunk.DefaultTileHeight = null;
+                        }
+                    }
+                    else
+                    {
+                        tile.Position = tile.Position.Add(0, -1, 0);
+                    }
+                }
+
                 worldBehaviour.ReRenderWorld();
             }
         }
@@ -174,6 +196,7 @@ namespace Assets.Scripts.Scenes.Game
                 {
                     chunk.DefaultTileHeight = 1;
                 }
+
                 worldBehaviour.ReRenderWorld();
             }
         }
@@ -185,6 +208,7 @@ namespace Assets.Scripts.Scenes.Game
                 if (chunk.DefaultTileHeight.HasValue)
                 {
                     var desiredValue = chunk.DefaultTileHeight - 1;
+
                     if (desiredValue < 1)
                     {
                         if (chunk.Tiles == null || chunk.Tiles.Count == 0)
@@ -202,6 +226,11 @@ namespace Assets.Scripts.Scenes.Game
                         chunk.DefaultTileHeight -= 1;
                     }
                 }
+                else if (chunk.Tiles == default || chunk.Tiles.Count < 1)
+                {
+                    gameState.CurrentLevel.RemoveChunk(chunk);
+                }
+
                 worldBehaviour.ReRenderWorld();
             }
         }
@@ -214,11 +243,14 @@ namespace Assets.Scripts.Scenes.Game
                 if (body.useGravity)
                 {
                     body.linearDamping = 0;
+                    body.angularDamping = 0;
                 }
                 else
                 {
                     body.linearDamping = 1;
+                    body.angularDamping = 1;
                 }
+
                 gravityButton.ToggleButton();
             }
         }
@@ -230,6 +262,7 @@ namespace Assets.Scripts.Scenes.Game
                 GetWorldTileFromPosition(hitPoint, out tile, out chunk);
                 return true;
             }
+
             tile = null;
             chunk = null;
             return false;
@@ -242,6 +275,7 @@ namespace Assets.Scripts.Scenes.Game
                 GetWorldChunkFromPosition(hitPoint, out chunk);
                 return true;
             }
+
             chunk = null;
             return false;
         }
@@ -253,9 +287,25 @@ namespace Assets.Scripts.Scenes.Game
                 hitPoint = Vector3.zero;
                 return false;
             }
+
+            hitPoint = Vector3.zero;
+
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            {
+                position = Pointer.current.position.ReadValue()
+            };
+
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
+            if (results.Count > 0)
+            {
+                return false;
+            }
+
             Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 10000))
+
+            if (Physics.Raycast(ray, out var hit, 10000))
             {
                 //Debug.Log("Did Hit " + hit.collider.gameObject.name + " x: " + hit.point.x + " z: " + hit.point.z);
                 hitPoint = hit.point;
@@ -266,7 +316,6 @@ namespace Assets.Scripts.Scenes.Game
             }
             return true;
         }
-
 
         private void GetWorldChunkFromPosition(Vector3 position, out WorldChunk chunk)
         {
@@ -318,6 +367,61 @@ namespace Assets.Scripts.Scenes.Game
             }
 
             return chunk;
+        }
+
+        private List<WorldChunk> CleanChunks(List<WorldChunk> chunks)
+        {
+            var cleanChunks = new List<WorldChunk>();
+
+            foreach (var sourceChunk in chunks)
+            {
+                var isClean = true;
+
+                if (cleanChunks.Any(c => c.Position == sourceChunk.Position))
+                {
+                    isClean = false;
+                }
+
+                if (!sourceChunk.DefaultTileHeight.HasValue && (sourceChunk.Tiles == null || sourceChunk.Tiles.Count < 1))
+                {
+                    isClean = false;
+                }
+
+                if (isClean)
+                {
+                    if (CleanTiles(sourceChunk.Tiles, out var cleanedTiles))
+                    {
+                        cleanChunks.Add(new WorldChunk()
+                        {
+                            Position = sourceChunk.Position,
+                            DefaultTileHeight = sourceChunk.DefaultTileHeight,
+                            Tiles = cleanedTiles
+                        });
+                    }
+                }
+            }
+
+            return cleanChunks;
+        }
+
+        private Boolean CleanTiles(List<WorldTile> sourceTiles, out List<WorldTile>? cleanedTiles)
+        {
+            cleanedTiles = default;
+
+            if (sourceTiles?.Count > 0)
+            {
+                cleanedTiles = new List<WorldTile>();
+
+                foreach (var tile in sourceTiles)
+                {
+                    if (!cleanedTiles.Any(t => t.Position == tile.Position))
+                    {
+                        cleanedTiles.Add(new WorldTile() { Position = tile.Position });
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

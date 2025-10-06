@@ -54,19 +54,20 @@ namespace Assets.Scripts.Scenes.Game
             moveAction.performed += OnMove;
 
             var clickAction = InputSystem.actions.FindAction("Click");
-            clickAction.performed += OnClick;
+            clickAction.started += StartDrag;
+            clickAction.canceled += StopDrag;
         }
 
         private void UnhookActions()
         {
             var moveAction = InputSystem.actions.FindAction("Move");
             moveAction.performed -= OnMove;
+
+            var clickAction = InputSystem.actions.FindAction("Click");
+            clickAction.started -= StartDrag;
+            clickAction.canceled -= StopDrag;
         }
 
-        private void OnClick(InputAction.CallbackContext context)
-        {
-            //Debug.Log("context: " + context.ReadValue<Vector2>());
-        }
 
         private void Update()
         {
@@ -74,9 +75,10 @@ namespace Assets.Scripts.Scenes.Game
 
             Camera.main.transform.position = UnityVector3.Lerp(currentCameraPosition, new UnityVector3(this.transform.position.x, currentCameraPosition.y, this.transform.position.z), 0.1f);
 
-            if (IsAllowingControlWhileMoving || (!IsAllowingControlWhileMoving && !isMoving))
+
+            if (isDragging)
             {
-                HandleMouseControl();
+                DragHandling();
             }
             PositionAndVelocityWatcher();
         }
@@ -105,99 +107,60 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
-        private void HandleMouseControl()
+
+        private void DragHandling()
         {
-            bool dragStart = false;
-            bool dragStop = false;
-            Vector2 pos = Vector2.zero;
-            if (Touchscreen.current != null)
+            var pointerPosition = Pointer.current.position.ReadValue();
+            var pos = transform.position;
+            var x = pointerPosition.x - dragStart.x;
+            var y = pointerPosition.y - dragStart.y;
+            if (Mathf.Abs(x) > 0.2f && Mathf.Abs(y) > 0.2f)
             {
+                var direction = new UnityVector3(x, 0, y);
+                arrow.rotation = Quaternion.LookRotation(direction);
 
-                if (Input.touchCount >= 1)
-                {
-                    Touch touch = Input.GetTouch(0);
-                    pos = touch.position;
-                    Debug.Log("Input.touchCount >= 1: " + pos);
-                    if (Input.touchCount == 1 && touch.phase == UnityEngine.TouchPhase.Began)
-                    {
-                        dragStart = true;
-                        isTouching = true;
-                    }
-                    if (isTouching && touch.phase == UnityEngine.TouchPhase.Ended)
-                    {
-                        dragStop = true;
-                        isTouching = false;
-                        Debug.Log("TouchPhase.Ended");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Input.touchCount < 1: " + Input.touchCount);
-                }
-
-            }
-            if (Mouse.current != null)
-            {
-                pos = Mouse.current.position.ReadValue();
-                if (Mouse.current.leftButton.wasPressedThisFrame)
-                {
-                    dragStart = true;
-                }
-                else if (Mouse.current.leftButton.wasReleasedThisFrame)
-                {
-                    dragStop = true;
-                }
-            }
-            if (dragStart)
-            {
-                StartDrag(pos);
+                var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
+                var arrowLegth = appliedStrength * arrowScaler;
+                arrow.localScale = new UnityVector3(1, 1, arrowLegth);
+                arrow.gameObject.SetActive(true);
             }
             else
             {
-                DragHandling(pos, dragStop);
+                arrow.gameObject.SetActive(false);
             }
         }
 
-        private void DragHandling(Vector2 pointerPosition, bool dragStop)
+        private void StartDrag(InputAction.CallbackContext context)
+        {
+            if (IsAllowingControlWhileMoving || (!IsAllowingControlWhileMoving && !isMoving))
+            {
+                var position = Pointer.current.position.ReadValue();
+                dragStart = position;
+                isDragging = true;
+            }
+        }
+
+        public void StopDrag(InputAction.CallbackContext context)
         {
             if (isDragging)
             {
+                var pointerPosition = Pointer.current.position.ReadValue();
                 var pos = transform.position;
                 var x = pointerPosition.x - dragStart.x;
                 var y = pointerPosition.y - dragStart.y;
                 if (Mathf.Abs(x) > 0.2f && Mathf.Abs(y) > 0.2f)
                 {
                     var direction = new UnityVector3(x, 0, y);
-                    arrow.rotation = Quaternion.LookRotation(direction);
 
                     var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
-                    var arrowLegth = appliedStrength * arrowScaler;
-                    arrow.localScale = new UnityVector3(1, 1, arrowLegth);
 
-                    if (dragStop)
-                    {
-
-                        direction = direction.normalized * appliedStrength;
-                        penguinRigidbody.AddForce(direction, ForceMode.Impulse);
-                        transform.rotation = Quaternion.LookRotation(direction);
-
-                        isDragging = false;
-                        arrow.gameObject.SetActive(false);
-                    }
-                }
-                else if (dragStop)
-                {
-                    isDragging = false;
-                    arrow.gameObject.SetActive(false);
+                    direction = direction.normalized * appliedStrength;
+                    penguinRigidbody.AddForce(direction, ForceMode.Impulse);
+                    transform.rotation = Quaternion.LookRotation(direction);
                 }
             }
-        }
-
-        private void StartDrag(Vector2 position)
-        {
-            dragStart = position;
-            arrow.gameObject.SetActive(true);
-            isDragging = true;
+            isDragging = false;
+            arrow.gameObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -223,5 +186,9 @@ namespace Assets.Scripts.Scenes.Game
                 }
             }
         }
+
+
+
     }
 }
+
