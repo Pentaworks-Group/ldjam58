@@ -5,11 +5,10 @@ using System.Linq;
 
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
-
 using Newtonsoft.Json;
-
+using System;
+using System.Collections.Generic;
 using TMPro;
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -30,7 +29,6 @@ namespace Assets.Scripts.Scenes.Game
         private EditorToolBehaviour selectedTool;
 
         private EventSystem eventSystem;
-        private bool isOverUI;
 
         private GameState gameState;
 
@@ -243,10 +241,12 @@ namespace Assets.Scripts.Scenes.Game
                 if (body.useGravity)
                 {
                     body.linearDamping = 0;
+                    body.angularDamping = 0;
                 }
                 else
                 {
                     body.linearDamping = 1;
+                    body.angularDamping = 1;
                 }
 
                 gravityButton.ToggleButton();
@@ -280,9 +280,18 @@ namespace Assets.Scripts.Scenes.Game
 
         private Boolean MakeRaycast(out Vector3 hitPoint)
         {
-            if (isOverUI)
+            hitPoint = Vector3.zero;
+
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
-                hitPoint = Vector3.zero;
+                position = Pointer.current.position.ReadValue()
+            };
+
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
+            if (results.Count > 0)
+            {
                 return false;
             }
 
