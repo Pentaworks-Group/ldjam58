@@ -26,6 +26,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
                     {
                         Reference = loadedGameMode.Reference,                       
                         Name = loadedGameMode.Name,
+                        AvailableLives = loadedGameMode.AvailableLives,
                         Description = loadedGameMode.Description,
                         AreLevelsRandom = loadedGameMode.AreLevelsRandom,
                         IsAllowingControlWhileMoving = loadedGameMode.IsAllowingControlWhileMoving,

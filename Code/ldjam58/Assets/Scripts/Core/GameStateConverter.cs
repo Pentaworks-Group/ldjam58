@@ -4,28 +4,30 @@ using System.Collections.Generic;
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Model;
 
-using GameFrame.Core.Math;
-
 namespace Assets.Scripts.Core
 {
     public class GameStateConverter
     {
         private readonly GameMode mode;
-        private IDictionary<String, Food> foodMap;
-        private IDictionary<String, Obstacle> obstacleMap;
 
         public GameStateConverter(GameMode gameMode)
         {
-            this.mode = gameMode;            
+            this.mode = gameMode;
         }
 
         public GameState Convert()
         {
+            if (!mode.AvailableLives.HasValue)
+            {
+                throw new Exception("GameMode.AvailableLives is Required!");
+            }
+
             var gameState = new GameState()
             {
                 CreatedOn = DateTime.Now,
                 CurrentScene = Constants.Scenes.GameName,
                 Mode = mode,
+                RemainingLives = mode.AvailableLives.Value,
                 Penguin = ConvertPenguin(mode.Penguin)
             };
 
@@ -55,19 +57,19 @@ namespace Assets.Scripts.Core
                 {
                     Name = penguinDefinition.Name
                 };
-                
+
                 if (!penguinDefinition.Strength.HasValue)
                 {
                     throw new Exception("Missing PenguinDefinition.Strength!");
                 }
-                
+
                 penguin.Strength = penguinDefinition.Strength.Value;
-                
+
                 if (!penguinDefinition.MaxStrength.HasValue)
                 {
                     throw new Exception("Missing PenguinDefinition.MaxStrength!");
                 }
-                
+
                 penguin.MaxStrength = penguinDefinition.MaxStrength.Value;
 
                 return penguin;

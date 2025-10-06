@@ -33,6 +33,7 @@ namespace Assets.Scripts.Core
         public Double TimeElapsed { get; set; } = 0.0;
         public String DeathReason { get; set; }
         public Int32 FoodEaten { get; set; }
+        public Int32 RemainingLives { get; set; }
 
         public void FillFoods()
         {

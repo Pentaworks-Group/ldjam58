@@ -10,7 +10,11 @@ namespace Assets.Scripts.Scenes.Game
             {
                 if (collision.body.gameObject.TryGetComponent<PenguinBehaviour>(out _))
                 {
-                    Base.Core.Game.State.DeathReason = "Eaten by an orca";
+                    var gameState = Base.Core.Game.State;
+
+                    gameState.DeathReason = "falling into water and being eaten by an Orca.";
+                    gameState.RemainingLives--;
+
                     Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.GameOver);
                 }
             }

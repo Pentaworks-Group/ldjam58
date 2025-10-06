@@ -3,6 +3,7 @@
     "Reference": "Default",
     "Name": "Default",
     "Description": "Default",
+    "AvailableLives": 3,
     "IsAllowingControlWhileMoving": false,
     "Penguin": {
       "Reference": "DefaultPenguin",
