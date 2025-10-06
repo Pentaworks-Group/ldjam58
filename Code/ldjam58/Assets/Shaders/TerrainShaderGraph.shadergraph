@@ -14,6 +14,9 @@
         },
         {
             "m_Id": "26d28e5e84eb4998824a295a5e61d2bc"
+        },
+        {
+            "m_Id": "9ec4c74af5e24ab2afb1ec74dfff2e73"
         }
     ],
     "m_Keywords": [],
@@ -673,6 +676,9 @@
         },
         {
             "m_Id": "26d28e5e84eb4998824a295a5e61d2bc"
+        },
+        {
+            "m_Id": "9ec4c74af5e24ab2afb1ec74dfff2e73"
         }
     ]
 }
@@ -1048,6 +1054,39 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.Metallic"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "9ec4c74af5e24ab2afb1ec74dfff2e73",
+    "m_Guid": {
+        "m_GuidSerialized": "0947fec7-d64a-4642-a0ef-cfca73282235"
+    },
+    "m_Name": "IceTexture",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "IceTexture",
+    "m_DefaultReferenceName": "_IceTexture",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": {
+        "m_SerializedTexture": "",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "useTexelSize": true,
+    "m_Modifiable": true,
+    "m_DefaultType": 0
 }
 
 {

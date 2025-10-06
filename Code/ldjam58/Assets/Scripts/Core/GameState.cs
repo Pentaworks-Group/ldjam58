@@ -34,6 +34,7 @@ namespace Assets.Scripts.Core
         public String DeathReason { get; set; }
         public Int32 Score { get; set; }
         public Int32 RemainingLives { get; set; }
+        public Int32 MovementCounter { get; internal set; }
 
         public void FillFoods()
         {

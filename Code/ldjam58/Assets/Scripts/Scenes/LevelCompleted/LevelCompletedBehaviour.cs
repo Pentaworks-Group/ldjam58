@@ -33,6 +33,8 @@ namespace Assets.Scripts.Scenes.LevelCompleted
 
         public void OnToMainMenuButtonClicked()
         {
+            GameFrame.Base.Audio.Effects.Stop();
+
             Base.Core.Game.Stop();
             Assets.Scripts.Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.MainMenu);
         }

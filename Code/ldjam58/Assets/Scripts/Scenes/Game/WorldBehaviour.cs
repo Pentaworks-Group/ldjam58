@@ -29,6 +29,7 @@ namespace Assets.Scripts.Scenes.Game
         public TMP_Text remainingLivesText;
         public TMP_Text currentScoreText;
         public TMP_Text elapsedTimeText;
+        public TMP_Text movementCounterText;
 
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
@@ -362,6 +363,7 @@ namespace Assets.Scripts.Scenes.Game
             {
                 this.gameState.TimeElapsed += Time.deltaTime;
                 this.elapsedTimeText.text = String.Format("{0:#####0.0}", this.gameState.TimeElapsed);
+                movementCounterText.text = this.gameState.MovementCounter.ToString();
             }
         }
 
