@@ -152,6 +152,24 @@ namespace Assets.Scripts.Constants
             }
         }
 
+        public const String ShootingStarsName = "ShootingStarsScene";
+        private static Scene shootingStars;
+        public static Scene ShootingStars
+        {
+            get
+            {
+                if (shootingStars == default)
+                {
+                    shootingStars = new Scene()
+                    {
+                        Name = ShootingStarsName
+                    };
+                }
+
+                return shootingStars;
+            }
+        }
+
         public static IList<Scene> GetAll()
         {
             return new List<Scene>()
