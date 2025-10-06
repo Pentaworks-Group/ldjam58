@@ -9,6 +9,7 @@ namespace Assets.Scripts.Scenes.Game
     {
         private float prevMagnitude = 0;
         private int touchCount = 0;
+        private float touchZoomFactor = .5f;
 
         private void Start()
         {
@@ -26,18 +27,10 @@ namespace Assets.Scripts.Scenes.Game
             );
             touch1contact.Enable();
 
-            touch0contact.performed += _ => touchCount++;
-            touch1contact.performed += _ => touchCount++;
-            touch0contact.canceled += _ =>
-            {
-                touchCount--;
-                prevMagnitude = 0;
-            };
-            touch1contact.canceled += _ =>
-            {
-                touchCount--;
-                prevMagnitude = 0;
-            };
+            touch0contact.performed += IncreaseCountTouch;
+            touch1contact.performed += IncreaseCountTouch;
+            touch0contact.canceled += DecreaseCountTouch;
+            touch1contact.canceled += DecreaseCountTouch;
 
             var touch0pos = new InputAction
             (
@@ -60,9 +53,22 @@ namespace Assets.Scripts.Scenes.Game
                     prevMagnitude = magnitude;
                 var difference = magnitude - prevMagnitude;
                 prevMagnitude = magnitude;
-                MoveCam(-difference);
+                MoveCam(-difference * touchZoomFactor);
             };
         }
+
+        private void IncreaseCountTouch(InputAction.CallbackContext contex)
+        {
+            touchCount++;
+        }
+
+        private void DecreaseCountTouch(InputAction.CallbackContext contex)
+        {
+            touchCount--;
+            prevMagnitude = 0;
+        }
+
+
         private void OnEnable()
         {
             HookActions();
@@ -95,7 +101,8 @@ namespace Assets.Scripts.Scenes.Game
         private void MoveCam(float z)
         {
             var pos = this.transform.position;
-            this.transform.position = new Vector3(pos.x, pos.y - z, pos.z);
+            var newHight = Mathf.Max(pos.y - z, 10);
+            this.transform.position = new Vector3(pos.x, newHight, pos.z);
         }
     }
 }
