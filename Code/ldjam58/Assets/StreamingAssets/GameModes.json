@@ -1134,9 +1134,9 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 5,
-                  "Y": 3,
-                  "Z": 6
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1158,9 +1158,9 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 12,
-                  "Y": 4,
-                  "Z": 4
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1174,23 +1174,9 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 7,
-                  "Y": 3,
-                  "Z": 2
-                }
-              },
-              {
-                "Position": {
-                  "X": 6,
-                  "Y": 5,
-                  "Z": 9
-                }
-              },
-              {
-                "Position": {
-                  "X": 8,
-                  "Y": 5,
-                  "Z": 8
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1206,14 +1192,6 @@
           {
             "Position": {
               "X": 9,
-              "Y": 4
-            },
-            "DefaultTileHeight": 1,
-            "Tiles": null
-          },
-          {
-            "Position": {
-              "X": 8,
               "Y": 4
             },
             "DefaultTileHeight": 1,
@@ -1245,14 +1223,6 @@
           },
           {
             "Position": {
-              "X": 9,
-              "Y": 6
-            },
-            "DefaultTileHeight": 1,
-            "Tiles": null
-          },
-          {
-            "Position": {
               "X": 5,
               "Y": 6
             },
@@ -1271,14 +1241,6 @@
             "Position": {
               "X": 6,
               "Y": 7
-            },
-            "DefaultTileHeight": 1,
-            "Tiles": null
-          },
-          {
-            "Position": {
-              "X": 5,
-              "Y": 8
             },
             "DefaultTileHeight": 1,
             "Tiles": null
@@ -1314,6 +1276,54 @@
             },
             "DefaultTileHeight": 1,
             "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 8,
+              "Y": 5
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 10,
+              "Y": 6
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 9,
+              "Y": 7
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 4,
+              "Y": 7
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 3,
+              "Y": 8
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 4,
+              "Y": 9
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
           }
         ]
       },
@@ -1344,6 +1354,26 @@
               "X": 8,
               "Y": 8
             }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 14,
+              "Y": 6
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 4,
+              "Y": 9
+            }
           }
         ],
         "ObstacleRandomOrder": false,
@@ -1359,9 +1389,9 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 5,
-                  "Y": 3,
-                  "Z": 6
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1383,9 +1413,9 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 12,
-                  "Y": 4,
-                  "Z": 4
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1399,23 +1429,9 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 7,
-                  "Y": 3,
-                  "Z": 2
-                }
-              },
-              {
-                "Position": {
-                  "X": 6,
-                  "Y": 5,
-                  "Z": 9
-                }
-              },
-              {
-                "Position": {
-                  "X": 8,
-                  "Y": 5,
-                  "Z": 8
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1699,6 +1715,14 @@
             },
             "DefaultTileHeight": 1,
             "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 13,
+              "Y": 8
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
           }
         ]
       },
@@ -1729,6 +1753,36 @@
               "X": 8,
               "Y": 8
             }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 1,
+              "Y": 8
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 12,
+              "Y": 7
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 6,
+              "Y": 3
+            }
           }
         ],
         "ObstacleRandomOrder": false,
@@ -1744,9 +1798,30 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 5,
-                  "Y": 3,
-                  "Z": 6
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "Position": {
+                  "X": 8,
+                  "Y": 2,
+                  "Z": 11
+                }
+              },
+              {
+                "Position": {
+                  "X": 8,
+                  "Y": 8,
+                  "Z": 12
+                }
+              },
+              {
+                "Position": {
+                  "X": 7,
+                  "Y": 5,
+                  "Z": 12
                 }
               }
             ]
@@ -1768,9 +1843,9 @@
             "Tiles": [
               {
                 "Position": {
-                  "X": 12,
-                  "Y": 4,
-                  "Z": 4
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1780,27 +1855,13 @@
               "X": 12,
               "Y": 7
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": [
               {
                 "Position": {
-                  "X": 7,
-                  "Y": 3,
-                  "Z": 2
-                }
-              },
-              {
-                "Position": {
-                  "X": 6,
-                  "Y": 5,
-                  "Z": 9
-                }
-              },
-              {
-                "Position": {
-                  "X": 8,
-                  "Y": 5,
-                  "Z": 8
+                  "X": 0,
+                  "Y": 0,
+                  "Z": 0
                 }
               }
             ]
@@ -1811,19 +1872,33 @@
               "Y": 5
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 9,
+                  "Y": 4,
+                  "Z": 8
+                }
+              },
+              {
+                "Position": {
+                  "X": 8,
+                  "Y": 7,
+                  "Z": 8
+                }
+              },
+              {
+                "Position": {
+                  "X": 8,
+                  "Y": 2,
+                  "Z": 9
+                }
+              }
+            ]
           },
           {
             "Position": {
               "X": 6,
-              "Y": 5
-            },
-            "DefaultTileHeight": 1,
-            "Tiles": null
-          },
-          {
-            "Position": {
-              "X": 8,
               "Y": 5
             },
             "DefaultTileHeight": 1,
@@ -1858,7 +1933,7 @@
               "X": 4,
               "Y": 6
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -1875,14 +1950,22 @@
               "Y": 8
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 7,
+                  "Y": 8,
+                  "Z": 7
+                }
+              }
+            ]
           },
           {
             "Position": {
               "X": 6,
               "Y": 8
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -1915,7 +1998,22 @@
               "Y": 7
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 8,
+                  "Y": 5,
+                  "Z": 8
+                }
+              },
+              {
+                "Position": {
+                  "X": 9,
+                  "Y": 14,
+                  "Z": 8
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -1923,7 +2021,36 @@
               "Y": 7
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 8,
+                  "Y": 3,
+                  "Z": 8
+                }
+              },
+              {
+                "Position": {
+                  "X": 9,
+                  "Y": 5,
+                  "Z": 8
+                }
+              },
+              {
+                "Position": {
+                  "X": 10,
+                  "Y": 7,
+                  "Z": 8
+                }
+              },
+              {
+                "Position": {
+                  "X": 11,
+                  "Y": 4,
+                  "Z": 8
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -1939,7 +2066,22 @@
               "Y": 7
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 11,
+                  "Y": 5,
+                  "Z": 9
+                }
+              },
+              {
+                "Position": {
+                  "X": 12,
+                  "Y": 9,
+                  "Z": 9
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -1962,7 +2104,7 @@
               "X": 1,
               "Y": 8
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -2002,7 +2144,7 @@
               "X": 6,
               "Y": 3
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -2011,7 +2153,22 @@
               "Y": 3
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 7,
+                  "Y": 9,
+                  "Z": 8
+                }
+              },
+              {
+                "Position": {
+                  "X": 7,
+                  "Y": 7,
+                  "Z": 9
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -2044,6 +2201,14 @@
             },
             "DefaultTileHeight": 1,
             "Tiles": null
+          },
+          {
+            "Position": {
+              "X": 8,
+              "Y": 5
+            },
+            "DefaultTileHeight": 1,
+            "Tiles": null
           }
         ]
       },
@@ -2073,6 +2238,36 @@
             "Position": {
               "X": 8,
               "Y": 8
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 6,
+              "Y": 14
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 15,
+              "Y": 6
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 4,
+              "Y": 4
             }
           }
         ],
