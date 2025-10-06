@@ -45,20 +45,20 @@ namespace Assets.Scripts.Scenes.Game
             GameFrame.Base.Audio.Effects.VolumeChanged.AddListener(OnEffectsVolumeChanged);
         }
 
-        private void OnMove(InputAction.CallbackContext context)
-        {
-            var moveVector = context.ReadValue<Vector2>();
+        //private void OnMove(InputAction.CallbackContext context)
+        //{
+        //    var moveVector = context.ReadValue<Vector2>();
 
-            var translation = 5f * new UnityVector3(moveVector.x, 0, moveVector.y);
+        //    var translation = 5f * new UnityVector3(moveVector.x, 0, moveVector.y);
 
-            penguinRigidbody.AddForce(translation, ForceMode.Impulse);
-            Debug.Log($"Adding force '{translation}'");
-        }
+        //    penguinRigidbody.AddForce(translation, ForceMode.Impulse);
+        //    Debug.Log($"Adding force '{translation}'");
+        //}
 
         private void HookActions()
         {
-            var moveAction = InputSystem.actions.FindAction("Move");
-            moveAction.performed += OnMove;
+            //var moveAction = InputSystem.actions.FindAction("Move");
+            //moveAction.performed += OnMove;
 
             var clickAction = InputSystem.actions.FindAction("Click");
             clickAction.started += StartDrag;
@@ -67,8 +67,8 @@ namespace Assets.Scripts.Scenes.Game
 
         private void UnhookActions()
         {
-            var moveAction = InputSystem.actions.FindAction("Move");
-            moveAction.performed -= OnMove;
+            //var moveAction = InputSystem.actions.FindAction("Move");
+            //moveAction.performed -= OnMove;
 
             var clickAction = InputSystem.actions.FindAction("Click");
             clickAction.started -= StartDrag;
