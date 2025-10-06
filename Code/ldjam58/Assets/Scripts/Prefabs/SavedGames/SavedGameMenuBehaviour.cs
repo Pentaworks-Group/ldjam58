@@ -58,10 +58,9 @@ namespace Assets.Scripts.Prefabs.Menus
             if (currentSlot != null)
             {
                 Base.Core.Game.Stop();
-                Base.Core.Game.LoadSavedGame(currentSlot.Key);
-                listContainer.UpdateList();
-
                 Base.Core.Game.PlayButtonSound();
+                Base.Core.Game.LoadSavedGame(currentSlot.Key);
+                Base.Core.Game.ForceSceneChange(Constants.Scenes.Game);
             }
         }
 
