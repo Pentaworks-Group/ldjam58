@@ -91,10 +91,13 @@ namespace Assets.Scripts.Core
 
                 foreach (var tileDefinition in chunkDefinition.Tiles)
                 {
-                    chunk.Tiles.Add(new WorldTile()
+                    if (tileDefinition.Position.HasValue && tileDefinition.Position.Value != default)
                     {
-                        Position = tileDefinition
-                    });
+                        chunk.Tiles.Add(new WorldTile()
+                        {
+                            Position = tileDefinition.Position.Value
+                        });
+                    }
                 }
             }
 

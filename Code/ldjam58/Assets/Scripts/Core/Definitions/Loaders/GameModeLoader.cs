@@ -1,4 +1,6 @@
-﻿using GameFrame.Core.Definitions.Loaders;
+﻿using Assets.Scripts.Core.Model;
+
+using GameFrame.Core.Definitions.Loaders;
 using System.Collections.Generic;
 
 namespace Assets.Scripts.Core.Definitons.Loaders
@@ -17,6 +19,7 @@ namespace Assets.Scripts.Core.Definitons.Loaders
         protected override void OnDefinitionsLoaded(List<GameMode> definitions)
         {
             _ = new GameMode() { IsReferenced = true };
+            _ = new WorldTile() { Position = default };
 
             if (definitions?.Count > 0)
             {
