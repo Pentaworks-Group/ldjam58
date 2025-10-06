@@ -1,10 +1,14 @@
-﻿using Assets.Scripts.Constants;
+﻿using System;
+
+using Assets.Scripts.Constants;
 using Assets.Scripts.Core.Model;
+
 using GameFrame.Core.Extensions;
-using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+
 using UnityVector3 = UnityEngine.Vector3;
 
 namespace Assets.Scripts.Scenes.Game
@@ -22,7 +26,7 @@ namespace Assets.Scripts.Scenes.Game
         [SerializeField]
         private Transform arrow;
 
-        private Boolean IsAllowingControlWhileMoving;
+        private Boolean isAllowingControlWhileMoving;
         private Boolean isMoving;
         private float maxDragDistance = 250f;
         private float maxArrowLength = 10;
@@ -32,7 +36,7 @@ namespace Assets.Scripts.Scenes.Game
             this.penguin = penguin;
             this.penguinRigidbody = GetComponent<Rigidbody>();
             this.penguinAnimator = transform.Find("Animator").GetComponent<Animator>();
-            IsAllowingControlWhileMoving = Base.Core.Game.State.Mode.IsAllowingControlWhileMoving;
+            isAllowingControlWhileMoving = Base.Core.Game.State.Mode.IsAllowingControlWhileMoving;
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -65,18 +69,17 @@ namespace Assets.Scripts.Scenes.Game
             clickAction.canceled -= StopDrag;
         }
 
-
         private void Update()
         {
             var currentCameraPosition = Camera.main.transform.position;
 
             Camera.main.transform.position = UnityVector3.Lerp(currentCameraPosition, new UnityVector3(this.transform.position.x, currentCameraPosition.y, this.transform.position.z), 0.1f);
 
-
             if (isDragging)
             {
                 DragHandling();
             }
+
             PositionAndVelocityWatcher();
         }
 
@@ -132,11 +135,13 @@ namespace Assets.Scripts.Scenes.Game
 
         private void StartDrag(InputAction.CallbackContext context)
         {
-            if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > 1) {
+            if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > 1)
+            {
                 DiscontinourDragging();
-                return; 
+                return;
             }
-            if (IsAllowingControlWhileMoving || (!IsAllowingControlWhileMoving && !isMoving))
+
+            if (isAllowingControlWhileMoving || (!isAllowingControlWhileMoving && !isMoving))
             {
                 var position = Pointer.current.position.ReadValue();
                 dragStart = position;
@@ -144,12 +149,12 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
-        private float GetPercentage(UnityVector3 direction) {
+        private float GetPercentage(UnityVector3 direction)
+        {
             var percentage = direction.magnitude / maxDragDistance;
             percentage = Mathf.Min(percentage, 1);
             return percentage;
         }
-
 
         public void StopDrag(InputAction.CallbackContext context)
         {
@@ -164,11 +169,12 @@ namespace Assets.Scripts.Scenes.Game
                     var direction = new UnityVector3(x, 0, y);
 
                     var appliedStrength = GetPercentage(direction) * penguin.MaxStrength;
-                    direction = appliedStrength * direction.normalized ;
+                    direction = appliedStrength * direction.normalized;
                     penguinRigidbody.AddForce(direction, ForceMode.Impulse);
                     transform.rotation = Quaternion.LookRotation(direction);
                 }
             }
+
             DiscontinourDragging();
         }
 
@@ -201,9 +207,6 @@ namespace Assets.Scripts.Scenes.Game
                 }
             }
         }
-
-
-
     }
 }
 

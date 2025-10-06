@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
@@ -366,7 +365,6 @@ namespace Assets.Scripts.Scenes.Game
                 GameFrame.Base.Audio.Effects.Play("ShootingStars");
 
                 //Fly the penguin back to starting point
-                
             }
         }
     }
