@@ -28,6 +28,8 @@ namespace Assets.Scripts.Scenes.Game
 
         private Boolean IsAllowingControlWhileMoving;
         private Boolean isMoving;
+        private float arrowScaler;
+        private float arrowMaxLength = 10f;
 
         public void Init(Penguin penguin)
         {
@@ -35,6 +37,7 @@ namespace Assets.Scripts.Scenes.Game
             this.penguinRigidbody = GetComponent<Rigidbody>();
             this.penguinAnimator = transform.Find("Animator").GetComponent<Animator>();
             IsAllowingControlWhileMoving = Base.Core.Game.State.Mode.IsAllowingControlWhileMoving;
+            arrowScaler = arrowMaxLength / penguin.MaxStrength;
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -116,30 +119,26 @@ namespace Assets.Scripts.Scenes.Game
                     {
                         var direction = new UnityVector3(x, 0, y);
                         arrow.rotation = Quaternion.LookRotation(direction);
-                        var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, 5);
-                        arrow.localScale = new UnityVector3(1, 1, appliedStrength);
-                    }
-                }
 
-                if (isDragging && Mouse.current.leftButton.wasReleasedThisFrame)
-                {
-                    UnityVector3 mousePos = Mouse.current.position.ReadValue();
-
-                    var x = (mousePos.x - dragStart.x);
-                    var y = (mousePos.y - dragStart.y);
-
-                    if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
-                    {
-                        var direction = new UnityVector3(x, 0, y);
                         var appliedStrength = Mathf.Min(direction.magnitude * penguin.Strength, penguin.MaxStrength);
-                        direction = direction.normalized * appliedStrength;
-                        penguinRigidbody.AddForce(direction, ForceMode.Impulse);
-                        transform.rotation = Quaternion.LookRotation(direction);
+                        var arrowLegth = appliedStrength * arrowScaler;
+                        arrow.localScale = new UnityVector3(1, 1, arrowLegth);
 
-                        isDragging = false;
+                        if (Mouse.current.leftButton.wasReleasedThisFrame)
+                        {
+                            direction = direction.normalized * appliedStrength;
+                            penguinRigidbody.AddForce(direction, ForceMode.Impulse);
+                            transform.rotation = Quaternion.LookRotation(direction);
+
+                            isDragging = false;
+                            arrow.gameObject.SetActive(false);
+                        }
                     }
-
-                    arrow.gameObject.SetActive(false);
+                    else if (Mouse.current.leftButton.wasReleasedThisFrame)
+                    {
+                        isDragging = false;
+                        arrow.gameObject.SetActive(false);
+                    }
                 }
             }
         }
