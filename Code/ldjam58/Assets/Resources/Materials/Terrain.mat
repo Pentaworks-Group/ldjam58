@@ -52,6 +52,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _IceTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -105,7 +109,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _IceHeight: 1
-    - _IceThreshold: 4
+    - _IceThreshold: 2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -125,8 +129,8 @@ Material:
     - _BaseColor: {r: 0.6679245, g: 0.16509077, b: 0.16509077, a: 1}
     - _Color: {r: 0.66792446, g: 0.16509074, b: 0.16509074, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Ice: {r: 0.7058824, g: 0.8117647, b: 0.98039216, a: 1}
-    - _Snow: {r: 1, g: 0.98039216, b: 0.98039216, a: 1}
+    - _Ice: {r: 0.7058824, g: 0.98039216, b: 0.7059664, a: 1}
+    - _Snow: {r: 0.90188676, g: 0, b: 0.09965922, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
