@@ -1,41 +1,23 @@
-![Title](https://github.com/Pentaworks-Group/ldjam58/blob/main/Data/Pentaworks.png?raw=true)
+![Titel](https://github.com/Pentaworks-Group/ldjam58/blob/main/Data/Titel.png?raw=true)
 
-# LDJam Template
-link LDJAM
-link Itch
 
-Description
+
+Play as the lovely little Floppy - our food-loving penguin that is obsessed with eating fish.
+
+Try to eat all the fish on the ice - but avoid the water.. there is great evil within.
 
 ## How to play
+Click and drag, release, enjoy.
+
+See in-game tutorial for more details :wink:.
 
 
-
-### Controls
-
-
-
-### What to do
-
-* 
-
-### Conditions
-
-
-## Key features
-
-* 
-
-## Screenshots
-
-
-
-## Known issues
-
-* 
+### Known issues
+* Saved Games dont load properly for now - please avoid :smile: 
 
 ## Changelog
 
 
 |     Date   | Version | Description
 |------------|---------|------------
-
+|07.10.2025|LDJam|Original Jam release
