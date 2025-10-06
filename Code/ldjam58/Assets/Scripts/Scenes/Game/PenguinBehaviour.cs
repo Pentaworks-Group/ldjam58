@@ -52,12 +52,20 @@ namespace Assets.Scripts.Scenes.Game
         {
             var moveAction = InputSystem.actions.FindAction("Move");
             moveAction.performed += OnMove;
+
+            var clickAction = InputSystem.actions.FindAction("Click");
+            clickAction.performed += OnClick;
         }
 
         private void UnhookActions()
         {
             var moveAction = InputSystem.actions.FindAction("Move");
             moveAction.performed -= OnMove;
+        }
+
+        private void OnClick(InputAction.CallbackContext context)
+        {
+            //Debug.Log("context: " + context.ReadValue<Vector2>());
         }
 
         private void Update()
@@ -157,7 +165,7 @@ namespace Assets.Scripts.Scenes.Game
                 var pos = transform.position;
                 var x = pointerPosition.x - dragStart.x;
                 var y = pointerPosition.y - dragStart.y;
-                if (Mathf.Abs(x) > 0.1f && Mathf.Abs(y) > 0.1f)
+                if (Mathf.Abs(x) > 0.2f && Mathf.Abs(y) > 0.2f)
                 {
                     var direction = new UnityVector3(x, 0, y);
                     arrow.rotation = Quaternion.LookRotation(direction);

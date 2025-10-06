@@ -249,7 +249,7 @@ namespace Assets.Scripts.Scenes.Game
                 hitPoint = Vector3.zero;
                 return false;
             }
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 10000))
             {
