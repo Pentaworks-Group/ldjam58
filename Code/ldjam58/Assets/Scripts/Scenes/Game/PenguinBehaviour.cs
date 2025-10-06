@@ -1,9 +1,14 @@
-﻿using Assets.Scripts.Core.Model;
+﻿using System;
+
+using Assets.Scripts.Constants;
+using Assets.Scripts.Core.Model;
+
 using GameFrame.Core.Extensions;
-using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+
 using UnityVector3 = UnityEngine.Vector3;
 
 namespace Assets.Scripts.Scenes.Game
@@ -73,9 +78,11 @@ namespace Assets.Scripts.Scenes.Game
             penguin.Velocity = penguinRigidbody.linearVelocity.ToFrame();
             if (penguin.Velocity.LengthSquared > 0.01f)
             {
-                if (!isMoving) {
+                if (!isMoving)
+                {
                     penguinAnimator.SetTrigger("StartSlide");
                 }
+
                 isMoving = true;
             }
             else
@@ -84,6 +91,7 @@ namespace Assets.Scripts.Scenes.Game
                 {
                     penguinAnimator.SetTrigger("StartWalk");
                 }
+
                 isMoving = false;
             }
         }
@@ -148,9 +156,15 @@ namespace Assets.Scripts.Scenes.Game
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.transform.parent.TryGetComponent<FoodBehaviour>(out var foodBehaviour))
+            // Maybe another detection is required when different Model is used.
+            if (other.gameObject.tag == Tags.Food)
             {
-                Eaten.Invoke(foodBehaviour);
+                var foodBehaviour = other.gameObject.GetComponentInParent<FoodBehaviour>(false);
+
+                if (foodBehaviour != default)
+                {
+                    Eaten.Invoke(foodBehaviour);
+                }
             }
         }
     }

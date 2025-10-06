@@ -7,7 +7,6 @@ namespace Assets.Scripts.Scenes.Game
 {
     public class FoodBehaviour : MonoBehaviour
     {
-
         public Food Food { get; protected set; }
 
         public void Init( Food food)
@@ -17,17 +16,12 @@ namespace Assets.Scripts.Scenes.Game
 
         private void OnTriggerEnter(Collider other)
         {
-            
+            Debug.Log($"Trigger Collided with {other.gameObject.name}");
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.body != default)
-            {
-                if (collision.body.gameObject.TryGetComponent<PenguinBehaviour>(out _))
-                {
-                }
-            }
+            Debug.Log($"Collision with {collision.gameObject.name}");
         }
     }
 }
