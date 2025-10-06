@@ -65,6 +65,7 @@ namespace Assets.Scripts.Core
                 ID = Guid.NewGuid(),
                 Definition = foodDef.Definition,
                 Position = new Vector3(foodDef.Position.X, 0, foodDef.Position.Y),
+                Score = foodDef.Definition.Score.GetValueOrDefault(1)
             };
         }
 

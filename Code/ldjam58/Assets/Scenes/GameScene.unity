@@ -176,6 +176,7 @@ MonoBehaviour:
   penguinContainerTransform: {fileID: 800698977}
   currentLevelText: {fileID: 1237031708}
   remainingLivesText: {fileID: 1024048904}
+  currentScoreText: {fileID: 1129891180125183756}
   terrainMaterial: {fileID: 2100000, guid: 30bb259236c08e54da38210bec5d9186, type: 2}
   iceMaterial: {fileID: 13400000, guid: 6aaa249ea79818b4890b5bd1bf5b7326, type: 2}
   snowMaterial: {fileID: 13400000, guid: c93ed6060154caa4fab7716732d161c6, type: 2}
@@ -992,6 +993,22 @@ PrefabInstance:
       propertyPath: worldBehaviour
       value: 
       objectReference: {fileID: 129315004}
+    - target: {fileID: 2673023030852085319, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673023030852085319, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673023030852085319, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2673023030852085319, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2821800464814113342, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
       propertyPath: m_Name
       value: StaticUI
@@ -1012,6 +1029,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5524557825834039004, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5751905917633638958, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -1028,10 +1049,26 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6423633243446044268, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7481418324447405043, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1932203713}
+    - target: {fileID: 8655612488430411255, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655612488430411255, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655612488430411255, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8655612488430411255, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -1041,6 +1078,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+--- !u!114 &1129891180125183756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5672995854995610859, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+  m_PrefabInstance: {fileID: 1129891180125183755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &4606166320449646466
 PrefabInstance:
   m_ObjectHideFlags: 0

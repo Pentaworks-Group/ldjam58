@@ -27,6 +27,7 @@ namespace Assets.Scripts.Scenes.Game
 
         public TMP_Text currentLevelText;
         public TMP_Text remainingLivesText;
+        public TMP_Text currentScoreText;
 
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
@@ -88,6 +89,8 @@ namespace Assets.Scripts.Scenes.Game
 
                 currentLevelText.text = gameState.CurrentLevel.Name;
                 remainingLivesText.text = gameState.RemainingLives.ToString();
+
+                UpdateCurrentScore();
 
                 if (TryGetComponent<BoxCollider>(out var woldCollider))
                 {
@@ -233,12 +236,14 @@ namespace Assets.Scripts.Scenes.Game
 
         private void OnFoodEaten(FoodBehaviour foodBehaviour)
         {
-            gameState.FoodEaten++;
+            gameState.Score += foodBehaviour.Food.Score;
             gameState.CurrentLevel.Foods.Remove(foodBehaviour.Food);
 
             renderedFoods.Remove(foodBehaviour.Food.ID);
 
             Destroy(foodBehaviour.gameObject);
+
+            UpdateCurrentScore();
 
             gameState.FillFoods();
 
@@ -250,6 +255,11 @@ namespace Assets.Scripts.Scenes.Game
             {
                 RenderFoods();
             }
+        }
+
+        private void UpdateCurrentScore()
+        {
+            currentScoreText.text = gameState.Score.ToString();
         }
 
         private Boolean TryGetRandomPositionOnChunk(out GameFrame.Core.Math.Vector3 position)

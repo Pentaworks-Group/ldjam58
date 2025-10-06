@@ -7,6 +7,6 @@ namespace Assets.Scripts.Core.Definitons
     public class FoodDefinition : BaseDefinition
     {
         public String Name { get; set; }
-        public String Sprite { get; set; }
+        public Int32? Score { get; set; }
     }
 }

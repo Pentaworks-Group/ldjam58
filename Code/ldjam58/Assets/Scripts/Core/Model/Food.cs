@@ -11,5 +11,6 @@ namespace Assets.Scripts.Core.Model
         public Guid ID { get; set; }
         public FoodDefinition Definition { get; set; }
         public Vector3 Position { get; set; }
+        public Int32 Score { get; set; }
     }
 }
