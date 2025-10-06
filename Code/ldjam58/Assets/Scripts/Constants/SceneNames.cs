@@ -12,8 +12,9 @@ namespace Assets.Scripts.Constants
         public const String Game = Scenes.GameName;
         public const String LevelCompleted = Scenes.LevelCompletedName;
         public const String GameOver = Scenes.GameOverName;
+        public const String ShootingStars = Scenes.ShootingStarsName;
 
-        public static List<String> GameSceneNames = new() { Scenes.MainMenuName, Scenes.OptionsName, Scenes.SavedGamesName, Scenes.CreditsName, Scenes.GameName, LevelCompleted, Scenes.GameOverName };
+        public static List<String> GameSceneNames = new() { Scenes.MainMenuName, Scenes.OptionsName, Scenes.SavedGamesName, Scenes.CreditsName, Scenes.GameName, LevelCompleted, Scenes.GameOverName, Scenes.ShootingStarsName };
         public static List<String> DevelopmentSceneNames = new() { };
     }
 }

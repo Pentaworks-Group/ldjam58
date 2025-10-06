@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
@@ -26,6 +27,7 @@ namespace Assets.Scripts.Scenes.Game
         public Transform penguinContainerTransform;
 
         public TMP_Text currentLevelText;
+        public TMP_Text remainingLivesText;
 
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
@@ -86,6 +88,19 @@ namespace Assets.Scripts.Scenes.Game
                 RenderFoods();
 
                 currentLevelText.text = gameState.CurrentLevel.Name;
+                remainingLivesText.text = gameState.RemainingLives.ToString();
+
+                if (TryGetComponent<BoxCollider>(out var woldCollider))
+                {
+                    var sizeX = gameState.CurrentLevel.Size.X * gameState.CurrentLevel.Resolution * 1.05f;
+                    var sizeY = 20;
+                    var sizeZ = gameState.CurrentLevel.Size.Y * gameState.CurrentLevel.Resolution * 1.05f;
+
+                    var sizeVector = new UnityEngine.Vector3(sizeX, sizeY, sizeZ);
+
+                    woldCollider.size = sizeVector;
+                    woldCollider.center = sizeVector / 2;
+                }
             }
         }
 
@@ -340,6 +355,19 @@ namespace Assets.Scripts.Scenes.Game
         private void OnDisable()
         {
             //UnhookActions();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            var penguinBehaviour = other.gameObject.GetComponentInParent<PenguinBehaviour>();
+
+            if (penguinBehaviour != default)
+            {
+                GameFrame.Base.Audio.Effects.Play("ShootingStars");
+
+                //Fly the penguin back to starting point
+                
+            }
         }
     }
 }
