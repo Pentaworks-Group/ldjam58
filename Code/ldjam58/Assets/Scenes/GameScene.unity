@@ -178,7 +178,7 @@ MonoBehaviour:
   remainingLivesText: {fileID: 1024048904}
   currentScoreText: {fileID: 1129891180125183756}
   elapsedTimeText: {fileID: 1129891180125183757}
-  terrainMaterial: {fileID: 2100000, guid: 30bb259236c08e54da38210bec5d9186, type: 2}
+  terrainMaterial: {fileID: 2100000, guid: 39778bc3655890f42b160fa74e6e40e9, type: 2}
   iceMaterial: {fileID: 13400000, guid: 6aaa249ea79818b4890b5bd1bf5b7326, type: 2}
   snowMaterial: {fileID: 13400000, guid: c93ed6060154caa4fab7716732d161c6, type: 2}
 --- !u!65 &129315005
@@ -980,6 +980,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 173298161874007938, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483550816167998990, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483550816167998990, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 483550816167998990, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2253961317514167792, guid: 304adf6107ec49b4ca28245350ea7324, type: 3}

@@ -87,6 +87,7 @@ namespace Assets.Scripts.Scenes.Game
         {
             penguin.Position = transform.position.ToFrame();
             penguin.Velocity = penguinRigidbody.linearVelocity.ToFrame();
+
             if (penguin.Velocity.LengthSquared > 0.01f)
             {
                 if (!isMoving)
@@ -115,6 +116,7 @@ namespace Assets.Scripts.Scenes.Game
                 DiscontinourDragging();
                 return;
             }
+
             var pointerPosition = Pointer.current.position.ReadValue();
             var pos = transform.position;
             var x = pointerPosition.x - dragStart.x;
@@ -164,6 +166,7 @@ namespace Assets.Scripts.Scenes.Game
                 var pos = transform.position;
                 var x = pointerPosition.x - dragStart.x;
                 var y = pointerPosition.y - dragStart.y;
+
                 if (Mathf.Abs(x) > 0.3f || Mathf.Abs(y) > 0.3f)
                 {
                     var direction = new UnityVector3(x, 0, y);
@@ -172,6 +175,8 @@ namespace Assets.Scripts.Scenes.Game
                     direction = appliedStrength * direction.normalized;
                     penguinRigidbody.AddForce(direction, ForceMode.Impulse);
                     transform.rotation = Quaternion.LookRotation(direction);
+
+                    Base.Core.Game.State.MovementCounter++;
                 }
             }
 
