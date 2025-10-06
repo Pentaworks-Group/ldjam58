@@ -210,7 +210,8 @@ namespace Assets.Scripts.Scenes.Game
                 {
                     if (TryGetRandomPositionOnChunk(out var position))
                     {
-                        foodBehaviour.transform.position = position.ToUnity();
+                        //foodBehaviour.transform.position = position.ToUnity();
+                        foodBehaviour.transform.position = new UnityEngine.Vector3(position.X, position.Y * TerrainGenerator.hightScale, position.Z);
                         hasValidPosition = true;
                         break;
                     }
@@ -220,7 +221,9 @@ namespace Assets.Scripts.Scenes.Game
             {
                 if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
                 {
-                    foodBehaviour.transform.position = position.ToUnity();
+                    //foodBehaviour.transform.position = position.ToUnity();
+
+                    foodBehaviour.transform.position = new UnityEngine.Vector3(position.X, position.Y * TerrainGenerator.hightScale, position.Z);
                     hasValidPosition = true;
                 }
             }

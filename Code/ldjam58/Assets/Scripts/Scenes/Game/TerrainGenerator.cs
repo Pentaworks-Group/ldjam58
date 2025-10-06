@@ -20,7 +20,7 @@ namespace Assets.Scripts.Scenes.Game
         private readonly Map<Int32, WorldChunk> chunkMap;
 
         private Map<Int32, ChunkBehaviour> chunkBehaviourMap;
-
+        public static readonly float hightScale = 0.5f;
         public TerrainGenerator(GameObject chunkContainer, Material terrainMaterial, PhysicsMaterial ice, PhysicsMaterial snow, Level world)
         {
             this.chunkContainer = chunkContainer;
@@ -85,7 +85,7 @@ namespace Assets.Scripts.Scenes.Game
                     {
                         if (worldChunk.DefaultTileHeight.HasValue)
                         {
-                            y = worldChunk.DefaultTileHeight.Value;
+                            y = worldChunk.DefaultTileHeight.Value * hightScale;
                         }
 
                         var tileX = Math.Min(x, level.Resolution - 1);
@@ -93,7 +93,7 @@ namespace Assets.Scripts.Scenes.Game
 
                         if (chunkTileMap.TryGetValue(tileX, tileZ, out var tile))
                         {
-                            y = tile.Position.Y;
+                            y = tile.Position.Y * hightScale;
                         }
                     }
 
