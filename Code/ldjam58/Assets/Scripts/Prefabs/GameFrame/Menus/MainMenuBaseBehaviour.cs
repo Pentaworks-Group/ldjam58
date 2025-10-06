@@ -9,25 +9,24 @@ namespace Assets.Scripts.Scenes.Menues
 {
     public class MainMenuBaseBehaviour : BaseMenuBehaviour
     {
-
         [SerializeField]
         private GameObject quitButton;
 
         private void Start()
         {
-            var introAudio = GameFrame.Base.Resources.Manager.Audio.Get("Intro");
+            //var introAudio = GameFrame.Base.Resources.Manager.Audio.Get("Intro");
 
-            var backgroundAudioClips = new List<AudioClip>()
-            {
-                GameFrame.Base.Resources.Manager.Audio.Get("Menu_empty"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Menu_empty"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Menu_empty"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Menu_1"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Menu_2")
-            };
+            //var backgroundAudioClips = new List<AudioClip>()
+            //{
+            //    GameFrame.Base.Resources.Manager.Audio.Get("Menu_empty"),
+            //    GameFrame.Base.Resources.Manager.Audio.Get("Menu_empty"),
+            //    GameFrame.Base.Resources.Manager.Audio.Get("Menu_empty"),
+            //    GameFrame.Base.Resources.Manager.Audio.Get("Menu_1"),
+            //    GameFrame.Base.Resources.Manager.Audio.Get("Menu_2")
+            //};
 
-            GameFrame.Base.Audio.Background.ReplaceClips(backgroundAudioClips);
-            GameFrame.Base.Audio.Background.PlayTransition(introAudio, backgroundAudioClips);
+            //GameFrame.Base.Audio.Background.ReplaceClips(backgroundAudioClips);
+            //GameFrame.Base.Audio.Background.PlayTransition(introAudio, backgroundAudioClips);
         }
 
         public void Awake()

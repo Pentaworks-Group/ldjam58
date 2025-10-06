@@ -35,7 +35,9 @@ namespace Assets.Scripts.Scenes.ShootingStars
         private readonly Range rotationFactorRange = new Range(0.75f, 2);
 
         public void OnRetryClicked()
-        {            
+        {
+            Base.Core.Game.PlayButtonSound();
+
             gameState.Penguin.Position = default;
             gameState.DeathReason = default;
 
@@ -44,6 +46,8 @@ namespace Assets.Scripts.Scenes.ShootingStars
 
         public void OnToMainMenuButtonClicked()
         {
+            Base.Core.Game.PlayButtonSound();
+
             Base.Core.Game.Stop();
             Assets.Scripts.Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.MainMenu);
         }
@@ -150,8 +154,6 @@ namespace Assets.Scripts.Scenes.ShootingStars
                     var targetBox = spawnBoxes.GetRandomEntry((b) => b != lastSpawnBox);
 
                     var targetPosition = targetBox.GetRandomPosition(0.3f);
-
-                    Debug.Log(string.Format("{0} => {1} ({2} => {3})", lastSpawnBox, targetBox, floppyTargetPosition, targetPosition));
 
                     lastSpawnBox = targetBox;
 
