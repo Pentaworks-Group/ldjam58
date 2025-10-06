@@ -40,6 +40,11 @@ namespace Assets.Scripts.Prefabs.Menus
         void Start()
         {
             menuToggle.SetActive(false);
+            if (PlayerPrefs.GetInt("TutorialShown") == 0)
+            {
+                ToggleMenu();
+                OpenTutorial();
+            }
         }
 
         private void OnEnable()
@@ -91,6 +96,7 @@ namespace Assets.Scripts.Prefabs.Menus
             menuToggle.SetActive(false);
 
             OpeningSubMenu(CloseTutorial);
+            PlayerPrefs.SetInt("TutorialShown", 1);
         }
 
         public void CloseTutorial()
