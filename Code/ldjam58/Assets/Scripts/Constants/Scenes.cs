@@ -17,7 +17,8 @@ namespace Assets.Scripts.Constants
                 {
                     mainMenu = new Scene()
                     {
-                        Name = MainMenuName
+                        Name = MainMenuName,
+                        IsStoppingBackgroundMusic = true
                     };
                 }
 
@@ -36,9 +37,7 @@ namespace Assets.Scripts.Constants
                     credits = new Scene()
                     {
                         Name = CreditsName,
-                        //AmbienceClips = new List<String>()
-                        //{
-                        //},
+                        IsStoppingBackgroundMusic = true,
                     };
                 }
 
@@ -56,7 +55,8 @@ namespace Assets.Scripts.Constants
                 {
                     options = new Scene()
                     {
-                        Name = OptionsName
+                        Name = OptionsName,
+                        IsStoppingBackgroundMusic = true,
                     };
                 }
 
@@ -74,7 +74,8 @@ namespace Assets.Scripts.Constants
                 {
                     savedGames = new Scene()
                     {
-                        Name = SavedGamesName
+                        Name = SavedGamesName,
+                        IsStoppingBackgroundMusic = true,
                     };
                 }
 
@@ -117,6 +118,7 @@ namespace Assets.Scripts.Constants
                     levelCompleted = new Scene()
                     {
                         Name = LevelCompletedName,
+                        IsStoppingBackgroundMusic = true,
                         //AmbienceClips = new List<String>()
                         //{
                         //    "WoodSound"
@@ -142,7 +144,8 @@ namespace Assets.Scripts.Constants
                 {
                     gameOver = new Scene()
                     {
-                        Name = GameOverName
+                        Name = GameOverName,
+                        IsStoppingBackgroundMusic = true,
                     };
                 }
 

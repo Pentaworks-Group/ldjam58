@@ -155,8 +155,6 @@ namespace Assets.Scripts.Scenes.ShootingStars
 
                     var targetPosition = targetBox.GetRandomPosition(0.3f);
 
-                    Debug.Log(string.Format("{0} => {1} ({2} => {3})", lastSpawnBox, targetBox, floppyTargetPosition, targetPosition));
-
                     lastSpawnBox = targetBox;
 
                     floppyTargetPosition = targetPosition;
