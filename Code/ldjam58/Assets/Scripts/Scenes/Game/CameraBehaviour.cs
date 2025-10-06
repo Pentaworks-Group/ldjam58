@@ -21,6 +21,9 @@ namespace Assets.Scripts.Scenes.Game
         {
             var moveAction = InputSystem.actions.FindAction("Scroll");
             moveAction.performed += HandleScroll;
+
+            var touchPress = InputSystem.actions.FindAction("TouchMultiPress");
+            moveAction.performed += HandleMultiTouch;
         }
 
         public void UnhookActions()
@@ -28,6 +31,14 @@ namespace Assets.Scripts.Scenes.Game
             var moveAction = InputSystem.actions.FindAction("Scroll");
             moveAction.performed -= HandleScroll;
 
+            var touchPress = InputSystem.actions.FindAction("TouchMultiPress");
+            moveAction.performed -= HandleMultiTouch;
+
+        }
+
+        private void HandleMultiTouch(InputAction.CallbackContext context)
+        {
+            Debug.Log("MultitouchContext" + context);
         }
 
         private void HandleScroll(InputAction.CallbackContext context)

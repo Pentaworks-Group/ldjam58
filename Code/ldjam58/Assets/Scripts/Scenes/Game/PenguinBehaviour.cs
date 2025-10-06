@@ -132,6 +132,10 @@ namespace Assets.Scripts.Scenes.Game
 
         private void StartDrag(InputAction.CallbackContext context)
         {
+            if (UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > 1) {
+                DiscontinourDragging();
+                return; 
+            }
             if (IsAllowingControlWhileMoving || (!IsAllowingControlWhileMoving && !isMoving))
             {
                 var position = Pointer.current.position.ReadValue();
@@ -159,6 +163,11 @@ namespace Assets.Scripts.Scenes.Game
                     transform.rotation = Quaternion.LookRotation(direction);
                 }
             }
+            DiscontinourDragging();
+        }
+
+        private void DiscontinourDragging()
+        {
             isDragging = false;
             arrow.gameObject.SetActive(false);
         }
