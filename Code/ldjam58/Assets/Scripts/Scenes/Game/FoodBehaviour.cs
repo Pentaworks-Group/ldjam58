@@ -14,14 +14,14 @@ namespace Assets.Scripts.Scenes.Game
             this.Food = food;
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log($"Trigger Collided with {other.gameObject.name}");
-        }
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    Debug.Log($"Trigger Collided with {other.gameObject.name}");
+        //}
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log($"Collision with {collision.gameObject.name}");
-        }
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    Debug.Log($"Collision with {collision.gameObject.name}");
+        //}
     }
 }
