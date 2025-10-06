@@ -1945,6 +1945,17 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 262.48242
       objectReference: {fileID: 0}
+    - target: {fileID: 605583602419978359, guid: 7b2fe0584c8a0174381cac336b43d8a5, type: 3}
+      propertyPath: m_text
+      value: 'Game modes are available in the main menu.
+
+        Why not give them
+        all a go?
+
+
+        We may have added them... but they are not guarnteed
+        to work.'
+      objectReference: {fileID: 0}
     - target: {fileID: 875904674863046455, guid: 7b2fe0584c8a0174381cac336b43d8a5, type: 3}
       propertyPath: m_SizeDelta.y
       value: -4.005596
