@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Model;
@@ -86,6 +87,8 @@ namespace Assets.Scripts.Core
 
             if (chunkDefinition.Tiles?.Count > 0)
             {
+                chunk.Tiles = new List<WorldTile>();
+
                 foreach (var tileDefinition in chunkDefinition.Tiles)
                 {
                     chunk.Tiles.Add(new WorldTile()

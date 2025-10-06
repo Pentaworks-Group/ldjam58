@@ -1,9 +1,13 @@
 
+using System;
+
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
+
 using Newtonsoft.Json;
-using System;
+
 using TMPro;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;

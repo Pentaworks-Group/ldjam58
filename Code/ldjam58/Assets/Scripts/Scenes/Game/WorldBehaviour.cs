@@ -6,6 +6,8 @@ using Assets.Scripts.Core.Model;
 
 using GameFrame.Core.Extensions;
 
+using TMPro;
+
 using UnityEngine;
 
 namespace Assets.Scripts.Scenes.Game
@@ -23,10 +25,11 @@ namespace Assets.Scripts.Scenes.Game
         public Transform foodContainerTransform;
         public GameObject rootContainer;
 
+        public TMP_Text currentLevelText;
+
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
         public PhysicsMaterial snowMaterial;
-
 
         public PenguinBehaviour PenguinBehaviour { get; private set; }
 
@@ -46,6 +49,8 @@ namespace Assets.Scripts.Scenes.Game
 
                 gameState.FillFoods();
                 RenderFoods();
+
+                currentLevelText.text = gameState.CurrentLevel.Name;
             }
         }
 
@@ -104,6 +109,10 @@ namespace Assets.Scripts.Scenes.Game
                         {
                             gameState.Penguin.Position = position;
                         }
+                        else
+                        {
+                            throw new Exception("Penguin start position is not over land!");
+                        }
                     }
                 }
 
@@ -150,12 +159,35 @@ namespace Assets.Scripts.Scenes.Game
 
             foodBehaviour.Init(food);
 
-            if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
-            {
-                foodBehaviour.transform.position = position.ToUnity();
+            var hasValidPosition = false;
 
-                foodObject.SetActive(true);
+            if (gameState.CurrentLevel.IsFoodPositionRandom)
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    if (TryGetRandomPositionOnChunk(out var position))
+                    {
+                        foodBehaviour.transform.position = position.ToUnity();
+                        hasValidPosition = true;
+                        break;
+                    }
+                }
             }
+            else
+            {
+                if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
+                {
+                    foodBehaviour.transform.position = position.ToUnity();
+                    hasValidPosition = true;
+                }
+            }
+
+            if (!hasValidPosition)
+            {
+                throw new Exception("Food was positioned outside of the playable area");
+            }
+
+            foodObject.SetActive(true);
 
             return foodBehaviour;
         }

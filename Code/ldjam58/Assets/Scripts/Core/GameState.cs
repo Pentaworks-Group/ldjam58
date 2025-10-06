@@ -66,13 +66,17 @@ namespace Assets.Scripts.Core
                                 }
                                 else
                                 {
-                                    food = currentLevel.AvailableFoods[0];
+                                    food = currentLevel.AvailableFoods.FirstOrDefault();
                                 }
 
                                 if (food != default)
                                 {
                                     currentLevel.AvailableFoods.Remove(food);
                                     currentLevel.Foods.Add(food);
+                                }
+                                else
+                                {
+                                    break;
                                 }
                             }
                         }
