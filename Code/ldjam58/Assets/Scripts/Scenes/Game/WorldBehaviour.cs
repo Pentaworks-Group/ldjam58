@@ -104,6 +104,10 @@ namespace Assets.Scripts.Scenes.Game
                         {
                             gameState.Penguin.Position = position;
                         }
+                        else
+                        {
+                            throw new Exception("Penguin start position is not over land!");
+                        }
                     }
                 }
 
@@ -150,12 +154,35 @@ namespace Assets.Scripts.Scenes.Game
 
             foodBehaviour.Init(food);
 
-            if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
+            var hasValidPosition = false;
+            
+            if (gameState.CurrentLevel.IsFoodPositionRandom)
             {
-                foodBehaviour.transform.position = position.ToUnity();
-
-                foodObject.SetActive(true);
+                for (int i = 0; i < 100; i++)
+                {
+                    if (TryGetRandomPositionOnChunk(out var position))
+                    {
+                        foodBehaviour.transform.position = position.ToUnity();
+                        hasValidPosition = true;
+                        break;
+                    }
+                }
             }
+            else
+            {
+                if (TryGetPosition((Int32)food.Position.X, (Int32)food.Position.Z, out var position))
+                {
+                    foodBehaviour.transform.position = position.ToUnity();
+                    hasValidPosition = true;
+                }
+            }
+
+            if (!hasValidPosition)
+            {
+                throw new Exception("Food was positioned outside of the playable area");
+            }
+
+            foodObject.SetActive(true);
 
             return foodBehaviour;
         }
