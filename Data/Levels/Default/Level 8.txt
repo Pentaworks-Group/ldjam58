@@ -73,13 +73,6 @@
       "Tiles": [
         {
           "Position": {
-            "X": 0,
-            "Y": 0,
-            "Z": 0
-          }
-        },
-        {
-          "Position": {
             "X": 8,
             "Y": 6,
             "Z": 8
@@ -93,15 +86,7 @@
         "Y": 7
       },
       "DefaultTileHeight": 3,
-      "Tiles": [
-        {
-          "Position": {
-            "X": 0,
-            "Y": 0,
-            "Z": 0
-          }
-        }
-      ]
+      "Tiles": []
     },
     {
       "Position": {

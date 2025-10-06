@@ -3032,6 +3032,56 @@
               "X": 8,
               "Y": 8
             }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 8,
+              "Y": 1
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 12,
+              "Y": 5
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 4,
+              "Y": 8
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 8,
+              "Y": 12
+            }
+          },
+          {
+            "Definition": {
+              "IsReferenced": true,
+              "Reference": "Fish"
+            },
+            "Position": {
+              "X": 10,
+              "Y": 0
+            }
           }
         ],
         "ObstacleRandomOrder": false,
@@ -3107,41 +3157,13 @@
               "X": 6,
               "Y": 7
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 3,
             "Tiles": [
               {
                 "Position": {
-                  "X": 10,
-                  "Y": 10,
-                  "Z": 8
-                }
-              },
-              {
-                "Position": {
                   "X": 8,
-                  "Y": 8,
+                  "Y": 6,
                   "Z": 8
-                }
-              },
-              {
-                "Position": {
-                  "X": 9,
-                  "Y": 15,
-                  "Z": 8
-                }
-              },
-              {
-                "Position": {
-                  "X": 8,
-                  "Y": 3,
-                  "Z": 7
-                }
-              },
-              {
-                "Position": {
-                  "X": 7,
-                  "Y": 2,
-                  "Z": 7
                 }
               }
             ]
@@ -3151,37 +3173,8 @@
               "X": 10,
               "Y": 7
             },
-            "DefaultTileHeight": 1,
-            "Tiles": [
-              {
-                "Position": {
-                  "X": 8,
-                  "Y": 2,
-                  "Z": 7
-                }
-              },
-              {
-                "Position": {
-                  "X": 9,
-                  "Y": 8,
-                  "Z": 8
-                }
-              },
-              {
-                "Position": {
-                  "X": 8,
-                  "Y": 6,
-                  "Z": 8
-                }
-              },
-              {
-                "Position": {
-                  "X": 8,
-                  "Y": 11,
-                  "Z": 9
-                }
-              }
-            ]
+            "DefaultTileHeight": 3,
+            "Tiles": []
           },
           {
             "Position": {
@@ -3196,7 +3189,7 @@
               "X": 4,
               "Y": 8
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 3,
             "Tiles": null
           },
           {
@@ -3212,7 +3205,7 @@
               "X": 8,
               "Y": 9
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -3237,7 +3230,22 @@
               "Y": 11
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 5,
+                  "Y": 5,
+                  "Z": 12
+                }
+              },
+              {
+                "Position": {
+                  "X": 4,
+                  "Y": 5,
+                  "Z": 12
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -3292,15 +3300,23 @@
               "X": 8,
               "Y": 12
             },
-            "DefaultTileHeight": 1,
-            "Tiles": null
+            "DefaultTileHeight": 5,
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 6,
+                  "Y": 9,
+                  "Z": 10
+                }
+              }
+            ]
           },
           {
             "Position": {
               "X": 6,
               "Y": 12
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 3,
             "Tiles": null
           },
           {
@@ -3325,7 +3341,43 @@
               "Y": 6
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 5,
+                  "Y": 7,
+                  "Z": 9
+                }
+              },
+              {
+                "Position": {
+                  "X": 6,
+                  "Y": 2,
+                  "Z": 9
+                }
+              },
+              {
+                "Position": {
+                  "X": 2,
+                  "Y": 2,
+                  "Z": 14
+                }
+              },
+              {
+                "Position": {
+                  "X": 2,
+                  "Y": 3,
+                  "Z": 15
+                }
+              },
+              {
+                "Position": {
+                  "X": 0,
+                  "Y": 4,
+                  "Z": 14
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -3364,7 +3416,7 @@
               "X": 11,
               "Y": 8
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 3,
             "Tiles": null
           },
           {
@@ -3380,16 +3432,32 @@
               "X": 11,
               "Y": 6
             },
-            "DefaultTileHeight": 1,
-            "Tiles": null
+            "DefaultTileHeight": 3,
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 8,
+                  "Y": 6,
+                  "Z": 8
+                }
+              }
+            ]
           },
           {
             "Position": {
               "X": 12,
               "Y": 5
             },
-            "DefaultTileHeight": 1,
-            "Tiles": null
+            "DefaultTileHeight": 3,
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 12,
+                  "Y": 5,
+                  "Z": 12
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -3445,14 +3513,22 @@
               "Y": 6
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 5,
+                  "Y": 5,
+                  "Z": 9
+                }
+              }
+            ]
           },
           {
             "Position": {
               "X": 13,
               "Y": 5
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -3509,14 +3585,36 @@
               "Y": 7
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 12,
+                  "Y": 7,
+                  "Z": 4
+                }
+              },
+              {
+                "Position": {
+                  "X": 6,
+                  "Y": 9,
+                  "Z": 9
+                }
+              },
+              {
+                "Position": {
+                  "X": 7,
+                  "Y": 3,
+                  "Z": 9
+                }
+              }
+            ]
           },
           {
             "Position": {
               "X": 3,
               "Y": 9
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -3557,7 +3655,22 @@
               "Y": 11
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 2,
+                  "Y": 6,
+                  "Z": 5
+                }
+              },
+              {
+                "Position": {
+                  "X": 3,
+                  "Y": 9,
+                  "Z": 5
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -3580,7 +3693,7 @@
               "X": 6,
               "Y": 11
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -3628,7 +3741,7 @@
               "X": 7,
               "Y": 13
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 4,
             "Tiles": null
           },
           {
@@ -3684,7 +3797,7 @@
               "X": 8,
               "Y": 5
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -3693,7 +3806,22 @@
               "Y": 3
             },
             "DefaultTileHeight": 1,
-            "Tiles": null
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 6,
+                  "Y": 2,
+                  "Z": 5
+                }
+              },
+              {
+                "Position": {
+                  "X": 6,
+                  "Y": 6,
+                  "Z": 6
+                }
+              }
+            ]
           },
           {
             "Position": {
@@ -3708,7 +3836,7 @@
               "X": 10,
               "Y": 3
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 5,
             "Tiles": null
           },
           {
@@ -3716,7 +3844,7 @@
               "X": 10,
               "Y": 2
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 5,
             "Tiles": null
           },
           {
@@ -3724,7 +3852,7 @@
               "X": 10,
               "Y": 1
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 4,
             "Tiles": null
           },
           {
@@ -3740,7 +3868,7 @@
               "X": 9,
               "Y": 0
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 2,
             "Tiles": null
           },
           {
@@ -3828,7 +3956,7 @@
               "X": 9,
               "Y": 1
             },
-            "DefaultTileHeight": 1,
+            "DefaultTileHeight": 3,
             "Tiles": null
           },
           {
@@ -3836,8 +3964,16 @@
               "X": 8,
               "Y": 1
             },
-            "DefaultTileHeight": 1,
-            "Tiles": null
+            "DefaultTileHeight": 5,
+            "Tiles": [
+              {
+                "Position": {
+                  "X": 9,
+                  "Y": 8,
+                  "Z": 9
+                }
+              }
+            ]
           },
           {
             "Position": {
