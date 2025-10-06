@@ -8,7 +8,7 @@ Credits:
  - 
 
 Todo:
- - Elapsed Time
+ 
 ---------------------------------- 
   
 Bugs: 
