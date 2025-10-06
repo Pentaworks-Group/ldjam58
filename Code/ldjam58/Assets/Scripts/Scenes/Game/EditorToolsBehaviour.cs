@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Assets.Scripts.Core;
+using Assets.Scripts.Core.Definitons;
 using Assets.Scripts.Core.Model;
 
 using Newtonsoft.Json;
@@ -27,12 +28,20 @@ namespace Assets.Scripts.Scenes.Game
         [SerializeField]
         private TMP_InputField inputField;
 
+        [SerializeField]
+        private UnityEngine.UI.Button previousLevelButton;
+        [SerializeField]
+        private UnityEngine.UI.Button nextLevelButton;
+
         private EditorToolBehaviour selectedTool;
 
         private EventSystem eventSystem;
         private Boolean isOverUI;
 
         private GameState gameState;
+
+        private LevelDefinition previousLevelDefinition;
+        private LevelDefinition nextLevelDefinition;
 
         private void Awake()
         {
@@ -62,6 +71,12 @@ namespace Assets.Scripts.Scenes.Game
         private void OnGameInitialized()
         {
             this.gameState = Base.Core.Game.State;
+
+            previousLevelDefinition = GetLevelDefinition(-1);
+            nextLevelDefinition = GetLevelDefinition(1);
+
+            previousLevelButton.interactable = previousLevelDefinition != default;
+            nextLevelButton.interactable = nextLevelDefinition != default;
         }
 
         public void HookActions()
@@ -255,6 +270,22 @@ namespace Assets.Scripts.Scenes.Game
             }
         }
 
+        public void OnNextLevel()
+        {
+            gameState.CurrentLevel = new LevelConverter().Convert(nextLevelDefinition);
+            gameState.Penguin.Position = default;
+
+            Base.Core.Game.ForceSceneChange(Assets.Scripts.Constants.Scenes.Game);
+        }
+
+        public void OnPreviousLevel()
+        {
+            gameState.CurrentLevel = new LevelConverter().Convert(previousLevelDefinition);
+            gameState.Penguin.Position = default;
+
+            Base.Core.Game.ForceSceneChange(Assets.Scripts.Constants.Scenes.Game);
+        }
+
         private Boolean GetTileWithRaycast(out WorldTile tile, out WorldChunk chunk)
         {
             if (MakeRaycast(out Vector3 hitPoint))
@@ -422,6 +453,23 @@ namespace Assets.Scripts.Scenes.Game
             }
 
             return true;
+        }
+
+
+        private LevelDefinition GetLevelDefinition(Int32 levelOffset)
+        {
+            var currentLevelDefinition = gameState.Mode.Levels.FirstOrDefault(l => l.Reference == gameState.CurrentLevel.Reference);
+
+            var currentLevelIndex = gameState.Mode.Levels.IndexOf(currentLevelDefinition);
+
+            var newLevelDefinitionIndex = currentLevelIndex + levelOffset;
+
+            if (newLevelDefinitionIndex >= 0 && newLevelDefinitionIndex < gameState.Mode.Levels.Count)
+            {
+                return gameState.Mode.Levels[newLevelDefinitionIndex];
+            }
+
+            return default;
         }
     }
 }

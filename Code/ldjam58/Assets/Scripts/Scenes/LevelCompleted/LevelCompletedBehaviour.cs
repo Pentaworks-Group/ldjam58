@@ -47,7 +47,7 @@ namespace Assets.Scripts.Scenes.LevelCompleted
 
             var currentLevelIndex = gameState.Mode.Levels.IndexOf(currentLevelDefinition);
 
-            if (currentLevelIndex < gameState.Mode.Levels.Count-1)
+            if (currentLevelIndex < gameState.Mode.Levels.Count - 1)
             {
                 this.nextLevelDefinition = gameState.Mode.Levels[currentLevelIndex + 1];
 
