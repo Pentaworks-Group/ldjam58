@@ -23,7 +23,7 @@ namespace Assets.Scripts.Scenes.Game
         public GameObject penguinTemplate;
         public Transform foodTemplatesContainer;
         public Transform foodContainerTransform;
-        public GameObject rootContainer;
+        public Transform penguinContainerTransform;
 
         public TMP_Text currentLevelText;
 
@@ -41,6 +41,41 @@ namespace Assets.Scripts.Scenes.Game
 
             LoadTemplates();
 
+            LoadWorld();
+        }
+
+        public void ReRenderWorld()
+        {
+            foreach (Transform child in chunkContainer.transform)
+            {
+                Destroy(child.gameObject); //works since gameobjects are destroyed after frame
+            }
+
+            RenderWorld();
+        }
+
+        public void ReloadWorld()
+        {
+            foreach (Transform child in chunkContainer.transform)
+            {
+                Destroy(child.gameObject); //works since gameobjects are destroyed after frame
+            }
+
+            foreach (Transform child in foodContainerTransform)
+            {
+                Destroy(child.gameObject); //works since gameobjects are destroyed after frame
+            }
+
+            foreach (Transform child in penguinContainerTransform)
+            {
+                Destroy(child.gameObject); //works since gameobjects are destroyed after frame
+            }
+
+            LoadWorld();
+        }
+
+        public void LoadWorld()
+        {
             if (RenderWorld())
             {
                 RenderPenguin();
@@ -52,16 +87,6 @@ namespace Assets.Scripts.Scenes.Game
 
                 currentLevelText.text = gameState.CurrentLevel.Name;
             }
-        }
-
-        public void ReRenderWorld()
-        {
-            foreach (Transform child in chunkContainer.transform)
-            {
-                Destroy(child.gameObject); //works since gameobjects are destroyed after frame
-            }
-
-            RenderWorld();
         }
 
         private Boolean RenderWorld()
@@ -116,7 +141,7 @@ namespace Assets.Scripts.Scenes.Game
                     }
                 }
 
-                var penguinObject = GameObject.Instantiate(penguinTemplate, rootContainer.transform);
+                var penguinObject = GameObject.Instantiate(penguinTemplate, penguinContainerTransform.transform);
 
                 var penguinBehaviour = penguinObject.GetComponent<PenguinBehaviour>();
 

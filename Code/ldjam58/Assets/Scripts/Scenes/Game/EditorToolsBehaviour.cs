@@ -72,11 +72,8 @@ namespace Assets.Scripts.Scenes.Game
         {
             this.gameState = Base.Core.Game.State;
 
-            previousLevelDefinition = GetLevelDefinition(-1);
-            nextLevelDefinition = GetLevelDefinition(1);
-
-            previousLevelButton.interactable = previousLevelDefinition != default;
-            nextLevelButton.interactable = nextLevelDefinition != default;
+            CheckSkipLevel(ref previousLevelDefinition, previousLevelButton, -1);
+            CheckSkipLevel(ref nextLevelDefinition, nextLevelButton, 1);
         }
 
         public void HookActions()
@@ -275,7 +272,10 @@ namespace Assets.Scripts.Scenes.Game
             gameState.CurrentLevel = new LevelConverter().Convert(nextLevelDefinition);
             gameState.Penguin.Position = default;
 
-            Base.Core.Game.ForceSceneChange(Assets.Scripts.Constants.Scenes.Game);
+            worldBehaviour.ReloadWorld();
+
+            CheckSkipLevel(ref previousLevelDefinition, previousLevelButton, -1);
+            CheckSkipLevel(ref nextLevelDefinition, nextLevelButton, 1);
         }
 
         public void OnPreviousLevel()
@@ -283,7 +283,10 @@ namespace Assets.Scripts.Scenes.Game
             gameState.CurrentLevel = new LevelConverter().Convert(previousLevelDefinition);
             gameState.Penguin.Position = default;
 
-            Base.Core.Game.ForceSceneChange(Assets.Scripts.Constants.Scenes.Game);
+            worldBehaviour.ReloadWorld();
+
+            CheckSkipLevel(ref previousLevelDefinition, previousLevelButton, -1);
+            CheckSkipLevel(ref nextLevelDefinition, nextLevelButton, 1);
         }
 
         private Boolean GetTileWithRaycast(out WorldTile tile, out WorldChunk chunk)
@@ -455,7 +458,6 @@ namespace Assets.Scripts.Scenes.Game
             return true;
         }
 
-
         private LevelDefinition GetLevelDefinition(Int32 levelOffset)
         {
             var currentLevelDefinition = gameState.Mode.Levels.FirstOrDefault(l => l.Reference == gameState.CurrentLevel.Reference);
@@ -470,6 +472,12 @@ namespace Assets.Scripts.Scenes.Game
             }
 
             return default;
+        }
+
+        private void CheckSkipLevel(ref LevelDefinition levelDefinition, UnityEngine.UI.Button button, Int32 indexOffset)
+        {
+            levelDefinition = GetLevelDefinition(indexOffset);
+            button.interactable = levelDefinition != default;
         }
     }
 }

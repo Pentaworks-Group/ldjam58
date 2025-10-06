@@ -152,6 +152,7 @@ Transform:
   - {fileID: 1222897638}
   - {fileID: 608406881}
   - {fileID: 1232739014}
+  - {fileID: 800698977}
   - {fileID: 1230264850}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -171,7 +172,7 @@ MonoBehaviour:
   penguinTemplate: {fileID: 1423278833}
   foodTemplatesContainer: {fileID: 1358933720}
   foodContainerTransform: {fileID: 608406881}
-  rootContainer: {fileID: 129315002}
+  penguinContainerTransform: {fileID: 800698977}
   currentLevelText: {fileID: 1237031708}
   terrainMaterial: {fileID: 2100000, guid: 30bb259236c08e54da38210bec5d9186, type: 2}
   iceMaterial: {fileID: 13400000, guid: 6aaa249ea79818b4890b5bd1bf5b7326, type: 2}
@@ -192,6 +193,14 @@ PrefabInstance:
       propertyPath: worldBehaviour
       value: 
       objectReference: {fileID: 129315004}
+    - target: {fileID: 2289963820373615380, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2915652297131510505, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6918455675109248511, guid: 7f3f7803d85d9d949bb694c0fbde6397, type: 3}
       propertyPath: m_fontSize
       value: 36.95
@@ -877,6 +886,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 129315003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &800698976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800698977}
+  m_Layer: 0
+  m_Name: PenguinContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &800698977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800698976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 129315003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068583514 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5452424541030572497, guid: 28b444f801ae2654faf5606c5cdbf323, type: 3}
@@ -1155,7 +1195,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.25
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
