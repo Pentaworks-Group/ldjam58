@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShootingStarsScene.unity
     guid: 3fbd55d3cc2f38d41b9684326436a1df
+  - enabled: 1
+    path: Assets/Scenes/SavedGamesScene.unity
+    guid: 2f219b043f9d4b2448646b61c686690b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
