@@ -2,7 +2,7 @@
   {
     "Reference": "Default",
     "Name": "Default",
-    "Description": "Move floppy around to eat all the fish.",
+    "Description": "Move Floppy around to eat all the fish.",
     "IsDefault":  true,
     "AvailableLives": 3,
     "IsAllowingControlWhileMoving": false,
