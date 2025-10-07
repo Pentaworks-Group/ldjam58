@@ -155,7 +155,7 @@ namespace Assets.Scripts.Scenes.Game
                 return;
             }
 
-            if (isAllowingControlWhileMoving || (!isAllowingControlWhileMoving && !isMoving))
+            if (Base.Core.Game.IsRunning && (isAllowingControlWhileMoving || (!isAllowingControlWhileMoving && !isMoving)))
             {
                 var position = Pointer.current.position.ReadValue();
                 dragStart = position;
