@@ -15,6 +15,7 @@ namespace Assets.Scripts.Core.Definitions
         public Int32 Resolution { get; set; }
         public Boolean? IsPenguinStartPositionRandom { get; set; }
         public Vector2Int? PenguinStartPosition { get; set; }
+        public Int32? MovementLimit { get; set; }
         public Int32? ActiveFoodLimit { get; set; }
         public Boolean? FoodRandomOrder { get; set; }
         public Boolean? IsFoodPositionRandom { get; set; }

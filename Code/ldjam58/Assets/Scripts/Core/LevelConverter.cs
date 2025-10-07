@@ -30,6 +30,7 @@ namespace Assets.Scripts.Core
                 Reference = levelDefinition.Reference,
                 Description = levelDefinition.Description,
                 Resolution = levelDefinition.Resolution,
+                MovementLimit = levelDefinition.MovementLimit,
                 IsPenguinStartPositionRandom = levelDefinition.IsPenguinStartPositionRandom.GetValueOrDefault(),
                 PenguinStartPosition = levelDefinition.PenguinStartPosition.GetValueOrDefault(),
                 IsFoodPositionRandom = levelDefinition.IsFoodPositionRandom.GetValueOrDefault(),

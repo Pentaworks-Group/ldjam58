@@ -224,7 +224,7 @@ namespace Assets.Scripts.Prefabs.Menus
         {
             if (pauseMenu)
             {
-                currentOpenMenu.text = "Pause";
+                currentOpenMenu.text = "Paused";
             }
             else if (options)
             {

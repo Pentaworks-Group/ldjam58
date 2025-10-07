@@ -30,6 +30,9 @@ namespace Assets.Scripts.Scenes.Game
         public TMP_Text currentScoreText;
         public TMP_Text elapsedTimeText;
         public TMP_Text movementCounterText;
+        public TMP_Text currentLevelMovementLimitText;
+        public GameObject staticCurrentLevelMovementLimitContainer;
+        public GameObject dynamicCurrentLevelMovementLimitContainer;
 
         public Material terrainMaterial;
         public PhysicsMaterial iceMaterial;
@@ -93,6 +96,18 @@ namespace Assets.Scripts.Scenes.Game
                 remainingLivesText.text = gameState.RemainingLives.ToString();
 
                 UpdateCurrentScore();
+
+                if (gameState.CurrentLevel.MovementLimit.HasValue)
+                {
+                    staticCurrentLevelMovementLimitContainer.gameObject.SetActive(true);
+                    dynamicCurrentLevelMovementLimitContainer.gameObject.SetActive(true);
+                    UpdateMovement();
+                }
+                else
+                {
+                    staticCurrentLevelMovementLimitContainer.gameObject.SetActive(false);
+                    dynamicCurrentLevelMovementLimitContainer.gameObject.SetActive(false);
+                }
 
                 if (TryGetComponent<BoxCollider>(out var woldCollider))
                 {
@@ -267,6 +282,14 @@ namespace Assets.Scripts.Scenes.Game
             currentScoreText.text = gameState.Score.ToString();
         }
 
+        private void UpdateMovement()
+        {
+            if (gameState.CurrentLevel.MovementLimit.HasValue)
+            {
+                currentLevelMovementLimitText.text = String.Format("{0} / {1}", gameState.CurrentLevel.MovementCounter, gameState.CurrentLevel.MovementLimit.Value);
+            }
+        }
+
         private Boolean TryGetRandomPositionOnChunk(out GameFrame.Core.Math.Vector3 position)
         {
             position = default;
@@ -363,7 +386,10 @@ namespace Assets.Scripts.Scenes.Game
             {
                 this.gameState.TimeElapsed += Time.deltaTime;
                 this.elapsedTimeText.text = String.Format("{0:#####0.0}", this.gameState.TimeElapsed);
+
                 movementCounterText.text = this.gameState.MovementCounter.ToString();
+
+                UpdateMovement();
             }
         }
 

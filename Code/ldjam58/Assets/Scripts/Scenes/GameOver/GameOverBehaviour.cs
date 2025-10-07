@@ -21,6 +21,7 @@ namespace Assets.Scripts.Scenes.GameOver
         {
             Base.Core.Game.PlayButtonSound();
 
+            gameState.CurrentLevel.MovementCounter = default;
             gameState.Penguin.Position = default;
             gameState.DeathReason = default;
             Assets.Scripts.Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.Game);
@@ -38,7 +39,7 @@ namespace Assets.Scripts.Scenes.GameOver
         {
             this.gameState = Base.Core.Game.State;
 
-            this.deathText.text = $"Poor {gameState.Penguin.Name} died by {gameState.DeathReason}";
+            this.deathText.text = $"Poor {gameState.Penguin.Name} died {gameState.DeathReason}";
 
             if (gameState.RemainingLives > 0)
             {

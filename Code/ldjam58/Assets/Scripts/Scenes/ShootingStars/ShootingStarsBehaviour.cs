@@ -38,6 +38,7 @@ namespace Assets.Scripts.Scenes.ShootingStars
         {
             Base.Core.Game.PlayButtonSound();
 
+            gameState.CurrentLevel.MovementCounter = default;
             gameState.Penguin.Position = default;
             gameState.DeathReason = default;
 

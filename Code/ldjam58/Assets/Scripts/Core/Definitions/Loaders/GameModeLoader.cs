@@ -70,6 +70,7 @@ namespace Assets.Scripts.Core.Definitions.Loaders
                         Seed = loadedItem.Seed,
                         Size = loadedItem.Size,
                         Resolution = loadedItem.Resolution,
+                        MovementLimit = loadedItem.MovementLimit,
                         IsPenguinStartPositionRandom = loadedItem.IsPenguinStartPositionRandom,
                         ActiveFoodLimit = loadedItem.ActiveFoodLimit,
                         PenguinStartPosition = loadedItem.PenguinStartPosition,

@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Assets.Scripts.Constants;
+using Assets.Scripts.Core;
 using Assets.Scripts.Core.Model;
 
 using GameFrame.Core.Extensions;
@@ -36,15 +37,20 @@ namespace Assets.Scripts.Scenes.Game
 
         private bool isKeyboardMovementHooked = false;
 
+        private GameState gameState;
+
         public void Init(Penguin penguin)
         {
+            this.gameState = Base.Core.Game.State;
+
             this.penguin = penguin;
             this.penguinRigidbody = GetComponent<Rigidbody>();
             this.penguinAnimator = transform.Find("Animator").GetComponent<Animator>();
-            isAllowingControlWhileMoving = Base.Core.Game.State.Mode.IsAllowingControlWhileMoving;
+            isAllowingControlWhileMoving = this.gameState.Mode.IsAllowingControlWhileMoving;
 
             slideAudioSource.volume = GameFrame.Base.Audio.Effects.Volume;
             GameFrame.Base.Audio.Effects.VolumeChanged.AddListener(OnEffectsVolumeChanged);
+
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -123,6 +129,16 @@ namespace Assets.Scripts.Scenes.Game
                 {
                     penguinAnimator.SetTrigger("StartWalk");
                     this.slideAudioSource.Stop();
+
+                    if (gameState.CurrentLevel.MovementLimit.HasValue)
+                    {
+                        if (gameState.CurrentLevel.MovementCounter >= gameState.CurrentLevel.MovementLimit.Value)
+                        {
+                            gameState.DeathReason = "of exhaustion.";
+                            gameState.RemainingLives--;
+                            Base.Core.Game.ChangeScene(Constants.Scenes.GameOver);
+                        }
+                    }
                 }
 
                 isMoving = false;
@@ -196,7 +212,8 @@ namespace Assets.Scripts.Scenes.Game
                     penguinRigidbody.AddForce(direction, ForceMode.Impulse);
                     transform.rotation = Quaternion.LookRotation(direction);
 
-                    Base.Core.Game.State.MovementCounter++;
+                    gameState.MovementCounter++;
+                    gameState.CurrentLevel.MovementCounter++;
                 }
             }
 

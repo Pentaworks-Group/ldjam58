@@ -17,7 +17,9 @@ namespace Assets.Scripts.Core.Model
         public Single? Seed { get; set; }
         public GameFrame.Core.Math.Vector2Int Size { get; set; }
         public Int32 Resolution { get; set; }
-
+        public Int32 MovementCounter { get; set; }
+        public Int32? MovementLimit { get; set; }
+        public Int32 MovementRemaining { get; set; }
         public Boolean IsPenguinStartPositionRandom { get; set; }
         public Vector2Int PenguinStartPosition { get; set; }
         public Boolean IsFoodPositionRandom { get; set; }
@@ -29,6 +31,7 @@ namespace Assets.Scripts.Core.Model
         public List<Obstacle> Obstacles { get; set; } = new List<Obstacle>();
 
         public List<WorldChunk> Chunks { get; set; } = new List<WorldChunk>();
+        
 
         public Map<Int32, WorldChunk> GetChunkMap()
         {

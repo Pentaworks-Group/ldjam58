@@ -14,7 +14,7 @@ namespace Assets.Scripts.Scenes.Game
 
                     GameFrame.Base.Audio.Effects.Play("Plopp");
 
-                    gameState.DeathReason = "falling into water and being eaten by an Orca.";
+                    gameState.DeathReason = "by falling into water and being eaten by an Orca.";
                     gameState.RemainingLives--;
 
                     Base.Core.Game.ChangeScene(Assets.Scripts.Constants.Scenes.GameOver);
