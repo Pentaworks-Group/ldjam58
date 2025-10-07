@@ -390,10 +390,10 @@ MonoBehaviour:
   - {fileID: 564541353661805463}
   - {fileID: 1183509436949332280}
   - {fileID: 4273562404270426805}
-  - {fileID: 8988588151147516171}
-  - {fileID: 6314034163999447686}
   - {fileID: 4078152083889953108}
   - {fileID: 1421611790377636569}
+  - {fileID: 8988588151147516171}
+  - {fileID: 6314034163999447686}
   - {fileID: 8897684965567353302}
   - {fileID: 7044381129136577033}
   - {fileID: 2256035068886818634}
@@ -1334,7 +1334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6782373280921254793, guid: 28b444f801ae2654faf5606c5cdbf323, type: 3}
       propertyPath: m_fontSizeBase
-      value: 38
+      value: 33.5
       objectReference: {fileID: 0}
     - target: {fileID: 6782373280921254793, guid: 28b444f801ae2654faf5606c5cdbf323, type: 3}
       propertyPath: m_enableAutoSizing
@@ -1682,7 +1682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562975645539897133, guid: f0ebab4727578434ebd47f4eaa8da30c, type: 3}
       propertyPath: m_text
-      value: 'Depth:'
+      value: 'Level:'
       objectReference: {fileID: 0}
     - target: {fileID: 562975645539897133, guid: f0ebab4727578434ebd47f4eaa8da30c, type: 3}
       propertyPath: m_fontSize
@@ -2680,7 +2680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562975645539897133, guid: f0ebab4727578434ebd47f4eaa8da30c, type: 3}
       propertyPath: m_text
-      value: 'Money:'
+      value: 'Score:'
       objectReference: {fileID: 0}
     - target: {fileID: 562975645539897133, guid: f0ebab4727578434ebd47f4eaa8da30c, type: 3}
       propertyPath: m_fontSize
