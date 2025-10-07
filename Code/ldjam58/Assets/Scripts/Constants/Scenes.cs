@@ -83,6 +83,30 @@ namespace Assets.Scripts.Constants
             }
         }
 
+        public const String GameModeName = "GameModeScene";
+        private static Scene gameMode;
+        public static Scene GameMode
+        {
+            get
+            {
+                if (gameMode == default)
+                {
+                    gameMode = new Scene()
+                    {
+                        Name = GameModeName,
+                        IsStoppingBackgroundMusic = true,
+                        //AmbienceClips = new List<String>()
+                        //{
+                        //    "WoodSound"
+                        //},
+                        BackgroundClips = new List<String>() { }
+                    };
+                }
+
+                return gameMode;
+            }
+        }
+
         public const String GameName = "GameScene";
         private static Scene game;
         public static Scene Game
@@ -175,16 +199,41 @@ namespace Assets.Scripts.Constants
             }
         }
 
+        public static List<Scene> GetGameScenes()
+        {
+            return new List<Scene>()
+            {
+                MainMenu,
+                Options,
+                SavedGames,
+                Credits,
+                GameMode,
+                Game,
+                LevelCompleted,
+                GameOver,
+                ShootingStars
+            };
+        }
+
+        public static List<Scene> GetDevelopmentScenes()
+        {
+            return new List<Scene>()
+            { };
+        }
+
         public static IList<Scene> GetAll()
         {
             return new List<Scene>()
             {
                 MainMenu,
-                Credits,
                 Options,
                 SavedGames,
+                Credits,
+                GameMode,
                 Game,
-                GameOver
+                LevelCompleted,
+                GameOver,
+                ShootingStars
             };
         }
     }

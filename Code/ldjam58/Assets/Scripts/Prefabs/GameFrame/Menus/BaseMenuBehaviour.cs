@@ -9,7 +9,7 @@ namespace Assets.Scripts.Scenes.Menues
         public void ToMainMenu()
         {
             Base.Core.Game.PlayButtonSound();
-            Base.Core.Game.ChangeScene(SceneNames.MainMenu);
+            Base.Core.Game.ChangeScene(Constants.Scenes.MainMenu);
         }
     }
 }

@@ -4,6 +4,8 @@ using System.IO;
 
 using Assets.Scripts.Constants;
 
+using GameFrame.Core;
+
 using Newtonsoft.Json;
 
 using UnityEditor;
@@ -26,7 +28,7 @@ public static class BuildConfigurator
         //Debug.Log($"SceneNames.scenes: {SceneNames.scenes}");
         //Debug.Log($"SceneNames.scenesDevelopment: {SceneNames.scenesDevelopment}");
 
-        var report = BuildPipeline.BuildPlayer(GetSceneNameArray(SceneNames.GameSceneNames, SceneNames.DevelopmentSceneNames), locationPath, BuildTarget.WebGL, BuildOptions.Development);
+        var report = BuildPipeline.BuildPlayer(GetScenePaths(Scenes.GetGameScenes(), Scenes.GetDevelopmentScenes()), locationPath, BuildTarget.WebGL, BuildOptions.Development);
 
         //var report = BuildPipeline.BuildPlayer(GetSampleScene(), locationPath, BuildTarget.WebGL, BuildOptions.Development);
         //Debug.Log($"Build result: {report.summary.result}, {report.summary.totalErrors} errors");
@@ -44,7 +46,7 @@ public static class BuildConfigurator
 
     public static void BuildProjectProduction()
     {
-        var report = BuildPipeline.BuildPlayer(GetSceneNameArray(SceneNames.GameSceneNames), locationPath, BuildTarget.WebGL, BuildOptions.None);
+        var report = BuildPipeline.BuildPlayer(GetScenePaths(Scenes.GetGameScenes()), locationPath, BuildTarget.WebGL, BuildOptions.None);
 
         //var report = BuildPipeline.BuildPlayer(GetSampleScene(), locationPath, BuildTarget.WebGL, BuildOptions.Development);
         //Debug.Log($"Build result: {report.summary.result}, {report.summary.totalErrors} errors");
@@ -59,23 +61,26 @@ public static class BuildConfigurator
         }
     }
 
-    private static String[] GetSceneNameArray(params List<String>[] sceneList1)
+    private static String[] GetScenePaths(params List<Scene>[] sceneListArray)
     {
-        List<String> scenes = new List<String>();
+        List<String> sceneNames = new List<String>();
 
-        if (sceneList1?.Length > 0)
+        if (sceneListArray?.Length > 0)
         {
-            foreach (var list in sceneList1)
+            foreach (var scenes in sceneListArray)
             {
-                scenes.AddRange(list);
+                foreach (var scene in scenes)
+                {
+                    sceneNames.Add(scene.Name);
+                }
             }
         }
 
-        string[] sceneArray = new string[scenes.Count];
+        string[] sceneArray = new string[sceneNames.Count];
 
-        for (int i = 0; i < scenes.Count; i++)
+        for (int i = 0; i < sceneNames.Count; i++)
         {
-            sceneArray[i] = prefix + scenes[i] + postfix;
+            sceneArray[i] = prefix + sceneNames[i] + postfix;
         }
 
         return sceneArray;

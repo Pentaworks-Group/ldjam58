@@ -217,7 +217,7 @@ namespace Assets.Scripts.Prefabs.Menus
             Time.timeScale = 1;
 
             Base.Core.Game.Stop();
-            Base.Core.Game.ChangeScene(SceneNames.MainMenu);
+            Base.Core.Game.ChangeScene(Constants.Scenes.MainMenu);
         }
 
         private void SetVisible(Boolean pauseMenu = false, Boolean options = false, Boolean savedGame = false)

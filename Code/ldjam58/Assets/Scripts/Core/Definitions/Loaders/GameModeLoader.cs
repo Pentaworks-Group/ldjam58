@@ -3,7 +3,7 @@
 using GameFrame.Core.Definitions.Loaders;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.Core.Definitons.Loaders
+namespace Assets.Scripts.Core.Definitions.Loaders
 {
     public class GameModeLoader : BaseLoader<GameMode>
     {

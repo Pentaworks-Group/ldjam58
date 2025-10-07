@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Assets.Scripts.Core.Definitons;
+using Assets.Scripts.Core.Definitions;
 
 using GameFrame.Core.Math;
 

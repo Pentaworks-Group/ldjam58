@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using GameFrame.Core.Definitions;
 using GameFrame.Core.Math;
 
-namespace Assets.Scripts.Core.Definitons
+namespace Assets.Scripts.Core.Definitions
 {
     public class LevelDefinition : BaseDefinition
     {

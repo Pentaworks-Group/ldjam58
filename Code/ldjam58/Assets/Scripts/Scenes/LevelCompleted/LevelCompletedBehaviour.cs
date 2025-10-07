@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 
 using Assets.Scripts.Core;
-using Assets.Scripts.Core.Definitons;
+using Assets.Scripts.Core.Definitions;
 
 using TMPro;
 
@@ -43,7 +43,7 @@ namespace Assets.Scripts.Scenes.LevelCompleted
         {
             this.gameState = Base.Core.Game.State;
 
-            levelNameText.text = String.Format("You have managed to completed the level '{0}'.", gameState.CurrentLevel.Name);
+            levelNameText.text = String.Format("You have managed to complete the level '{0}'.", gameState.CurrentLevel.Name);
 
             var currentLevelDefinition = gameState.Mode.Levels.FirstOrDefault(l => l.Reference == gameState.CurrentLevel.Reference);
 

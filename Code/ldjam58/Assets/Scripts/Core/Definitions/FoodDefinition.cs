@@ -2,7 +2,7 @@
 
 using GameFrame.Core.Definitions;
 
-namespace Assets.Scripts.Core.Definitons
+namespace Assets.Scripts.Core.Definitions
 {
     public class FoodDefinition : BaseDefinition
     {

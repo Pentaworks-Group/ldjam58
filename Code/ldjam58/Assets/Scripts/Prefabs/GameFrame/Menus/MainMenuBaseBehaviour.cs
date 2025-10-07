@@ -40,30 +40,25 @@ namespace Assets.Scripts.Scenes.Menues
         public void Play()
         {
             Base.Core.Game.PlayButtonSound();
-            Base.Core.Game.Start();
-        }
-
-        public void Test()
-        {
-            Debug.Log("Test");
+            Base.Core.Game.ChangeScene(Constants.Scenes.GameMode);
         }
 
         public void ShowOptions()
         {
             Base.Core.Game.PlayButtonSound();
-            Base.Core.Game.ChangeScene(SceneNames.Options);
+            Base.Core.Game.ChangeScene(Constants.Scenes.Options);
         }
         
         public void ShowSavedGames()
         {
             Base.Core.Game.PlayButtonSound();
-            Base.Core.Game.ChangeScene(SceneNames.SavedGames);
+            Base.Core.Game.ChangeScene(Constants.Scenes.SavedGames);
         }
 
         public void ShowCredits()
         {
             Base.Core.Game.PlayButtonSound();
-            Base.Core.Game.ChangeScene(SceneNames.Credits);
+            Base.Core.Game.ChangeScene(Constants.Scenes.Credits);
         }
 
         public void QuitGame()

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-using Assets.Scripts.Core.Definitons;
+using Assets.Scripts.Core.Definitions;
 using Assets.Scripts.Core.Model;
 
 namespace Assets.Scripts.Core

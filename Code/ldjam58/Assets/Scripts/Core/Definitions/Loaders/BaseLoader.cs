@@ -7,7 +7,7 @@ using GameFrame.Core.Definitions.Loaders;
 
 using Unity.VisualScripting;
 
-namespace Assets.Scripts.Core.Definitons.Loaders
+namespace Assets.Scripts.Core.Definitions.Loaders
 {
     public class BaseLoader<TDefinition> : DefinitionLoader<TDefinition> where TDefinition : BaseDefinition
     {

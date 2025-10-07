@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Assets.Scripts.Core;
-using Assets.Scripts.Core.Definitons;
+using Assets.Scripts.Core.Definitions;
 using Assets.Scripts.Core.Model;
 
 using Newtonsoft.Json;
