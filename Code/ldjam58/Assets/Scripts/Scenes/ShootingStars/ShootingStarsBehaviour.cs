@@ -108,7 +108,7 @@ namespace Assets.Scripts.Scenes.ShootingStars
             }
             else
             {
-                return string.Format("{0} Had enough of your shit.", gameState.Penguin.Name);
+                return string.Format("{0} had enough of your shit.", gameState.Penguin.Name);
             }
         }
 
