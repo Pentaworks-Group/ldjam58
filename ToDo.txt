@@ -26,8 +26,6 @@ UI:
  - GameMode selection
    
 Audio:
- - Button click
- - Flop (when penguin starts moving)
  - Ambience
  - Background
   
