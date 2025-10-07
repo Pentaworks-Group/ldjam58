@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Assets.Scripts.Core.Definitions;
 using Assets.Scripts.Core.Model;
 
-using GameFrame.Core.Math;
+using GameFrame.Core.Collections;
+using GameFrame.Core.Extensions;
 
 namespace Assets.Scripts.Core
 {
     public class LevelConverter
     {
+        private readonly Map<Int32, WorldChunk> chunkMap = new Map<int, WorldChunk>();
+        private IList<WorldChunk> chunkList;
+
         public Level Convert(LevelDefinition levelDefinition)
         {
             if (!levelDefinition.PenguinStartPosition.HasValue && !levelDefinition.IsPenguinStartPositionRandom.HasValue)
@@ -28,16 +33,9 @@ namespace Assets.Scripts.Core
                 IsPenguinStartPositionRandom = levelDefinition.IsPenguinStartPositionRandom.GetValueOrDefault(),
                 PenguinStartPosition = levelDefinition.PenguinStartPosition.GetValueOrDefault(),
                 IsFoodPositionRandom = levelDefinition.IsFoodPositionRandom.GetValueOrDefault(),
+                IsFoodPositionRandomOnRetry = levelDefinition.IsFoodPositionRandomOnRetry.GetValueOrDefault(),
                 IsObstaclePositionRandom = levelDefinition.IsObstaclePositionRandom.GetValueOrDefault(),
             };
-
-            if (levelDefinition.Foods?.Count > 0)
-            {
-                foreach (var foodDef in levelDefinition.Foods)
-                {
-                    convertedLevel.AvailableFoods.Add(ConvertFood(foodDef));
-                }
-            }
 
             if (levelDefinition.Obstacles?.Count > 0)
             {
@@ -55,18 +53,40 @@ namespace Assets.Scripts.Core
                 }
             }
 
+
+            if (levelDefinition.Foods?.Count > 0)
+            {
+                foreach (var foodDef in levelDefinition.Foods)
+                {
+                    convertedLevel.AvailableFoods.Add(ConvertFood(foodDef, convertedLevel));
+                }
+            }
+
             return convertedLevel;
         }
 
-        private Food ConvertFood(FoodPosDefinition foodDef)
+        private Food ConvertFood(FoodPosDefinition foodDef, Level level)
         {
-            return new Food()
+            var food = new Food()
             {
                 ID = Guid.NewGuid(),
                 Definition = foodDef.Definition,
-                Position = new Vector3(foodDef.Position.X, 0, foodDef.Position.Y),
                 Score = foodDef.Definition.Score.GetValueOrDefault(1)
             };
+
+            if (level.IsFoodPositionRandom)
+            {
+                if (!level.IsFoodPositionRandomOnRetry)
+                {
+                    food.Position = GetRandomPosition();
+                }
+            }
+            else
+            {
+                food.Position = new GameFrame.Core.Math.Vector3(foodDef.Position.X, 0, foodDef.Position.Y);
+            }
+
+            return food;
         }
 
         private Obstacle ConvertObstacle(ObstaclePosDefinition obstacleDef)
@@ -86,6 +106,8 @@ namespace Assets.Scripts.Core
                 DefaultTileHeight = chunkDefinition.DefaultTileHeight,
             };
 
+            chunkMap[chunkDefinition.Position.X, chunkDefinition.Position.Y] = chunk;
+
             if (chunkDefinition.Tiles?.Count > 0)
             {
                 chunk.Tiles = new List<WorldTile>();
@@ -103,6 +125,20 @@ namespace Assets.Scripts.Core
             }
 
             return chunk;
+        }
+
+        private GameFrame.Core.Math.Vector3 GetRandomPosition()
+        {
+            if (chunkList == default)
+            {
+                chunkList = chunkMap.GetAll().ToList();
+            }
+
+            var chunk = chunkList.GetRandomEntry();
+
+            chunkList.Remove(chunk);
+
+            return new GameFrame.Core.Math.Vector3(chunk.Position.X, 0, chunk.Position.Y) ;
         }
     }
 }

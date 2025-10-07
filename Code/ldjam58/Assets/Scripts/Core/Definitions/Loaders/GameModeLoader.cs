@@ -75,6 +75,7 @@ namespace Assets.Scripts.Core.Definitions.Loaders
                         PenguinStartPosition = loadedItem.PenguinStartPosition,
                         FoodRandomOrder = loadedItem.FoodRandomOrder,
                         IsFoodPositionRandom = loadedItem.IsFoodPositionRandom,
+                        IsFoodPositionRandomOnRetry = loadedItem.IsFoodPositionRandomOnRetry,
                         ObstacleRandomOrder = loadedItem.ObstacleRandomOrder,
                         IsObstaclePositionRandom = loadedItem.IsObstaclePositionRandom,
                         Foods = new List<FoodPosDefinition>(),

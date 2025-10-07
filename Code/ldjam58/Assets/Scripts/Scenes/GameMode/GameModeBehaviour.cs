@@ -141,7 +141,7 @@ namespace Assets.Scripts.Scenes.GameMode
         {
             var xMin = Camera.main.pixelWidth * 0.01f;
             var yMin = Camera.main.pixelHeight * 0.01f;
-            var width = Camera.main.pixelWidth * 0.79f;
+            var width = Camera.main.pixelWidth * 0.74f;
             var height = Camera.main.pixelHeight * 0.98f;
 
             this.spawnBox = new SpawnBox("Camera")

@@ -20,8 +20,8 @@ namespace Assets.Scripts.Core.Model
 
         public Boolean IsPenguinStartPositionRandom { get; set; }
         public Vector2Int PenguinStartPosition { get; set; }
-
         public Boolean IsFoodPositionRandom { get; set; }
+        public Boolean IsFoodPositionRandomOnRetry { get; set; }
         public List<Food> Foods { get; set; } = new List<Food>();
         public List<Food> AvailableFoods { get; set; } = new List<Food>();
 

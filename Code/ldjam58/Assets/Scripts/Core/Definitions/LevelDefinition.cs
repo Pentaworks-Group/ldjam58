@@ -18,6 +18,7 @@ namespace Assets.Scripts.Core.Definitions
         public Int32? ActiveFoodLimit { get; set; }
         public Boolean? FoodRandomOrder { get; set; }
         public Boolean? IsFoodPositionRandom { get; set; }
+        public Boolean? IsFoodPositionRandomOnRetry { get; set; }
         public Boolean? ObstacleRandomOrder { get; set; }
         public Boolean? IsObstaclePositionRandom { get; set; }
         public List<FoodPosDefinition> Foods { get; set; }

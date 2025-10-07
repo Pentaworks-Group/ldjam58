@@ -205,7 +205,7 @@ namespace Assets.Scripts.Scenes.Game
 
             var hasValidPosition = false;
 
-            if (gameState.CurrentLevel.IsFoodPositionRandom)
+            if (gameState.CurrentLevel.IsFoodPositionRandom && gameState.CurrentLevel.IsFoodPositionRandomOnRetry)
             {
                 for (int i = 0; i < 100; i++)
                 {
