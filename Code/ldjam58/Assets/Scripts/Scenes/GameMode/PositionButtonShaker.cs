@@ -1,23 +1,22 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Scenes.MainMenu
+namespace Assets.Scripts.Scenes.GameMode
 {
-    public class ButtonShakerBehaviour : MonoBehaviour
+    public class PositionButtonShaker : MonoBehaviour
     {
         private float shakeSpeedX = 1.0f;
         private float shakeSpeedY = 1.3f;
-        private float shakeStrengthX = 0.01f;
-        private float shakeStrengthY = 0.005f;
+        private float shakeStrengthX =10f;
+        private float shakeStrengthY = 10f;
         private float delay;
-        private Vector2 origAnchorMin;
-        private Vector2 origAnchorMax;
         private RectTransform rectTransform;
+
+        private Vector3 originalPosition;
 
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
-            origAnchorMin = rectTransform.anchorMin;
-            origAnchorMax = rectTransform.anchorMax;
+
             shakeSpeedX *= Random.Range(0.8f, 1.2f);
             shakeSpeedY *= Random.Range(0.8f, 1.2f);
             shakeStrengthX *= Random.Range(0.8f, 1.2f);
@@ -25,9 +24,17 @@ namespace Assets.Scripts.Scenes.MainMenu
             delay = Random.Range(0, Mathf.PI * 2);
         }
 
+        public void SetStartPosition(Vector3 startPosition)
+        {
+            originalPosition = startPosition;
+        }
+
         private void Update()
         {
-            Shake();
+            if (originalPosition != default)
+            {
+                Shake();
+            }
         }
 
         private void Shake()
@@ -45,8 +52,8 @@ namespace Assets.Scripts.Scenes.MainMenu
             //var x = (Mathf.Sin(Time.time) * shakeStrength) + origPosition.x;
             var x = (Mathf.Sin(Time.time * shakeSpeedX + delay) * shakeStrengthX);
             var y = (Mathf.Sin(Time.time * shakeSpeedY + delay) * shakeStrengthY);
-            rectTransform.anchorMin = new Vector2(origAnchorMin.x + x, origAnchorMin.y + y);
-            rectTransform.anchorMax = new Vector2(origAnchorMax.x + x, origAnchorMax.y + y);
+
+            rectTransform.position = originalPosition + new Vector3 (x, y, 0) ;
         }
     }
 }

@@ -1,7 +1,8 @@
 Color codes:
 ----------------------------------
  - Text: 
- - Button:  
+ - Button:
+	- Highlight: #89ff77
 
 Credits:
 ----------------------------------

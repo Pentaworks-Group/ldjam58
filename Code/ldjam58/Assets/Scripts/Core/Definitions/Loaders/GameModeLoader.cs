@@ -19,7 +19,6 @@ namespace Assets.Scripts.Core.Definitions.Loaders
         protected override void OnDefinitionsLoaded(List<GameMode> definitions)
         {
             _ = new GameMode() { IsReferenced = true };
-            _ = new WorldTile() { Position = default };
 
             if (definitions?.Count > 0)
             {
@@ -27,7 +26,8 @@ namespace Assets.Scripts.Core.Definitions.Loaders
                 {
                     var newGameMode = new GameMode()
                     {
-                        Reference = loadedGameMode.Reference,                       
+                        IsDefault = loadedGameMode.IsDefault,
+                        Reference = loadedGameMode.Reference,
                         Name = loadedGameMode.Name,
                         AvailableLives = loadedGameMode.AvailableLives,
                         Description = loadedGameMode.Description,
