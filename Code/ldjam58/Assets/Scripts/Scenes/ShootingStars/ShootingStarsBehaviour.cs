@@ -25,7 +25,6 @@ namespace Assets.Scripts.Scenes.ShootingStars
         public TMP_Text quitButtonText;
         public AutoRotateBehaviour floppyRotator;
 
-        private UnityVector3 floppyStartPosition;
         private UnityVector3 floppyTargetPosition;
         private float speedFactor;
 
