@@ -34,6 +34,8 @@ namespace Assets.Scripts.Scenes.Game
         private float maxDragDistance = 250f;
         private float maxArrowLength = 10;
 
+        private bool isKeyboardMovementHooked = false;
+
         public void Init(Penguin penguin)
         {
             this.penguin = penguin;
@@ -45,21 +47,25 @@ namespace Assets.Scripts.Scenes.Game
             GameFrame.Base.Audio.Effects.VolumeChanged.AddListener(OnEffectsVolumeChanged);
         }
 
-        //private void OnMove(InputAction.CallbackContext context)
-        //{
-        //    var moveVector = context.ReadValue<Vector2>();
+        private void OnMove(InputAction.CallbackContext context)
+        {
+            var moveVector = context.ReadValue<Vector2>();
 
-        //    var translation = 5f * new UnityVector3(moveVector.x, 0, moveVector.y);
+            var translation = 5f * new UnityVector3(moveVector.x, 0, moveVector.y);
 
-        //    penguinRigidbody.AddForce(translation, ForceMode.Impulse);
-        //    Debug.Log($"Adding force '{translation}'");
-        //}
+            penguinRigidbody.AddForce(translation, ForceMode.Impulse);
+            Debug.Log($"Adding force '{translation}'");
+        }
+
+        public void HookKeyboardMovement()
+        {
+            var moveAction = InputSystem.actions.FindAction("Move");
+            moveAction.performed += OnMove;
+            isKeyboardMovementHooked = true;
+        }
 
         private void HookActions()
         {
-            //var moveAction = InputSystem.actions.FindAction("Move");
-            //moveAction.performed += OnMove;
-
             var clickAction = InputSystem.actions.FindAction("Click");
             clickAction.started += StartDrag;
             clickAction.canceled += StopDrag;
@@ -67,9 +73,11 @@ namespace Assets.Scripts.Scenes.Game
 
         private void UnhookActions()
         {
-            //var moveAction = InputSystem.actions.FindAction("Move");
-            //moveAction.performed -= OnMove;
-
+            if (isKeyboardMovementHooked)
+            {
+                var moveAction = InputSystem.actions.FindAction("Move");
+                moveAction.performed -= OnMove;
+            }
             var clickAction = InputSystem.actions.FindAction("Click");
             clickAction.started -= StartDrag;
             clickAction.canceled -= StopDrag;
@@ -187,7 +195,7 @@ namespace Assets.Scripts.Scenes.Game
                     direction = appliedStrength * direction.normalized;
                     penguinRigidbody.AddForce(direction, ForceMode.Impulse);
                     transform.rotation = Quaternion.LookRotation(direction);
-                                        
+
                     Base.Core.Game.State.MovementCounter++;
                 }
             }

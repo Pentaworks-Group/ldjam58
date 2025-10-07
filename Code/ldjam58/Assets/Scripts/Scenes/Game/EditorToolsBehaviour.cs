@@ -36,12 +36,12 @@ namespace Assets.Scripts.Scenes.Game
         private EditorToolBehaviour selectedTool;
 
         private EventSystem eventSystem;
-        private Boolean isOverUI;
 
         private GameState gameState;
 
         private LevelDefinition previousLevelDefinition;
         private LevelDefinition nextLevelDefinition;
+        private int editorEnableClickCount = 0;
 
         private void Awake()
         {
@@ -51,11 +51,6 @@ namespace Assets.Scripts.Scenes.Game
         void Start()
         {
             eventSystem = EventSystem.current;
-        }
-
-        void Update()
-        {
-            isOverUI = eventSystem.IsPointerOverGameObject();
         }
 
         private void OnEnable()
@@ -87,6 +82,21 @@ namespace Assets.Scripts.Scenes.Game
             var moveAction = InputSystem.actions.FindAction("Click");
             moveAction.performed -= ExecuteClick;
         }
+
+        public void EnableEditorCounter()
+        {
+            editorEnableClickCount++;
+            if (editorEnableClickCount > 10)
+            {
+                EnableEditor();
+            }
+        }
+
+        private void EnableEditor() {
+            worldBehaviour.PenguinBehaviour.HookKeyboardMovement();
+            gameObject.SetActive(true);
+        }
+
 
         public void SaveMap()
         {
@@ -316,12 +326,6 @@ namespace Assets.Scripts.Scenes.Game
 
         private Boolean MakeRaycast(out Vector3 hitPoint)
         {
-            if (isOverUI)
-            {
-                hitPoint = Vector3.zero;
-                return false;
-            }
-
             hitPoint = Vector3.zero;
 
             PointerEventData pointerData = new PointerEventData(EventSystem.current)
