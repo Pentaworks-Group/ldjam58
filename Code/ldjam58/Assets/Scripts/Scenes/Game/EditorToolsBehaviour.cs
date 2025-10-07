@@ -333,6 +333,8 @@ namespace Assets.Scripts.Scenes.Game
                 position = Pointer.current.position.ReadValue()
             };
 
+            
+
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
 
@@ -341,18 +343,20 @@ namespace Assets.Scripts.Scenes.Game
                 return false;
             }
 
+            int layerMask = ~(1 << LayerMask.NameToLayer("IgnoreForToolRaycast"));
             Ray ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
-
-            if (Physics.Raycast(ray, out var hit, 10000))
+            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1f);
+            if (Physics.Raycast(ray, out var hit, 10000, layerMask))
             {
-                //Debug.Log("Did Hit " + hit.collider.gameObject.name + " x: " + hit.point.x + " z: " + hit.point.z);
                 hitPoint = hit.point;
+                Debug.Log("hitpoint: " + hitPoint);
+                return true;
             }
             else
             {
                 hitPoint = Vector3.zero;
+                return false;
             }
-            return true;
         }
 
         private void GetWorldChunkFromPosition(Vector3 position, out WorldChunk chunk)
@@ -390,6 +394,10 @@ namespace Assets.Scripts.Scenes.Game
                 };
                 chunk.AddTile(tile);
             }
+
+            int calcX = chunk.Position.X * resolution + tile.Position.X;
+            int calcZ = chunk.Position.Y * resolution + tile.Position.Z;
+            Debug.Log("chunk: " + chunk.Position + "  tile: " + tile.Position + "  calced: " + calcX + "," + calcZ);
         }
 
         private WorldChunk GetChunkFromIndixes(int xC, int yC)
