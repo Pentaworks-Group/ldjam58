@@ -65,11 +65,11 @@ namespace Assets.Scripts.Core
             RegisterScenes(Constants.Scenes.GetAll());
         }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void GameStart()
-        {
-            Base.Core.Game.Startup();
-        }
+        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        //private static void GameStart()
+        //{
+        //    Base.Core.Game.Startup();
+        //}
 
         protected override IEnumerator LoadDefintions()
         {
